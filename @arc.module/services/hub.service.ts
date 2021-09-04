@@ -6,10 +6,13 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
+import { TokenService } from './token.service';
 
 
 const NEW_DEVELOPER_EVENT = "NEW_EVENT";
 const NEW_ARC_EVENT = "ARC_EVENT";
+const ARC_USER_EVENT = "ARC_USER_EVENT";
+const ARC_GROUP_EVENT = "ARC_GROUP_EVENT";
 
 @Injectable({
   providedIn: "root"
@@ -23,12 +26,14 @@ export class HubService {
   lastArcEvent: Subject<any> = new Subject<any>();
   lastAlert: Subject<any> = new Subject<any>();
   private initialized = false;
+  connectionId: any;
 
 
 
 
   constructor(
     public settings: SettingsService,
+    public tokenService: TokenService,
     private http: HttpClient
   ) { }
 
@@ -39,19 +44,44 @@ export class HubService {
 
     this.hubConnection?.off(NEW_DEVELOPER_EVENT);
     this.hubConnection?.off(NEW_ARC_EVENT);
-    this.hubConnection = null;
     this.initialized = false;
 
+    this.hubConnection ? this.hubConnection.stop().then(() => {
+      console.log('stop hubConnection');
+
+    }).catch(err => console.error(err))
+      : null;
+
+    this.hubConnection = null;
+
+  }
+
+  private startConnection(hubConnection) {
+    hubConnection
+      .start()
+      .then(() => {
+        console.log("Connection started");
+        this.addToGroup(this.tokenService.user.groupName);
+      })
+      .then(() => this.getConnectionId())
+
+      // )
+      .catch(err => {
+        console.log("Error while starting connection: " + err);
+      });
   }
 
   public start = async () => {
     if (this.initialized)
       return;
     if (!this.hubConnection) {
-      this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(this.settings.serverAddress + "/irisaHub")
-        .build();
 
+      this.hubConnection = await new signalR.HubConnectionBuilder()
+        .withUrl(this.settings.serverAddress + "/irisaHub", {
+          accessTokenFactory: () => this.getToken()
+        })
+        .build();
+      await this.startConnection(this.hubConnection)
     }
     this.addListener();
     this.addArcListener();
@@ -61,11 +91,12 @@ export class HubService {
 
   };
   private async connectionCheck() {
-
     if (!this.hubConnection) {
 
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(this.settings.serverAddress + "/irisaHub")
+        .withUrl(this.settings.serverAddress + "/irisaHub", {
+          accessTokenFactory: () => this.getToken()
+        })
         .build();
     }
     if (
@@ -74,22 +105,57 @@ export class HubService {
     ) {
       console.log("RECONNECTING TO HUB");
 
-      this.hubConnection
-        .start()
-        .then(() => {
-          console.log("Connection started");
-        })
-        .catch(err => {
-          console.log("Error while starting connection: " + err);
-        });
+      this.startConnection(this.hubConnection);
     }
   }
+
+  public getConnectionId = () => {
+    this.hubConnection.invoke('getconnectionid').then(
+      (data) => {
+        // console.warn("connectionId", data);
+        this.connectionId = data;
+      }
+    );
+  }
+
+  public addToGroup = (groupName: string) => {
+    this.hubConnection.invoke('AddToGroup', groupName).then(
+      () => {
+        console.warn(`Add To ${groupName} Group`);
+        // this.connectionId = data;
+      }
+    ).catch(err => console.error(err));;
+  }
+  public RemoveFromGroup = (groupName: string) => {
+    this.hubConnection.invoke('RemoveFromGroup', groupName).then(
+      (data) => {
+        console.warn("RemoveFromGroup", data);
+        // this.connectionId = data;
+      }
+    ).catch(err => console.error(err));
+  }
+
 
   private addListener = () => {
     this.hubConnection.on(NEW_DEVELOPER_EVENT, data => {
       const tmp = JSON.parse(data);
 
       this.latestEvent.next(tmp);
+    });
+
+    this.hubConnection.on(ARC_USER_EVENT, data => {
+      const tmp = JSON.parse(data);
+      // console.log('ARC_USER_EVENT: ', tmp);
+      this.latestEvent.next(tmp);
+
+    });
+
+
+    this.hubConnection.on(ARC_GROUP_EVENT, data => {
+      const tmp = JSON.parse(data);
+      // console.log('ARC_GROUP_EVENT: ', tmp);
+      this.latestEvent.next(tmp);
+
     });
     this.hubConnection.onclose(() => {
       console.log("DISCONNECTED!!!");
@@ -112,4 +178,8 @@ export class HubService {
   };
 
 
+
+  async getToken() {
+    return this.tokenService.token
+  }
 }

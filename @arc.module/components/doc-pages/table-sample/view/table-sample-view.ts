@@ -63,8 +63,12 @@ export class DocTableSampleView implements OnInit {
       { field: "scheduleNum", header: "Program", cell: (element: any) => element.scheduleNum },
       { field: "rowNum", header: "Row", cell: (element: any) => element.rowNum },
       {
-        field: "operation-btn", header: "عملیات",
-        styles: `display: flex;justify-content: space-evenly;align-items: center;`,
+        field: "operation-btn", header: "",
+        styles: `display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        `,
         cell: (element: any) => element
       },
 

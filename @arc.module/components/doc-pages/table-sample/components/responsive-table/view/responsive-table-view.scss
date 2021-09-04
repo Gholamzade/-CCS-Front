@@ -1,0 +1,25 @@
+.button-margin {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.irisa-table-container {
+  height: 50vh;
+  overflow: auto;
+  width: 100%;
+}
+.operation-btn {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.icon-action {
+  cursor: pointer;
+}
+
+.header-cell-div {
+  // text-align: right; // change to right if use serach input in header cell
+  // min-width: 6rem; // change based your need
+}

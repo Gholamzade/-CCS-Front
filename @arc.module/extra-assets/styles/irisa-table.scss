@@ -3,16 +3,107 @@
 //   box-sizing: border-box;
 // }
 $header-border: #c1c7d0;
+@mixin xs-irisa-table-container {
+  height: 50vh;
+  overflow: auto;
+  width: 100%;
+}
+@mixin xs-irisa-table {
+  overflow: hidden;
+  thead {
+    display: none;
+  }
+  .mat-cell:last-child {
+    border-bottom: 0;
+    [dir="rtl"] & {
+      padding-right: 0;
+    }
+    [dir="ltr"] & {
+      padding-left: 0 !important;
+    }
+  }
+  .mat-cell:first-child {
+    margin-top: 1rem;
+    width: 100%;
+    [dir="rtl"] & {
+      padding-right: 0 !important;
+    }
+    [dir="ltr"] & {
+      padding-left: 0;
+    }
+  }
 
-%irisa-table-container {
+  // caption {
+  //   font-size: 1em;
+  // }
+
+  .mat-header-cell {
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-row {
+    border-bottom: 5px solid $header-border;
+    display: block;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .mat-cell {
+    border-bottom: 1px solid $header-border;
+    // display: block;
+    display: flex;
+    justify-content: space-between;
+    [dir="rtl"] & {
+      padding-right: 0 !important;
+    }
+    [dir="ltr"] & {
+      padding-left: 0;
+    }
+    font-size: 0.875rem;
+    font-stretch: normal;
+    text-align: center;
+    font-weight: bold;
+    // height: 30px;
+    // margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    width: 100%;
+
+    div {
+      width: 100%;
+    }
+  }
+
+  .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    [dir="rtl"] & {
+      float: right;
+    }
+    [dir="ltr"] & {
+      float: left;
+    }
+    // text-transform: uppercase;
+    font-weight: normal;
+
+    // font-size: .85em;
+  }
+}
+
+@mixin irisa-table-container {
   max-height: 25rem;
   // max-width: 138vh;
   overflow-x: auto;
   margin-top: 1rem;
-}
-
-.irisa-table-container {
-  @extend %irisa-table-container;
 }
 
 .irisa-table-section {
@@ -29,11 +120,12 @@ $header-border: #c1c7d0;
   font-style: normal !important;
 }
 
-%irisa-table {
+@mixin irisa-table {
+  width: 100%;
   th.mat-header-cell {
     // min-width: 207px;
     // min-height: 25px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -57,9 +149,9 @@ $header-border: #c1c7d0;
 
   tr.mat-header-row {
     // width: 1200px;
-    min-height: 80px;
-    margin: 16px 0 46px;
-    padding: 0.75rem 24px 8px 129px;
+    min-height: 5rem;
+    margin: 0.5rem 0 2.875rem;
+    padding: 0.75rem 1.5rem 0.5rem 8.063rem;
     border: solid 1px $header-border;
     background-color: #dfe1e6;
     // background-color: #f4f5f7;
@@ -151,49 +243,17 @@ $header-border: #c1c7d0;
       }
     }
   }
+
   tr.mat-row {
-    padding: 0.75rem 24px 0.688rem 32px;
+    padding: 0.75rem 1.5rem 0.688rem 2rem;
     border: solid 1px #dfe1e6;
     background-color: #ffffff;
-
-    // &:nth-child(even) td {
-    //   background: #fafbfc;
-    // }
-
-    // [dir="rtl"] & {
-    //   &:hover td {
-    //     border-top: solid 1px #2684ff;
-    //     border-bottom: solid 1px #2684ff;
-    //     background-color: #f2f7ff;
-
-    //     &:first-of-type {
-    //       border-right: solid 4px #2684ff;
-    //     }
-    //     &:last-of-type {
-    //       border-left: solid 1px #2684ff;
-    //     }
-    //   }
-    // }
-    // [dir="ltr"] & {
-    //   &:hover td {
-    //     border-top: solid 1px #2684ff;
-    //     border-bottom: solid 1px #2684ff;
-    //     background-color: #f2f7ff;
-
-    //     &:first-of-type {
-    //       border-left: solid 4px #2684ff;
-    //     }
-    //     &:last-of-type {
-    //       border-right: solid 1px #2684ff;
-    //     }
-    //   }
-    // }
   }
 
   td.mat-cell {
     // min-width: 68px;
 
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -201,19 +261,7 @@ $header-border: #c1c7d0;
     letter-spacing: normal;
     text-align: center;
     color: #172b4d;
-    // >.cell-div{
-    // min-height: 25px;
-    // padding: 32px 0.75rem 32px 0.75rem;
-    // > button mat-icon {
-    //   padding: 0.75rem 0.75rem 0.75rem 0.75rem;
-    // }
-    // [dir='rtl'] & {
-    //   margin: 0.75rem 4.75rem 0.688rem 4.75rem;
-    // }
-    // [dir='ltr'] & {
-    //   margin: 0.75rem 4.75rem 0.688rem 4.75rem;
-    // }
-    // }
+
     [dir="rtl"] & {
       margin: 0.75rem 4.75rem 0.688rem 4.75rem;
       border-left: 1px solid #dfe1e6;
@@ -239,22 +287,11 @@ $header-border: #c1c7d0;
         margin: 0.75rem 4.75rem 0.688rem 4.75rem;
         border-left: 1px solid #dfe1e6;
         padding-left: 0 !important;
-        // &:hover {
-        //   border-top: solid 1px #2684ff;
-        //   border-bottom: solid 1px #2684ff;
-        //   border-left: solid 1px #2684ff;
-        // }
       }
       [dir="ltr"] & {
         margin: 0.75rem 4.75rem 0.688rem 4.75rem;
         border-right: 1px solid #dfe1e6;
         padding-right: 0 !important;
-
-        // &:hover {
-        //   border-top: solid 1px #2684ff;
-        //   border-bottom: solid 1px #2684ff;
-        //   border-right: solid 1px #2684ff;
-        // }
       }
     }
   }
@@ -272,24 +309,54 @@ $header-border: #c1c7d0;
     justify-content: space-between !important;
     flex-flow: wrap !important;
   }
-
-  // .mat-table-sticky-border-elem-top {
-  //   border-bottom: 1px solid #dfe1e6;;
-  // }
-
-  // .mat-table-sticky-border-elem-right {
-  //   border-left: 1px solid #dfe1e6;;
-  // }
-
-  // .mat-table-sticky-border-elem-bottom {
-  //   border-top: 1px solid #dfe1e6;;
-  // }
-
-  // .mat-table-sticky-border-elem-left {
-  //   border-right: 1px solid #dfe1e6;;
-  // }
 }
 
-.irisa-table {
-  @extend %irisa-table;
+//xl
+@media screen and (min-width: 1920px) and (max-width: 5000px) {
+  .irisa-table-container {
+    @include irisa-table-container;
+  }
+  .irisa-table {
+    @include irisa-table;
+  }
+}
+
+//lg
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .irisa-table-container {
+    @include irisa-table-container;
+  }
+  .irisa-table {
+    @include irisa-table;
+  }
+}
+
+//md
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .irisa-table-container {
+    @include irisa-table-container;
+  }
+  .irisa-table {
+    @include irisa-table;
+  }
+}
+
+//sm
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .irisa-table-container {
+    @include irisa-table-container;
+  }
+  .irisa-table {
+    @include irisa-table;
+  }
+}
+
+//xs
+@media screen and (max-width: 599px) {
+  .irisa-table-container {
+    @include xs-irisa-table-container;
+  }
+  .irisa-table {
+    @include xs-irisa-table;
+  }
 }

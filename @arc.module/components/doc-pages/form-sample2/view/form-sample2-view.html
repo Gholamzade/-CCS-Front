@@ -48,9 +48,18 @@
 
       <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
         fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
-        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)"
-          [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
-          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        <date-time-picker-overlay-presenter (selectedDateChange)="getSelectedStartDate($event)"
+          [selectedDate]="form?.controls?.startDate?.value" [label]="'one way binding'"
+          [placeholder]="'one way binding'" [showTime]="true" [locale]="'fa'"
+          [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <date-time-picker-overlay-presenter [(selectedDate)]="endDate" [label]="'two way binding'"
+          [placeholder]="'two way binding'" [showTime]="true" [locale]="'en'"
+          [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
         </date-time-picker-overlay-presenter>
       </div>
 

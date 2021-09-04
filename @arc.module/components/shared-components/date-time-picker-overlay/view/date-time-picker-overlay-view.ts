@@ -1,13 +1,14 @@
 import { CdkOverlayOrigin, ConnectionPositionPair, Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, ComponentRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, } from '@angular/forms';
 import { BreakPointsService } from '@arc.module/services/break-points.service';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { SimpleDateTimePickerPresenter } from '../../simple-date-time-picker/simple-date-time-picker-presenter';
 import { IrisaDate } from '@arc.module/utilities/date-utility';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { DateFormatValidator } from '@arc.module/utilities/custom-validators/date-format-validator';
 // import { DateFormatValidator } from '@arc.module/utilities/DateUtility';
 
 @Component({
@@ -20,7 +21,7 @@ export class DateTimePickerOverlayView implements OnInit, OnDestroy {
   @ViewChild(CdkOverlayOrigin) _overlayOrigin: CdkOverlayOrigin;
   @ViewChild('Origin') origin: CdkOverlayOrigin;
 
-  @Output() onSelectedDate: EventEmitter<string | IrisaDate> = new EventEmitter<string | IrisaDate>();
+  @Output() onSelectedDate: EventEmitter<IrisaDate> = new EventEmitter<IrisaDate>();
   @Input() label;
   @Input() buttonsLabel: { submit: string, cancel: string };
   @Input() placeholder = '';
@@ -37,16 +38,18 @@ export class DateTimePickerOverlayView implements OnInit, OnDestroy {
     return this._locale;
   }
 
-  selectedDateFormControl: FormControl = new FormControl(null, [])
+  selectedDateFormControl: FormControl = new FormControl(null,
+    [DateFormatValidator(this.locale)],
+  )
   dateTimePickerRef: ComponentRef<SimpleDateTimePickerPresenter>
 
-  private _selectedDate: string | IrisaDate;
-  @Input() set selectedDate(val: string | IrisaDate) {
+  private _selectedDate: IrisaDate;
+  @Input() set selectedDate(val: IrisaDate) {
 
     this._selectedDate = val;
-    this.selectedDateFormControl.setValue(val)
+    // this.selectedDateFormControl.setValue(val)
   }
-  get selectedDate(): string | IrisaDate {
+  get selectedDate(): IrisaDate {
     return this._selectedDate;
   }
   constructor(
@@ -63,7 +66,10 @@ export class DateTimePickerOverlayView implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.selectedDateFormControl.valueChanges.subscribe(value => {
+    this.selectedDateFormControl.valueChanges.pipe(
+      takeUntil(this.destroy),
+      // distinctUntilChanged((prev: Irisa Date | string, curent: IrisaDate | string) => curent.toString() === prev.toString())
+    ).subscribe(value => {
       this._selectedDate = value
       this.onSelectedDate.emit(value)
     })
@@ -101,17 +107,18 @@ export class DateTimePickerOverlayView implements OnInit, OnDestroy {
 
     this.dateTimePickerRef = overlayRef.attach(new ComponentPortal(SimpleDateTimePickerPresenter, this.viewContainerRef));
     this.dateTimePickerRef.instance.showTime = this.showTime;
-    this.dateTimePickerRef.instance.selectedDate = this.selectedDate;
+
+    this.dateTimePickerRef.instance.selectedDate = this.selectedDateFormControl.invalid ? null : this.selectedDate;
     this.dateTimePickerRef.instance.locale = this.locale;
     this.dateTimePickerRef.instance.buttonsLabel = this.buttonsLabel;
 
     this.dateTimePickerRef.instance.dateChange.asObservable().pipe(
       takeUntil(this.destroy)
-    ).subscribe((date: string | IrisaDate) => {
+    ).subscribe((date: IrisaDate) => {
 
       this.selectedDateFormControl.setValue(date)
       // this.selectedDate = date;
-      this.onSelectedDate.emit(date)
+      // this.onSelectedDate.emit(date)
       overlayRef.dispose()
     });
 

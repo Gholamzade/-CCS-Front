@@ -9,12 +9,12 @@ import { SampleSvgPresenter } from './sample-svg/sample-svg-presenter';
 import { DocButtonsPresenter } from './buttons/doc-buttons-presenter';
 import { DocUtilityPresenter } from './utility/doc-utility-presenter';
 import { ReportSamplePresenter } from './report-sample/report-sample-presenter';
-// import { ResponsiveTablePresenter } from './table-sample/components/responsive-table/responsive-table-presenter';
+import { ResponsiveTablePresenter } from './table-sample/components/responsive-table/responsive-table-presenter';
 import { MessagesSamplePresenter } from './messages-sample/messages-sample-presenter';
 
 export const DOCROUTESLIST: DocRoutes = [
   { path: 'table-sample', component: DocTableSamplePresenter, title: 'Table' },
-  // { path: 'responsive-table', component: ResponsiveTablePresenter, title: 'Responsive Table' },
+  { path: 'responsive-table', component: ResponsiveTablePresenter, title: 'Responsive Table' },
   { path: 'form-sample', component: FromSamplePresenter, title: 'Forms' },
   { path: 'form-sample2', component: FromSample2Presenter, title: 'Forms2' },
   { path: 'modal-sample', component: ModalSamplePresenter, title: 'Modals' },

@@ -13,13 +13,13 @@ import { IPureSubMenu } from '@arc.module/models/interfaces/pure-sub-menu.interf
 })
 export class MenuService {
 
-  private readonly _menus = new BehaviorSubject<IMenu[]>([]);
-  readonly menus$ = this._menus.asObservable();
+  menus = new BehaviorSubject<IMenu[]>([]);
+  readonly menus$ = this.menus.asObservable();
   private readonly _reports = new BehaviorSubject<IReportGroup[]>([]);
   readonly reports$ = this._reports.asObservable();
 
-  private readonly _subMenus = new Subject<IPureSubMenu[]>();
-  readonly subMenus$ = this._subMenus.asObservable();
+  subMenus = new BehaviorSubject<IPureSubMenu[]>([]);
+  readonly subMenus$ = this.subMenus.asObservable();
 
   constructor(
     private telService: ArcTelegramService,
@@ -38,8 +38,10 @@ export class MenuService {
   }
 
   start() {
-    this.getMenus()
-    this.getReportMenu()
+    if (this.menus.getValue()?.length === 0) {
+      this.getMenus();
+      this.getReportMenu()
+    }
   }
 
   getMenus() {
@@ -52,56 +54,50 @@ export class MenuService {
 
       console.log("🚀 ~ menus", menus);
 
-      this._subMenus.next(menus)
-      menus.forEach(element => {
-        if (!(menusFixed.find(a => a.menuId == element.mId)))
-          menusFixed.push({
-            captionEn: element.mCaption,
-            captionFa: element.mCaption,
-            menuId: element.mId,
-            position: element.mPos,
-            titleEn: element.mTitle,
-            titleFa: element.mTitle,
-            subMenus: []
-          });
-      });
+      this.subMenus.next(menus);
 
-      menus.forEach(element => {
-        let menu = menusFixed.find(a => a.menuId == element.mId);
-        menu.subMenus.push({
-          captionEn: element.sCaption,
-          captionFa: element.sCaption,
-          submenuId: element.sId,
-          position: element.sPos,
-          route: element.sRoute,
-          shortcut: element.sShortcut,
-          titleEn: element.sTitle,
-          titleFa: element.sTitle,
-          menuFk: element.mId
-        });
+      menusFixed = this.mappingMenus(menus, menusFixed);
+      menusFixed = this.sortMenus(menusFixed, 'position');
 
-      });
-
-      let firstRoute: string
-      menusFixed = this.sortMenus(menusFixed, 'position')
-      // menusFixed.some(menus => {
-      //   if (menus.subMenus.length > 0) {
-      //     firstRoute = menus.subMenus[0]["route"]
-
-      //     return true;
-      //   }
-      // })
-      // console.warn('firstRoute: ', firstRoute);
-      this._menus.next(menusFixed);
-
-      // if (this.router.url === '/login') {
-      //   this.router.navigate(["/" +firstRoute]);
-      // }
+      this.menus.next(menusFixed);
 
     }).catch(err => {
       console.error(err)
       // this.router.navigate([''])
     });
+  }
+
+  public mappingMenus(menus: any[], menusFixed: any[]) {
+    menus.forEach(element => {
+      if (!(menusFixed.find(a => a.menuId == element.mId)))
+        menusFixed.push({
+          captionEn: element.mCaption,
+          captionFa: element.mCaption,
+          menuId: element.mId,
+          position: element.mPos,
+          titleEn: element.mTitle,
+          titleFa: element.mTitle,
+          subMenus: []
+        });
+    });
+
+    menus.forEach(element => {
+      let menu = menusFixed.find(a => a.menuId == element.mId);
+      menu.subMenus.push({
+        captionEn: element.sCaption,
+        captionFa: element.sCaption,
+        submenuId: element.sId,
+        position: element.sPos,
+        route: element.sRoute,
+        shortcut: element.sShortcut,
+        titleEn: element.sTitle,
+        titleFa: element.sTitle,
+        menuFk: element.mId
+      });
+
+    });
+
+    return menusFixed;
   }
 
   getReportMenu() {
@@ -151,7 +147,7 @@ export class MenuService {
 
   }
 
-  private sortMenus(array: any[], sortKey: string) {
+  sortMenus(array: any[], sortKey: string) {
     const compare = (a, b) => {
       if (a[sortKey] < b[sortKey]) {
         return -1;
@@ -163,5 +159,7 @@ export class MenuService {
     }
     return array.sort(compare)
   }
+
+
 
 }

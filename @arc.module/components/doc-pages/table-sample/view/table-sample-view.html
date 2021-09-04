@@ -55,7 +55,7 @@
 
         </p>
         <p> <b>
-          CCS-Front\@arc.module\extra-assets\styles\irisa-table.scss ==> فایل مربوط به استایل معماری
+            arc-front-end-template-v2\@arc.module\extra-assets\styles\irisa-table.scss ==> فایل مربوط به استایل معماری
           </b></p>
         <p>
           ستون های sticky ابتدای جدول براساس direction
@@ -135,7 +135,7 @@
                     <div [style]="column.styles">{{ column.header }}</div>
 
                   </th>
-                  <td mat-cell *matCellDef="let element">
+                  <td [attr.data-label]="column.header" mat-cell *matCellDef="let element">
                     <div class="operation-btn" [style]="column.styles">
                       <button mat-flat-button [color]="'prime'" class="button-sm button-margin">
                         {{
@@ -148,7 +148,9 @@
 
                       <mat-icon color="warning-outline" class="button-margin icon-action">edit</mat-icon>
                       <mat-icon color="danger-outline" class="button-margin icon-action">delete</mat-icon>
-
+                      <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                      </button>
                     </div>
                   </td>
                 </ng-container>
@@ -175,7 +177,7 @@
 
 
                   </th>
-                  <td mat-cell *matCellDef="let element">
+                  <td [attr.data-label]="column.header" mat-cell *matCellDef="let element">
                     <div class="cell-div" [style]="column.styles">
                       {{column.cell(element)}}
                     </div>
@@ -201,7 +203,20 @@
     </div>
 
 
-
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
 
   </mat-tab>
 

@@ -1,0 +1,61 @@
+<div *ngIf="showTime" role="group" class="irisa-date-time-input-container" [formGroup]="parts"
+  [attr.aria-labelledby]="_formField?.getLabelId()" (focusin)="onFocusIn($event)" (focusout)="onFocusOut($event)">
+
+  <div>
+    <input class="irisa-date-time-input-element" formControlName="year" size="4" maxLength="4" max="3000" min="1000"
+      (input)="_handleInput(parts.controls.year,year, month)" #year aria-label="Area year" placeholder="yyyy">
+    <span class="irisa-date-time-input-spacer bold-font">&nbsp;/&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="month" maxLength="2" size="2" max="12" min="1"
+      (input)="_handleInput(parts.controls.month,month, day)"
+      (keyup.backspace)="autoFocusPrev(parts.controls.month, year)" #month aria-label="Area month" placeholder="mm">
+    <span class="irisa-date-time-input-spacer bold-font">&nbsp;/&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="day" maxLength="2" size="2" max="31" min="1"
+      (input)="_handleInput(parts.controls.day,day,hour)" (keyup.backspace)="autoFocusPrev(parts.controls.day, month)"
+      #day aria-label="Area month" placeholder="dd">
+
+  </div>
+  <span class="irisa-date-time-input-spacer">&nbsp;&nbsp;
+  </span>
+
+  <div>
+    <input class="irisa-date-time-input-element" formControlName="hour" maxLength="2" size="2" max="23" min="0"
+      (input)="_handleInput(parts.controls.hour,hour,minute)"
+      (keyup.backspace)="autoFocusPrev(parts.controls.hour, day)" #hour aria-label="Area day" placeholder="hh">
+
+    <span class="irisa-date-time-input-spacer bold-font">&nbsp;:&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="minute" maxLength="2" size="2" max="59" min="0"
+      (input)="_handleInput(parts.controls.minute,minute,second)"
+      (keyup.backspace)="autoFocusPrev(parts.controls.minute, hour)" #minute aria-label="Area minute" placeholder="mm">
+
+    <span class="irisa-date-time-input-spacer bold-font">&nbsp;:&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="second" maxLength="2" size="2" max="59" min="0"
+      (input)="_handleInput(parts.controls.second,second,year)"
+      (keyup.backspace)="autoFocusPrev(parts.controls.second, minute)" #second aria-label="Area second"
+      placeholder="ss">
+  </div>
+
+</div>
+<!-- ------------------------------------------------------------------------ -->
+<div *ngIf="!showTime" role="group" class="irisa-date-time-input-container" [formGroup]="parts"
+  [attr.aria-labelledby]="_formField?.getLabelId()" (focusin)="onFocusIn($event)" (focusout)="onFocusOut($event)">
+
+  <div>
+    <input class="irisa-date-time-input-element" formControlName="year" size="4" maxLength="4" max="3000" min="1000"
+      (input)="_handleInput(parts.controls.year,year, month)" #year aria-label="Area year" placeholder="yyyy">
+    <span class="irisa-date-time-input-spacer">&nbsp;/&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="month" maxLength="2" size="2" max="12" min="1"
+      (input)="_handleInput(parts.controls.month,month, day)"
+      (keyup.backspace)="autoFocusPrev(parts.controls.month, year)" #month aria-label="Area month" placeholder="mm">
+    <span class="irisa-date-time-input-spacer">&nbsp;/&nbsp;</span>
+
+    <input class="irisa-date-time-input-element" formControlName="day" maxLength="2" size="2" max="31" min="1"
+      (input)="_handleInput(parts.controls.day,day,year)" (keyup.backspace)="autoFocusPrev(parts.controls.day, month)"
+      #day aria-label="Area month" placeholder="dd">
+
+  </div>
+</div>

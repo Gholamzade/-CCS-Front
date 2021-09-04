@@ -114,12 +114,18 @@ export class ArcSidenavView implements OnInit {
       console.log('menu: ', menu);
       menu.subMenus = menu.subMenus.filter(sub => {
         let path: string = sub.route;
-        if (path?.includes('/')) {
-          path = path.split('/').join('')
+
+        if (path?.split('/:').length > 1) {
+          return false
+        } else {
+          return true
         }
-        if (routes.some(approute => approute.path === path)) {
-          return sub;
-        }
+        // if (path?.includes('/')) {
+        //   path = path.split('/').join('')
+        // }
+        // if (routes.some(approute => approute.path === path)) {
+        //   return sub;
+        // }
       })
     })
 

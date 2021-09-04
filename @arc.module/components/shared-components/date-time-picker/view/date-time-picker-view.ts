@@ -1,21 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { FormControl, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { LIMIT_TIMES, PATTERN_INPUT_HOUR, PATTERN_INPUT_MINUTE } from "@arc.module/constants/date-time-patterns";
 import { BreakPointsService } from '@arc.module/services/break-points.service';
 import * as jalaliMoment from "jalali-moment";
 
-
-export const PATTERN_INPUT_HOUR = /^(2[0-3]|[0-1][0-9]|[0-9])$/;
-export const PATTERN_INPUT_MINUTE = /^([0-5][0-9]|[0-9])$/;
-export const PATTERN_INPUT_SECOND = /^([0-5][0-9]|[0-9])$/;
-export const LIMIT_TIMES = {
-  minHour: 0,
-  maxHour: 24,
-  minMinute: 0,
-  maxMinute: 60,
-  minSecond: 0,
-  maxSecond: 60,
-}
 export function formatTwoDigitTimeValue(val: number) {
   const txt = val.toString();
   return txt.length > 1 ? txt : `0${txt}`;
@@ -178,7 +167,7 @@ export class DateTimePickerView implements OnInit {
 
   /**
      * Get next value by property
-     * @param prop 
+     * @param prop
      * @param up
      */
   private _getNextValueByProp(prop: 'hour' | 'minute', up: boolean): number {

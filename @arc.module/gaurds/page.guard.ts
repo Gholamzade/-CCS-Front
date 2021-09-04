@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable, } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MenuService } from "../services/menu.service";
 import { IPureSubMenu } from '@arc.module/models/interfaces/pure-sub-menu.interface';
+import { Telegram } from '@arc.module/models/classes/telegram.class';
+import { ArcTelegramService } from '@arc.module/services/arcTelegram.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageGuard implements CanActivate {
   private menus: IPureSubMenu[];
-  constructor(private router: Router, private menuService: MenuService) {
+  constructor(private router: Router, private menuService: MenuService,
+    private telService: ArcTelegramService,) {
   }
 
   canActivate(
@@ -18,10 +20,10 @@ export class PageGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let path = state.url;
     if (path.startsWith('/')) {
-      path = path.replace('/', '')
+      path = path.substring(1)
     }
 
-    return this.checkAccessRoute(path)
+    return this.getMenus(path)
   }
 
   // canLoad(
@@ -30,35 +32,50 @@ export class PageGuard implements CanActivate {
   //   return true;
   // }
 
+  getMenus(currentRoute) {
+    let menusFixed = [];
 
-  async checkAccessRoute(currentRoute: string) {
-    this.menuService.subMenus$.subscribe(menus => {
-      console.log("subMenus", menus)
-      this.menus = menus;
+    this.menus = this.menuService.subMenus.getValue();
+
+    if (this.menus.length === 0) {
+
+      return this.telService.send(new Telegram(31, null)).then(res1 => {
+        let menus: IPureSubMenu[] = res1.telData.body;
+        menus = this.menuService.sortMenus(menus, 'sPos')
+
+        this.menuService.subMenus.next(menus);
+
+        menusFixed = this.menuService.mappingMenus(menus, menusFixed);
+        menusFixed = this.menuService.sortMenus(menusFixed, 'position');
+
+        this.menuService.menus.next(menusFixed);
+        return this.hasAccess(menus, currentRoute)
+
+      }).catch(err => {
+        console.error(err)
+        console.error('hasAccess: ', false);
+        return false;
+      });
+    } else {
+
+      return this.hasAccess(this.menus, currentRoute)
+
+    }
+  }
+
+
+  hasAccess(menus, currentRoute) {
+    let hasAccess = menus.some(route => {
+      if (route.sRoute === currentRoute) {
+        return true;
+      }
+
     })
+    console.log('hasAccess:', hasAccess);
 
-    let hasAccess = this.menus.some(route => route.sRoute === currentRoute)
     if (!hasAccess) {
       this.router.navigate(['404'])
     }
-    return this.menus.some(route => route.sRoute === currentRoute)
+    return hasAccess;
   }
-
-  checkAccessRoute2(currentRoute: string) {
-    console.error(this.menus)
-    this.menuService.subMenus$.pipe(
-      map(menus => {
-        console.log("subMenus", menus)
-        console.log("currentRoute", currentRoute)
-        this.menus = menus;
-        let hasAccess = this.menus.some(route => route.sRoute === currentRoute)
-        console.log("🚀 ~ file: page.guard.ts ~ line 91 ~ hasAccess", hasAccess);
-        if (!hasAccess) {
-          this.router.navigate(['404'])
-        }
-        return hasAccess;
-      })
-    )
-  }
-
 }

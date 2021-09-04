@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" [floatLabel]="'always'" style="width: 100%;">
+  <mat-label>{{label}}</mat-label>
+  <irisa-date-time-input [formControl]="selectedDateFormControl" [showTime]="showTime" autocomplete="off"
+    [locale]="locale" cdkOverlayOrigin #startDateOrigin="cdkOverlayOrigin">
+  </irisa-date-time-input>
+  <button mat-icon-button matSuffix (click)="openPanelWithBackdrop()">
+    <mat-icon>date_range
+    </mat-icon>
+  </button>
+</mat-form-field>

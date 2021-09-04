@@ -6,6 +6,10 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { Direction } from '@angular/cdk/bidi';
 import { DOCUMENT } from '@angular/common';
 
+export function isDefined(value: any): boolean {
+  return typeof value !== 'undefined' && value !== null;
+}
+
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -56,6 +60,25 @@ export class LanguageService {
       });
   }
 
+  getValue(target: any, key: string): { tranlations: string[], lastCategory: string } {
+    let keys = typeof key === 'string' ? key.split('.') : [key];
+    let lastCategory = keys[keys.length - 1];
+    key = '';
+    do {
+      key += keys.shift();
+      if (isDefined(target) && isDefined(target[key]) && (typeof target[key] === 'object' || !keys.length)) {
+        target = target[key];
+        key = '';
+      } else if (!keys.length) {
+        target = undefined;
+      } else {
+        key += '.';
+      }
+    } while (keys.length);
+
+    return { tranlations: target, lastCategory };
+  }
+
   translate(phrase: string, language: string = null) {
     let lang: string = language
     if (lang == null || lang == undefined || lang == '') {
@@ -76,17 +99,15 @@ export class LanguageService {
       return phrase;
     }
 
-    // let lowercasePhrases = Object.keys(phrases).reduce((acc, key) => {
-    //   acc[key.trimEnd().trimStart().toLowerCase()] = phrases[key];
-    //   return acc;
-    // }, {});
+    let { tranlations, lastCategory } = this.getValue(this.allPhrases, phrase)
 
-    if (this.allPhrases[phrase] && this.allPhrases[phrase][selectedLang.langIndex]) {
-      return this.allPhrases[phrase][selectedLang.langIndex];
+    let translated = phrase;
+    if (isDefined(tranlations) && isDefined(tranlations[selectedLang.langIndex])) {
+      translated = tranlations[selectedLang.langIndex];
     } else {
-      // console.error(`not found phrases for (${phrase}) for (${lang}) language `)
-      return phrase;
+      translated = lastCategory
     }
+    return translated;
 
   }
 
@@ -114,7 +135,7 @@ export class LanguageService {
 
   getDirection() {
     let dir = localStorage.getItem('direction') as Direction
-    if (dir === null || dir === undefined){
+    if (dir === null || dir === undefined) {
       this.setDirection("ltr");
       return "ltr";
     }

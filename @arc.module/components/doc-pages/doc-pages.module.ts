@@ -26,8 +26,8 @@ import { DocUtilityPresenter } from './utility/doc-utility-presenter';
 import { DocUtilityView } from './utility/view/doc-utility-view';
 import { ReportSamplePresenter } from './report-sample/report-sample-presenter';
 import { ReportSampleView } from './report-sample/view/report-sample-view';
-// import { ResponsiveTablePresenter } from './table-sample/components/responsive-table/responsive-table-presenter';
-// import { ResponsiveTableView } from './table-sample/components/responsive-table/view/responsive-table-view';
+import { ResponsiveTablePresenter } from './table-sample/components/responsive-table/responsive-table-presenter';
+import { ResponsiveTableView } from './table-sample/components/responsive-table/view/responsive-table-view';
 import { MessagesSamplePresenter } from './messages-sample/messages-sample-presenter';
 import { MessagesSampleView } from './messages-sample/view/messages-sample-view';
 
@@ -57,8 +57,8 @@ const DOC_COMPONENTS = [
   ReportSamplePresenter,
   ReportSampleView,
 
-  // ResponsiveTablePresenter,
-  // ResponsiveTableView,
+  ResponsiveTablePresenter,
+  ResponsiveTableView,
 
   MessagesSamplePresenter,
   MessagesSampleView

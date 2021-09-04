@@ -96,15 +96,18 @@ export class FromSample2View implements OnInit {
   }
 
   getSelectedStartDate(startDate: string | IrisaDate) {
+    console.log('startDate: ', startDate);
     this.form.controls.startDate.setValue(startDate.toString())
   }
-  getSelectedEndDate(endDate: string | IrisaDate) {
-    this.form.controls.endDate.setValue(endDate.toString())
+
+
+  private _endDate: IrisaDate;
+  public get endDate(): IrisaDate {
+    return this._endDate;
+  }
+  public set endDate(value: IrisaDate) {
+    console.log('endDate with two way binding: ', value);
+    this._endDate = value;
   }
 
-
-
-  getSelectedDate(endDate: string | IrisaDate) {
-    this.form2.controls.date.setValue(endDate.toString())
-  }
 }

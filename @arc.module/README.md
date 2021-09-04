@@ -136,6 +136,7 @@ fix condition of restart signalR connection,
 *define $header-border variable to use for header border color (irisa-table css class)
 *modify style of table and use p-paginator instead mat-paginator ,set default row count(alertLog page)
 *fill total field from totalCount of alertLog telegram(26),use defaultPageSize in apply searchFilters(alertLog page)
+((need backend version 1.4.4))
 *modify styles based new design , use date-time-picker-overlay component(alertLog page)
 *create irisa-expansion-panel scss class (used in alertLog page and simple-date-time-picker to look like secondary-form )
 *close date-time-picker-overlay after change route
@@ -143,6 +144,46 @@ fix condition of restart signalR connection,
 -messageService_F ==> 1.4.28
 *create message component to show message with Different type
 *create message-sample component to use as document of messageService
+
+-multiLanguage ==> 1.4.29
+*Add category feature, in creating translation file (language.json)
+*fix translate of phrases in @arc.module folder
+
+-customerLogo_F ==> 1.4.30
+Set customer logo in toolbar based different image format(priority with svg then png > jpg > jpeg)
+
+-responsiveTable_F ==> 1.4.31
+
+- modify irisa-table.scss based xs,sm,md,lg,xl viewport
+- create static mat table in responsive-table component
+- modify table-sample component (show proper responsive mode)
+- use matMenu to show actions on row of table (table-sample component)
+
+-responsiveTable_F ==> 1.4.32
+
+- Modify menuService to caching menus and submenus , check in PageGaurd to Check access level and get menus and cached them after refresh page
+- return category name if related phrased not defined in language.json
+- refactor getMenus function (menuService) and use extracted function in pageGuard
+- use PageGuard on routes
+- remove setDynamicRoutes from appComponent
+
+-dateTimePickerV3_F ==> 1.4.33
+
+-improve date-time-picker-overlay component to use two way data binding
+-improve simple-time-picker component and fix bugs
+-implement irisa-date-time-input as custom form field for date time
+-implement irisa-date-time-picker to show simple-date-time-picker as overLay (datetime selector) on irisa-date-time-input (custom form field)
+-fix bugs in dateUtility class
+-improvement in input.scss
+-update form-sample , form-sample and input pages based new date time fields
+
+-dateTimePickerV3_F ==> 1.5.0
+-set token on hubConnection by accessTokenFactory
+-listen on ARC_USER_EVENT (get telegram for specific users)
+-refactor start connection with irisahub (faster starting)
+-add to group after Connection started (group by userGroup)
+-set listener on ARC_GROUP_EVENT (get telegram for specific user groups)
+-remove signalR connection after user logout
 
 ## 📖 Documents
 
@@ -152,14 +193,14 @@ http://localhost:4200/#/document
 
 Which version to use?
 
-| Angular | Material | @arc.module |
-| ------- | -------- | ----------- |
-| v12     | v12      | 1.4.27      |
-| v10     | v10      | 1.4.19      |
+| Angular | Material | @arc.module | backend Ver                                                          |
+| ------- | -------- | ----------- | -------------------------------------------------------------------- |
+| v12     | v12      | 1.5.0       | 1.4.5 (signalR security and send event to specific users and groups) |
+| v12     | v12      | 1.4.33      | 1.4.4 - 1.4.3 (without alert log page)                               |
+| v12     | v12      | 1.4.28      | 1.4.4 - 1.4.3 (without alert log page)                               |
+| v10     | v10      | 1.4.19      | 1.4.3                                                                |
 
 ## ⚙️ Schematics
-
-You can use the ng-matero schematics to generate a module or a page.
 
 ### Page schematic
 

@@ -10,7 +10,7 @@
           </button>
         </div>
         <!-- <span> -->
-        <img fxFlex="20%" src="assets/imgs/customer-logo.svg" class="customer-logo">
+        <img fxFlex="20%" [src]="(filesArray|validFile:'assets/imgs/irisa-logo.png'|async)?.url" class="customer-logo">
         <!-- </span> -->
         <span fxFlex="65%" fxHide.lt-sm class="title">{{title}}</span>
       </span>
@@ -41,7 +41,7 @@
           <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(15% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
             fxFlex.lg="0 1 calc(15% - 0.5rem)" fxFlex.xl="0 1 calc(15% - 0.5rem)">
             <button color="danger-text" class="button-sm" mat-raised-button (click)="toolbarLogConfirmed(alertLog)">
-              {{'confirmDangerAlert'|TranslatePipe}}
+              {{'arcHeader.confirmDangerAlert'|TranslatePipe}}
             </button>
 
           </div>
@@ -129,7 +129,7 @@
 
       <div fxFlex="0 1 calc(10% - 0.5rem)">
         <button color="danger-text" class="button-sm" mat-raised-button (click)="toolbarLogConfirmed(alertLog)">
-          {{'confirmDangerAlert'|TranslatePipe}}
+          {{'arcHeader.confirmDangerAlert'|TranslatePipe}}
         </button>
 
       </div>

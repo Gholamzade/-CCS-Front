@@ -10,6 +10,7 @@ import { TelegramModificationPagePresenter } from './components/pages/telegram-m
 import { TelegramLogPagePresenter } from './components/pages/telegram-log-page/telegram-log-page-presenter'
 import { NotFoundComponent } from './components/shared-components/not-found/not-found.component';
 import { ReportIframeView } from './components/shared-components/report-iframe/report-iframe-view';
+import { PageGuard } from './gaurds/page.guard';
 
 
 export const DOC_ROUTES: Routes = [
@@ -27,19 +28,19 @@ export const DOC_ROUTES: Routes = [
 export const ARC_ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPagePresenter },
-  { path: 'shift-definition', component: ShiftPagePresenter },
-  { path: 'alert-log', component: AlertLogPagePresenter },
-  { path: 'alert-definition', component: AlertDefinitionPagePresenter },
-  { path: 'menu-definition', component: MenuPagePresenter },
-  { path: 'user-definition', component: UserPagePresenter },
-  { path: 'report-definition', component: ReportDefinitionPagePresenter },
+  { path: 'shift-definition', component: ShiftPagePresenter, canActivate: [PageGuard] },
+  { path: 'alert-log', component: AlertLogPagePresenter, canActivate: [PageGuard] },
+  { path: 'alert-definition', component: AlertDefinitionPagePresenter, canActivate: [PageGuard] },
+  { path: 'menu-definition', component: MenuPagePresenter, canActivate: [PageGuard] },
+  { path: 'user-definition', component: UserPagePresenter, canActivate: [PageGuard] },
+  { path: 'report-definition', component: ReportDefinitionPagePresenter, canActivate: [PageGuard] },
   { path: 'report-view', component: ReportIframeView },
-  { path: 'telegram-modification', component: TelegramModificationPagePresenter },
-  { path: 'telegram-log', component: TelegramLogPagePresenter },
+  { path: 'telegram-modification', component: TelegramModificationPagePresenter, canActivate: [PageGuard] },
+  { path: 'telegram-log', component: TelegramLogPagePresenter, canActivate: [PageGuard] },
   { path: '404', component: NotFoundComponent },
-  ...DOC_ROUTES
-  // {
-  //     path: '**',
-  //     redirectTo: '404'
-  // }
+  ...DOC_ROUTES,
+  {
+    path: '**',
+    redirectTo: '404'
+  }
 ];

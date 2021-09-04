@@ -11,14 +11,14 @@
       <mat-icon class="icon">{{messageIcon}}</mat-icon>
     </ng-template>
   </div>
-  <div class="heading" [dir]="titleDirection">
-    {{title|TranslatePipe}}
+  <div class="heading" [dir]="titleDirection" [innerHtml]="title">
+    <!-- {{title|TranslatePipe}} -->
   </div>
 
 </div>
 
-<div class="modal-content" [dir]="messageDirection">
-  {{message|TranslatePipe}}
+<div class="modal-content" [dir]="messageDirection" [innerHtml]="message">
+  <!-- {{message|TranslatePipe}} -->
 </div>
 
 <div class="modal-actions">

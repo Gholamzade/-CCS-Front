@@ -184,11 +184,19 @@ import { JalaliDateToMiladiPipe } from "@arc.module/pipes/jalali-date-to-miladi.
 import { SummerizeTextPipe } from "@arc.module/pipes/summerize-text.pipe";
 import { PrimePaginator } from "@arc.module/components/shared-components/prime-paginator/paginator";
 import { MessageView } from './components/shared-components/message/message-view';
+import { IrisaDateTimePickeView } from './components/shared-components/irisa-date-time-picker/view/irisa-date-time-picker-view';
+import { IrisaDateTimePickerPresenter } from './components/shared-components/irisa-date-time-picker/irisa-date-time-picker-presenter';
+import { ValidFile } from './pipes/valid-file.pipe';
+import { IrisaDateTimeInput } from './components/shared-components/irisa-date-time-input/irisa-date-time-input-view';
 
 const SharedComponent = [
 
   PrimePaginator,
-  MessageView
+  MessageView,
+  ValidFile,
+  IrisaDateTimePickeView,
+  IrisaDateTimePickerPresenter,
+  IrisaDateTimeInput,
 ];
 
 @NgModule({

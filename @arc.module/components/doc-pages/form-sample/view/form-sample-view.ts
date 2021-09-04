@@ -59,6 +59,14 @@ export class FromSampleView implements OnInit {
 
   @Input('form-data') formData: any[]
 
+  start: IrisaDate
+  startTest: IrisaDate
+  end: IrisaDate
+
+  sDateChange(e) {
+    console.log('e: ', e);
+
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -88,17 +96,20 @@ export class FromSampleView implements OnInit {
   }
 
   submit() {
+    console.warn("this.start", this.start);
+    console.warn("this.end", this.end);
+    console.warn("this.starttest", this.startTest);
     console.log(this.form.value);
   }
 
-  getSelectedStartDate(startDate: string | IrisaDate) {
-    console.log(startDate);
-    this.form.controls.startDate.setValue(startDate.toString())
-  }
-  getSelectedEndDate(endDate: string | IrisaDate) {
-    console.log(endDate);
-    this.form.controls.endDate.setValue(endDate.toString())
-  }
+  // getSelectedStartDate(startDate: string | IrisaDate) {
+  //   console.log(startDate);
+  //   this.form.controls.startDate.setValue(startDate.toString())
+  // }
+  // getSelectedEndDate(endDate: string | IrisaDate) {
+  //   console.log(endDate);
+  //   this.form.controls.endDate.setValue(endDate.toString())
+  // }
 
 
 

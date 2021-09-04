@@ -23,14 +23,14 @@
       <mat-expansion-panel *ngFor="let menu of menus">
         <mat-expansion-panel-header class="expansion-panel-header">
           <mat-panel-title style="font-weight: bolder;">
-            {{menu.titleEn|TranslatePipe}}
+            {{'sidebar.menus.'+menu.titleEn|TranslatePipe}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-selection-list [multiple]="false" #submenus>
           <mat-list-option [dir]="dir" class="list-title" *ngFor="let sub of menu.subMenus" (click)="onClick(sub)">
             <mat-icon mat-list-icon>{{sub.route|iconSetter}}</mat-icon>
-            <span [routerLink]="['/'+sub.route]"> {{sub.titleEn|TranslatePipe}}</span>
+            <span [routerLink]="['/'+sub.route]"> {{'sidebar.menus.'+sub.titleEn|TranslatePipe}}</span>
 
           </mat-list-option>
         </mat-selection-list>
@@ -42,7 +42,7 @@
       <mat-expansion-panel *ngIf="reportGroups && reportGroups.length > 0">
         <mat-expansion-panel-header id="reportGroups-menu" class="expansion-panel-header">
           <mat-panel-title style="font-weight: bolder;">
-            {{'Reports'|TranslatePipe}}
+            {{'sidebar.menus.Reports'|TranslatePipe}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -50,7 +50,7 @@
           <mat-expansion-panel *ngFor="let group of reportGroups">
             <mat-expansion-panel-header id="report-menu" class="expansion-panel-header">
               <mat-panel-title style="font-weight: bolder;">
-                {{group.title|TranslatePipe}}
+                {{'sidebar.menus.'+group.title|TranslatePipe}}
               </mat-panel-title>
 
             </mat-expansion-panel-header>
@@ -65,14 +65,14 @@
 
         <mat-expansion-panel-header class="expansion-panel-header">
           <mat-panel-title style="font-weight: bolder;">
-            {{'ArcDocuments'|TranslatePipe}}
+            {{'sidebar.menus.ArcDocuments'|TranslatePipe}}
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-selection-list [multiple]="false" #submenus>
           <mat-list-option [dir]="dir" class="list-title" *ngFor="let doc of docRoutes">
             <mat-icon mat-list-icon>{{doc.path|iconSetter}}</mat-icon>
-            <span [routerLink]="['/document/'+doc.path]"> {{doc.title|TranslatePipe}}</span>
+            <span [routerLink]="['/document/'+doc.path]"> {{doc.title}}</span>
           </mat-list-option>
         </mat-selection-list>
 
@@ -82,7 +82,7 @@
       <mat-expansion-panel hideToggle (click)="logOut()">
         <mat-expansion-panel-header class="expansion-panel-header">
           <mat-panel-title style="font-weight: bolder;">
-            {{'Logout'|TranslatePipe}}
+            {{'sidebar.menus.Logout'|TranslatePipe}}
           </mat-panel-title>
           <mat-panel-description style="justify-content: flex-end">
             <mat-icon>logout</mat-icon>
@@ -94,9 +94,9 @@
 
   <div class="irisa-section" [dir]="dir">
     <img src="assets/imgs/irisa-logo.svg" class="logo">
-    <div class="logo-title">{{'Designed and implemented by Irisa Company'|TranslatePipe}}</div>
+    <div class="logo-title">{{'sidebar.Designed and implemented by Irisa Company'|TranslatePipe}}</div>
 
-    <div class="version" [dir]="dir"> {{'Version'|TranslatePipe}} {{_version}} </div>
+    <div class="version" [dir]="dir"> {{'sidebar.menus.Version'|TranslatePipe}} {{_version}} </div>
   </div>
 
 </div>

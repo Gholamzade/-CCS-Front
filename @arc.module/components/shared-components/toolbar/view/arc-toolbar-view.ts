@@ -28,6 +28,7 @@ export class ArcToolbarView implements OnInit, OnDestroy {
   popupLogs: IAlertLogItem[] = [];
   title: string;
   selectedLanguage: string;
+  customerLogo: string;
   @Input() set newLog(value: IAlertLogItem) {
     if (value) {
       if (!value.popup) {
@@ -90,7 +91,15 @@ export class ArcToolbarView implements OnInit, OnDestroy {
     clearInterval(this.audioPlayerTimer);
   }
 
+  filesArray = [
+    'assets/imgs/customer-logo.svg',
+    'assets/imgs/customer-logo.png',
+    'assets/imgs/customer-logo.jpg',
+    'assets/imgs/customer-logo.jpeg',
+  ]
+
   ngOnInit(): void {
+    // this.imageExists()
     // this.toolbarLogs.push(
     //   { "title": "asdasdasd", "type": 3, "alertLogId": 171389, "body": "این یک پیام تست  91211255555   ن یک پیام تست  91211255555   ن یک پیام تست  91211255555   ن یک پیام تست  91211255555   ,  91211255555  است", "logDate": "2021-05-23T21:06:08.9001362+04:30", "alertId": null, "popup": false, "sound": false }
     // )
@@ -176,4 +185,30 @@ export class ArcToolbarView implements OnInit, OnDestroy {
   }
 
 
+  // imageExists() {
+
+  //   let image = new Image();
+  //  .forEach(element => {
+  //     this.checkIfImageExists(element)
+
+  //   });
+
+  // }
+
+  // checkIfImageExists(url) {
+  //   const img = new Image();
+
+  //   img.src = url;
+
+  //   if (img.complete) {
+  //     this.customerLogo = url;
+  //   } else {
+  //     img.onload = () => {
+  //       console.error('customer logo not found')
+  //     };
+  //     img.onerror = () => {
+  //       console.error('customer logo not found')
+  //     };
+  //   }
+  // }
 }

@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { LanguageService } from "@arc.module/services/language.service";
 import { DateUtility, IrisaDate } from "@arc.module/utilities/date-utility";
 
 
@@ -9,6 +10,7 @@ import { DateUtility, IrisaDate } from "@arc.module/utilities/date-utility";
   [months]="months"
   [days]="days"
   (selectedDateChange)="selectedDateChange($event)"
+  (monthChange)="calcDays($event)"
   (on-close)="onClose()"
   [disabled]="disabled"
   [locale]="locale"
@@ -16,7 +18,9 @@ import { DateUtility, IrisaDate } from "@arc.module/utilities/date-utility";
   [dateObject]="dateObject"
   [dateChange]="dateChange"
   [showTime]="showTime"
+  [dir]="dir"
   ></simple-date-time-picker-view>`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class SimpleDateTimePickerPresenter implements OnInit {
@@ -25,10 +29,15 @@ export class SimpleDateTimePickerPresenter implements OnInit {
   @Output('on-close') onCloseEvent: EventEmitter<void> = new EventEmitter<void>();
 
   private _selectedDate: IrisaDate | string
+  selectedYear: number;
+  dir: string;
   @Input() set selectedDate(val: IrisaDate | string) {
-    this._selectedDate = val
+
     if (val) {
-      this.parseInputDate()
+      this._selectedDate = val
+      this.parseInputDate().then(selectedYear => {
+        this.initValues(selectedYear)
+      })
     }
   };
 
@@ -41,8 +50,8 @@ export class SimpleDateTimePickerPresenter implements OnInit {
   @Input() buttonsLabel: { submit: string, cancel: string }
   @Input() dateObject: IrisaDate;
 
-  days: number[]
-  months: { name: string, value: number }[] = [];
+
+  months: { name: string, value: number, dayCount: number }[] = [];
   years: number[]
 
   selectedDateChange(selectedDate: string | IrisaDate) {
@@ -52,38 +61,42 @@ export class SimpleDateTimePickerPresenter implements OnInit {
   @Input() label: string = ''
   private _locale: string
   @Input() public set locale(v: string) {
-    this._locale = v;
+    if (v) {
+      this._locale = v;
+      this.dateIntance = new IrisaDate(v)
+    }
   }
 
   public get locale(): string {
     return this._locale;
   }
 
-
-  @Input() placeholder: string = ''
-
   dateIntance: IrisaDate
+  @Input() placeholder: string = ''
+  days: number[] = []
 
-  constructor() {
 
+  constructor(
+    private languageService: LanguageService
+  ) {
+    this.dir = languageService.getDirection()
   }
 
   createRange(start, stop, step) {
     return Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
   }
 
-  initValues() {
-    // console.warn(this.locale, this.dateIntance)
+  initValues(selectedYear) {
     this.years = this.createRange(this.dateIntance.year + 3, this.dateIntance.year - 10, -1)
     let months = this.dateIntance.getMonths()
     months.forEach((month: string, index: number) => {
       this.months.push({
         value: index + 1,
-        name: month
+        name: month,
+        dayCount: DateUtility.getNumDaysInMonth(this.locale, selectedYear, index)
       })
     })
-    let dayCounts = this.dateIntance.getNumDaysInMonth()
-    this.days = Array.from({ length: dayCounts }, (_, i) => i + 1);
+
 
   }
 
@@ -91,9 +104,7 @@ export class SimpleDateTimePickerPresenter implements OnInit {
   parseInputDate() {
 
     if (typeof this.selectedDate === 'string') {
-      console.log('selectedDate: ', this.selectedDate);
       //converted string to IrisaDate
-
       if (this.locale === 'fa') {
         this.dateObject = DateUtility.stringTojalali(this.selectedDate)
         // console.log('this.dateObject: ', this.dateObject);
@@ -101,7 +112,6 @@ export class SimpleDateTimePickerPresenter implements OnInit {
       } else if (this.locale === 'en') {
         this.dateObject = DateUtility.stringToMiladi(this.selectedDate)
         // console.log('this.dateObject: ', this.dateObject);
-
       }
 
     }
@@ -117,33 +127,31 @@ export class SimpleDateTimePickerPresenter implements OnInit {
       }
 
     }
-    // else if (DateUtility.isDateObject((this.selectedDate))) {
-    //   let day = this.selectedDate.getDay()
-    //   let month = this.selectedDate.getMonth()
-    //   let year = this.selectedDate.getDay()
-    //   let hour = this.selectedDate.getHours()
-    //   let minute = this.selectedDate.getMinutes()
-    //   let second = this.selectedDate.getSeconds()
-    //   this.dateObject = DateUtility.createDate(year, month, day, hour, minute, second, this.locale)
-    // }
+
     else {
       this.dateObject = undefined
 
     }
 
+    this.selectedYear = this.dateObject?.year
+
+    return Promise.resolve(this.selectedYear)
   }
 
   async ngOnInit() {
-    this.dateIntance = new IrisaDate(this.locale)
-
-    this.initValues()
-
-    this.parseInputDate()
+    this.parseInputDate().then(selectedYear => {
+      this.initValues(selectedYear)
+    })
 
   }
 
   onClose() {
     this.onCloseEvent.emit()
+  }
+
+  calcDays(monthNumber: number) {
+    const month = this.months.find(m => m.value === monthNumber)
+    this.days = [...Array.from({ length: month.dayCount }, (_, i) => i + 1)];
   }
 
 }

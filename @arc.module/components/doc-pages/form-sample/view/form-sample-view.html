@@ -47,17 +47,16 @@
 
       <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
         fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
-        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)"
-          [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
-          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        <date-time-picker-overlay-presenter [(selectedDate)]="start" (selectedDateChange)="sDateChange($event)"
+          [label]="'Start Time*'" [placeholder]="'Start Time*'" [showTime]="true" [locale]="'fa'"
+          [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
         </date-time-picker-overlay-presenter>
       </div>
 
       <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
         fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
-        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedEndDate($event)"
-          [selectedDate]="form?.controls?.endDate?.value" [label]="'زمان پایان*'" [placeholder]="'زمان پایان*'"
-          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'ثبت',cancel:'لغو'}">
+        <date-time-picker-overlay-presenter [(selectedDate)]="end" [label]="'زمان پایان*'" [placeholder]="'زمان پایان*'"
+          [showTime]="true" [locale]="'en'" [buttonsLabel]="{submit:'ثبت',cancel:'لغو'}">
         </date-time-picker-overlay-presenter>
       </div>
 
@@ -158,12 +157,28 @@
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
 
-        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
-          fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
-          <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedDate($event)"
-            [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
-            [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'ثبت',cancel:'انصراف'}">
+        <div class="date-form-field" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+          <date-time-picker-overlay-presenter [(selectedDate)]="start" [label]="'Start Time*'"
+            [placeholder]="'Start Time*'" [showTime]="true" [locale]="'fa'"
+            [buttonsLabel]="{submit:'ثبت',cancel:'انصراف'}">
           </date-time-picker-overlay-presenter>
+        </div>
+
+        <div class="date-form-field" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+          <irisa-date-time-picker-presenter [(selectedDate)]="startTest" [label]="'تاریخ شمسی'"
+            [placeholder]="'Start Time*'" [showTime]="false" [locale]="'fa'"
+            [buttonsLabel]="{submit:'ثبت',cancel:'انصراف'}">
+          </irisa-date-time-picker-presenter>
+        </div>
+
+
+        <div class="date-form-field" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+          <irisa-date-time-picker-presenter [(selectedDate)]="startTest" [label]="'miladi date'"
+            [placeholder]="'Start Time*'" [showTime]="true" [locale]="'en'">
+          </irisa-date-time-picker-presenter>
         </div>
 
         <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"

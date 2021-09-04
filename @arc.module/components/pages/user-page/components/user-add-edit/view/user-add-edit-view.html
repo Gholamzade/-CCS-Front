@@ -1,41 +1,41 @@
 <div mat-dialog-title>
-  <span *ngIf="user.userId">{{'Edit User'|TranslatePipe}}: {{user.username}}</span>
-  <span *ngIf="!user.userId">{{'Create User'|TranslatePipe}}</span>
-  <span *ngIf="!user.userId && !user.userGroupFk"> ({{'unAssigned Group'|TranslatePipe}})</span>
+  <span *ngIf="user.userId">{{'arcPages.users.EditUser'|TranslatePipe}}: {{user.username}}</span>
+  <span *ngIf="!user.userId">{{'arcPages.users.Create User'|TranslatePipe}}</span>
+  <span *ngIf="!user.userId && !user.userGroupFk"> ({{'arcPages.users.unAssigned Group'|TranslatePipe}})</span>
 </div>
 <div mat-dialog-content fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="10px" ngForm #myForm="ngForm">
 
   <mat-form-field fxFlex="0 1 calc(50% - 10px)">
-    <mat-label>{{"FirstName"|TranslatePipe}}</mat-label>
+    <mat-label>{{"arcPages.users.FirstName"|TranslatePipe}}</mat-label>
     <input matInput [(ngModel)]="user.name" name="name" required>
   </mat-form-field>
 
   <mat-form-field fxFlex="0 1 calc(50% - 10px)">
-    <mat-label>{{"LastName"|TranslatePipe}}</mat-label>
+    <mat-label>{{"arcPages.users.LastName"|TranslatePipe}}</mat-label>
     <input matInput [(ngModel)]="user.family" name="family" required>
   </mat-form-field>
 
   <div *ngIf="!user.userId" fxFlex="100">
     <mat-form-field style="width: 100%;">
-      <mat-label>{{"UserName"|TranslatePipe}}</mat-label>
+      <mat-label>{{"arcPages.users.UserName"|TranslatePipe}}</mat-label>
       <input matInput [(ngModel)]="user.username" (ngModelChange)="usernameChanged()" name="username" required>
     </mat-form-field>
     <span mat-label *ngIf="takenUsername" style="color:darkred">
-      {{"username is taken"|TranslatePipe}}</span>
+      {{"arcPages.users.username is taken"|TranslatePipe}}</span>
   </div>
 
   <mat-form-field fxFlex="0 1 calc(50% - 10px)" *ngIf="isPasswordChanged || !user.userId">
-    <mat-label>{{"Password"|TranslatePipe}}</mat-label>
+    <mat-label>{{"arcPages.users.Password"|TranslatePipe}}</mat-label>
     <input matInput [(ngModel)]="user.password" name="password" required type="password">
   </mat-form-field>
 
   <div fxFlex="0 1 calc(50% - 10px)" *ngIf="isPasswordChanged || !user.userId">
     <mat-form-field style="width: 100%;">
-      <mat-label>{{"Confirm Password"|TranslatePipe}}</mat-label>
+      <mat-label>{{"arcPages.users.Confirm Password"|TranslatePipe}}</mat-label>
       <input matInput [(ngModel)]="confirmPassword" name="confirmPass" required type="password" #confirmPass="ngModel">
     </mat-form-field>
     <span mat-label *ngIf="confirmPass.touched && user.password !== confirmPassword" style="color:darkred">
-      {{'confirm password does not match'|TranslatePipe}}</span>
+      {{'arcPages.users.confirm password does not match'|TranslatePipe}}</span>
   </div>
 
   <div fxFlex="100">
@@ -45,16 +45,18 @@
 
   <div *ngIf="!isPasswordChanged && user.userId" fxFlex="100">
     <button mat-raised-button (click)="isPasswordChanged=true" color="primary">
-      {{'Change Password'|TranslatePipe}}
+      {{'arcPages.users.Change Password'|TranslatePipe}}
     </button>
   </div>
 
   <p fxFlex="0 1 calc(50% - 10px)">
-    <mat-checkbox class="example-margin" [(ngModel)]="user.isActive" name="isActive">{{'Is Active'|TranslatePipe}}
+    <mat-checkbox class="example-margin" [(ngModel)]="user.isActive" name="isActive">
+      {{'arcPages.users.Is Active'|TranslatePipe}}
     </mat-checkbox>
   </p>
   <p fxFlex="0 1 calc(50% - 10px)">
-    <mat-checkbox class="example-margin" [(ngModel)]="user.isService" name="isService">{{'Is Service'|TranslatePipe}}
+    <mat-checkbox class="example-margin" [(ngModel)]="user.isService" name="isService">
+      {{'arcPages.users.Is Service'|TranslatePipe}}
     </mat-checkbox>
   </p>
 </div>

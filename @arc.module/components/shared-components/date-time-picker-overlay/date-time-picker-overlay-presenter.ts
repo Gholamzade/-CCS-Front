@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
-import { IrisaDate } from '@arc.module/utilities/date-utility';
+import { DateUtility, IrisaDate } from '@arc.module/utilities/date-utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'date-time-picker-overlay-presenter',
@@ -7,14 +8,14 @@ import { IrisaDate } from '@arc.module/utilities/date-utility';
     [label]="label"
     [buttonsLabel]="buttonsLabel"
     [placeholder]="placeholder"
-    [selectedDate]="selectedDate"
+    [selectedDate]="data$|async"
     [showTime]="showTime"
     [locale]="locale"
     (onSelectedDate)="getSelectedDate($event)"
   ></date-time-picker-overlay-view>`,
 })
 export class DateTimePickerOverlayPresenter implements OnInit {
-  @Output() onSelectedDate: EventEmitter<string | IrisaDate> = new EventEmitter<string | IrisaDate>();
+  @Output() selectedDateChange: EventEmitter<IrisaDate> = new EventEmitter<IrisaDate>();
   @Input() label = '';
   @Input() buttonsLabel: { submit: string, cancel: string };
   @Input() placeholder = '';
@@ -29,13 +30,40 @@ export class DateTimePickerOverlayPresenter implements OnInit {
     return this._locale;
   }
 
+  data$: Subject<IrisaDate | string> = new Subject<IrisaDate | string>()
+
   private _selectedDate: IrisaDate | string;
   @Input() set selectedDate(val: IrisaDate | string) {
     this._selectedDate = val;
+    this.data$.next(val)
   };
 
-  get selectedDate(): IrisaDate | string {
-    return this._selectedDate;
+  get selectedDate() {
+    return this.parseInputDate(this._selectedDate);
+  }
+
+  parseInputDate(selectedDate) {
+    let dateObject
+    if (typeof selectedDate === 'string') {
+      //converted string to IrisaDate
+      if (this.locale === 'fa') {
+        dateObject = DateUtility.stringTojalali(selectedDate)
+      } else if (this.locale === 'en') {
+        dateObject = DateUtility.stringToMiladi(selectedDate)
+      }
+    }
+    else if (this.selectedDate instanceof IrisaDate) {
+      if (this.locale === 'fa') {
+        dateObject = selectedDate.toJalali();
+      } else if (this.locale === 'en') {
+        dateObject = selectedDate.toMiladi();
+      }
+
+    }
+    else {
+      dateObject = undefined
+    }
+    return dateObject
   }
 
   constructor() { }
@@ -43,7 +71,7 @@ export class DateTimePickerOverlayPresenter implements OnInit {
   ngOnInit(): void {
   }
 
-  getSelectedDate(selectedDate: string | IrisaDate) {
-    this.onSelectedDate.emit(selectedDate)
+  getSelectedDate(selectedDate: IrisaDate) {
+    this.selectedDateChange.emit(selectedDate)
   }
 }

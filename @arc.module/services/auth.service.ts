@@ -58,7 +58,7 @@ export class AuthService {
       .post(url, obj)
       .toPromise()
       .then((data: any) => {
-        console.log(data);
+
         this.tokenService.setData(data);
         this.loginStatus.next(true);
         this.startServices();
@@ -76,15 +76,17 @@ export class AuthService {
 
 
   logOut() {
+    this.stopServices();
     console.error("clearData");
     this.tokenService.clearData();
-    this.stopServices();
   }
-  private startServices() {
-    this.hubService.start();
-    this.routineService.start();
-    this.menuService.start();
-    this.languageService.start()
+  private async startServices() {
+    if (this.tokenService.token && this.tokenService.token !== 'test') {
+      await this.hubService.start();
+      await this.routineService.start();
+      await this.menuService.start();
+      await this.languageService.start()
+    }
   }
   private stopServices() {
     this.hubService.stop();

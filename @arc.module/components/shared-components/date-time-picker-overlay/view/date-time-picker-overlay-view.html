@@ -1,9 +1,9 @@
 <mat-form-field appearance="outline" style="width: 100%;">
-    <mat-label>{{label}}</mat-label>
-    <input type="datetime" matInput [formControl]="selectedDateFormControl" [placeholder]="placeholder" cdkOverlayOrigin
-        #startDateOrigin="cdkOverlayOrigin" autocomplete="off" />
-    <button mat-icon-button matSuffix (click)="openPanelWithBackdrop()">
-        <mat-icon>date_range
-        </mat-icon>
-    </button>
+  <mat-label>{{label}}</mat-label>
+  <input matInput [formControl]="selectedDateFormControl" [placeholder]="placeholder" cdkOverlayOrigin
+    #startDateOrigin="cdkOverlayOrigin" autocomplete="off" [dir]="'ltr'" />
+  <button mat-icon-button matSuffix (click)="openPanelWithBackdrop()">
+    <mat-icon>date_range
+    </mat-icon>
+  </button>
 </mat-form-field>

@@ -1,6 +1,6 @@
 <mat-card class="filter-card" style="margin: 10px;">
   <mat-card-header>
-    <mat-card-title>Set Telegram Filters</mat-card-title>
+    <mat-card-title>{{'arcPages.telegramLogs.Set Telegram Filters'|TranslatePipe}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
@@ -115,12 +115,12 @@
         [buttonsLabel]="{submit:'بستن',cancel:'انصراف'}"
        >
       </date-time-picker-overlay-presenter> -->
-      <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)" [selectedDate]="selectedFrom"
-        [label]="'Start Date'" [placeholder]="'Start Date'" [showTime]="true" [locale]="'en'">
+      <date-time-picker-overlay-presenter [(selectedDate)]="selectedFrom" [label]="'Start Date'"
+        [placeholder]="'Start Date'" [showTime]="true" [locale]="'en'">
       </date-time-picker-overlay-presenter>
 
-      <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedEndDate($event)" [selectedDate]="selectedTo"
-        [label]="'End Date'" [placeholder]="'End Date'" [showTime]="true" [locale]="'en'">
+      <date-time-picker-overlay-presenter [(selectedDate)]="selectedTo" [label]="'End Date'" [placeholder]="'End Date'"
+        [showTime]="true" [locale]="'en'">
       </date-time-picker-overlay-presenter>
 
       <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"

@@ -2,7 +2,7 @@
   <mat-card-header [dir]="'rtl'">
     <mat-card-title>Inputs</mat-card-title>
   </mat-card-header>
-  <mat-card-content [dir]="'rtl'" style="height: 35vh;">
+  <mat-card-content [dir]="'rtl'">
 
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
@@ -12,7 +12,7 @@
         <input matInput placeholder="placeholder" [formControl]="testCtrl">
         <mat-hint>
           <mat-icon aria-hidden="false">info_outlined</mat-icon>
-          متن راهنمای تکست فیلد
+          <p>متن راهنمای تکست فیلد</p>
         </mat-hint>
       </mat-form-field>
 
@@ -23,7 +23,7 @@
         <input matInput placeholder="placeholder" [formControl]="test2Ctrl">
         <mat-error>
           <mat-icon aria-hidden="false">info_outlined</mat-icon>
-          متن راهنمای تکست فیلد
+          <p>متن راهنمای تکست فیلد</p>
         </mat-error>
       </mat-form-field>
 
@@ -40,22 +40,28 @@
         <input matInput placeholder="placeholder" [formControl]="test2Ctrl">
         <mat-hint>
           <mat-icon aria-hidden="false">info_outlined</mat-icon>
-          از matPrefix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام نمیدهد.
+          <p>
+            از matPrefix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام نمیدهد.
+          </p>
         </mat-hint>
         <mat-icon matPrefix>phone</mat-icon>
       </mat-form-field>
 
 
       <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
-        fxFlex.gt-md="0 1 23%">
+        fxFlex.gt-md="0 1 23%" class="static-position">
         <mat-label>عنوان تکست فیلد‌ها</mat-label>
 
         <input matInput [type]="hide ? 'password' : 'text'" [formControl]="test3Ctrl">
 
         <mat-hint>
           <mat-icon aria-hidden="false">info_outlined</mat-icon>
-          از matSuffix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام میدهد مثلا فراخوانی یک
-          فانکشن.
+          <p>
+            از matSuffix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام میدهد مثلا فراخوانی
+            یک
+            فانکشن.
+          </p>
+
         </mat-hint>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
@@ -71,6 +77,7 @@
 
       </mat-form-field>
 
+
       <!-- <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
         fxFlex.gt-md="0 1 23%">
         <mat-label>عنوان textarea</mat-label>
@@ -83,6 +90,37 @@
 
       </mat-form-field> -->
     </div>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" style="padding-top: 1rem;">
+      <div class="date-form-field" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <irisa-date-time-picker-presenter [(selectedDate)]="jalaliDateTime" [label]="'تاریخ شمسی'"
+          [placeholder]="'Start Time*'" [showTime]="false" [locale]="'fa'"
+          [buttonsLabel]="{submit:'ثبت',cancel:'انصراف'}">
+        </irisa-date-time-picker-presenter>
+      </div>
 
+
+      <div class="date-form-field" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <irisa-date-time-picker-presenter [(selectedDate)]="miladiDateTime" [label]="'miladi date'"
+          [placeholder]="'Start Time*'" [showTime]="true" [locale]="'en'">
+        </irisa-date-time-picker-presenter>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <date-time-picker-overlay-presenter [(selectedDate)]="start" (selectedDateChange)="dateChange($event)"
+          [label]="'Start Time*'" [placeholder]="'Start Time*'" [showTime]="true" [locale]="'fa'"
+          [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <date-time-picker-overlay-presenter [(selectedDate)]="end" [label]="'زمان پایان*'" [placeholder]="'زمان پایان*'"
+          [showTime]="true" [locale]="'en'" [buttonsLabel]="{submit:'ثبت',cancel:'لغو'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

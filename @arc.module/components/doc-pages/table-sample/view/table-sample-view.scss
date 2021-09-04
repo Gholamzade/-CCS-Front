@@ -3,18 +3,13 @@
   margin-left: 6px;
 }
 
-.operation-btn {
-  min-height: 25px;
-  padding: 12px 32px 12px 32px;
-}
-
 .icon-action {
   cursor: pointer;
 }
 
 .header-cell-div {
   // text-align: right; // change to right if use serach input in header cell
-  min-width: 6rem; // change based your need
+  // min-width: 6rem; // change based your need
 }
 
 .title {
@@ -24,10 +19,20 @@
 
 //xl
 @media screen and (min-width: 1920px) and (max-width: 5000px) {
+  .operation-btn {
+    min-height: 25px;
+    padding: 12px 32px 12px 32px;
+    width: 18rem;
+  }
 }
 
 //lg
 @media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .operation-btn {
+    min-height: 25px;
+    padding: 12px 32px 12px 32px;
+    width: 18rem;
+  }
 }
 
 //md
@@ -40,4 +45,7 @@
 
 //xs
 @media screen and (max-width: 599px) {
+  .operation-btn {
+    min-height: 25px;
+  }
 }

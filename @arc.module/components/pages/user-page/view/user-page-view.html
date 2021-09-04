@@ -1,10 +1,10 @@
 <div>
   <div role="userGroupBox" style="text-align: center;margin: 10px;">
-    <mat-icon title="{{'Create UserGroup'|TranslatePipe}}" class="pointer circle-btn add-btn" (click)="AddUserGroup()"
-      style="margin: 3px;">
+    <mat-icon title="{{'arcPages.users.Create UserGroup'|TranslatePipe}}" class="pointer circle-btn add-btn"
+      (click)="AddUserGroup()" style="margin: 3px;">
       add</mat-icon>
     <mat-form-field appearance="fill">
-      <mat-label>{{'Select a user group'|TranslatePipe}}</mat-label>
+      <mat-label>{{'arcPages.users.Select a user group'|TranslatePipe}}</mat-label>
       <mat-select [(ngModel)]="selectedGroup" (ngModelChange)="onGroupChange()">
         <mat-option *ngFor="let group of Groups" [value]="group">
           {{group.title}}
@@ -21,7 +21,7 @@
   <div role="assigned users" *ngIf="selectedGroup" style="margin: 10px;">
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title>{{selectedGroup.title}} {{'Users'|TranslatePipe}}</mat-card-title>
+        <mat-card-title>{{selectedGroup.title}} {{'arcPages.users.Users'|TranslatePipe}}</mat-card-title>
         <mat-icon aria-hidden="false" class="addMenuButton circle-btn add-btn" (click)="AddUser(selectedGroup)">
           person_add</mat-icon>
       </mat-card-header>

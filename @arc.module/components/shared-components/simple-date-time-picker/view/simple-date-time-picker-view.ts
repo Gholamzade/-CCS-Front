@@ -1,20 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PATTERN_INPUT_HOUR, PATTERN_INPUT_MINUTE, PATTERN_INPUT_SECOND } from "@arc.module/constants/date-time-patterns";
 import { BreakPointsService } from "@arc.module/services/break-points.service";
 import { DateUtility, IrisaDate } from "@arc.module/utilities/date-utility";
-
-export const PATTERN_INPUT_HOUR = /^(2[0-3]|[0-1][0-9]|[0-9])$/;
-export const PATTERN_INPUT_MINUTE = /^([0-5][0-9]|[0-9])$/;
-export const PATTERN_INPUT_SECOND = /^([0-5][0-9]|[0-9])$/;
-export const LIMIT_TIMES = {
-  minHour: 0,
-  maxHour: 24,
-  minMinute: 0,
-  maxMinute: 60,
-  minSecond: 0,
-  maxSecond: 60,
-}
-
 
 @Component({
   selector: "simple-date-time-picker-view",
@@ -51,8 +39,10 @@ export class SimpleDateTimePickerView implements OnInit {
   }
 
   @Output('selectedDateChange') selectedDateChange = new EventEmitter<IrisaDate>();
+  @Output('monthChange') onMonthChange = new EventEmitter<number>();
   @Output('on-close') onClose: EventEmitter<void> = new EventEmitter<void>();
   @Input() disabled: boolean;
+  @Input() dir: string;
   @Input() showTime: boolean;
   private _locale: string
   @Input() public set locale(v: string) {
@@ -78,6 +68,8 @@ export class SimpleDateTimePickerView implements OnInit {
   private _dateObject: IrisaDate
   @Input() set dateObject(val: IrisaDate) {
     if (val) {
+      this.changeMonth(val.month)
+
       this.dayControl.setValue(val.day);
       this.monthControl.setValue(val.month);
       this.yearControl.setValue(val.year);
@@ -91,21 +83,25 @@ export class SimpleDateTimePickerView implements OnInit {
     return this._dateObject;
   }
 
-
-  private _days: number[]
-  @Input() set days(val: number[]) {
-    this._days = val;
-  }
-  get days() {
+  private _days: number[];
+  @Input() get days(): number[] {
     return this._days;
   }
-
-  private _months: { name: string, value: number }[]
-  @Input() set months(v: { name: string, value: number }[]) {
-    this._months = v;
+  set days(value: number[]) {
+    if (value) {
+      this._days = value;
+    }
   }
 
-  get months(): { name: string, value: number }[] {
+
+  private _months: { name: string, value: number, dayCount: number }[]
+  @Input() set months(v: { name: string, value: number, dayCount: number }[]) {
+    if (v) {
+      this._months = v;
+    }
+  }
+
+  get months(): { name: string, value: number, dayCount: number }[] {
     return this._months;
   }
 
@@ -121,6 +117,9 @@ export class SimpleDateTimePickerView implements OnInit {
     public breakPointService: BreakPointsService,
   ) { }
 
+  changeMonth(selectedMonth: number) {
+    this.onMonthChange.emit(selectedMonth)
+  }
 
   ngOnInit() { }
 

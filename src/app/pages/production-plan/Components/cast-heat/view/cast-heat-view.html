@@ -1,10 +1,39 @@
-<!-- {{ castheatList | json }} -->
+<mat-tab-group mat-align-tabs="end" [selectedIndex]="1">
 
 
+  <mat-tab label="EXAMPLE">
 
+    <div>
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="12px" fxLayoutAlign="baseline center"
+        class="irisa-table-section" [dir]="dir">
+        <div class="irisa-table-title">
+          <h1>
+            Table Title
+          </h1>
+        </div>
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 12px)" fxFlex.md="0 1 calc(50% - 12px)"
+          fxFlex.gt-md="0 1 calc(50% - 12px)">
+          <button mat-flat-button color="success" class="button-md">افزودن</button>
+        </div>
 
-          <table mat-table matSort   [dataSource]="castheatList"
-             class="irisa-table irisa-row-hover">
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(30% - 12px)" fxFlex.md="0 1 calc(30% - 12px)"
+          fxFlex.gt-md="0 1 calc(30% - 12px)">
+          <mat-form-field appearance="outline" style="width: 100%;" class="remove-padding-bottom">
+            <mat-label>جستجو</mat-label>
+
+            <input matInput placeholder="جستجو" [formControl]="testCtrl">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(20% - 12px)" fxFlex.md="0 1 calc(20% - 12px)"
+          fxFlex.gt-md="0 1 calc(20% - 12px)">
+          <button mat-flat-button color="prime-text" class="button-md">جستجو پیشرفته</button>
+        </div>
+        <div class="irisa-table-container mat-elevation-z8">
+
+          <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="castHeatList"
+            *ngIf="castHeatList" class="irisa-table irisa-row-hover">
 
             <ng-container *ngFor="let column of columns" [matColumnDef]="column.field" [sticky]="isSticky(column.field)"
               [stickyEnd]="isStickyEnd(column.field)">
@@ -69,9 +98,18 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
           </table>
+        </div>
+        <p-paginator (onPageChange)="primePaginate($event)" [rows]="5" [totalRecords]="castHeatList.length"
+          [rowsPerPageOptions]="[5,10,20,30]" [showCurrentPageReport]="true"
+          [currentPageReportTemplate]="currentPageReportTemplate" [showPageLinks]="showPageLinks$|async">
+        </p-paginator>
+      </div>
+
+    </div>
 
 
 
 
+  </mat-tab>
 
-
+</mat-tab-group>

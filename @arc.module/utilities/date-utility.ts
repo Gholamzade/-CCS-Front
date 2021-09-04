@@ -1,9 +1,12 @@
 // import { formatDate } from "@angular/common";
 // import * as moment from "moment";
+import * as moment from "moment";
 import * as jalaliMoment from "jalali-moment";
 
 export function formatTwoDigitTimeValue(val: number) {
-  const txt = val.toString();
+  if (val === null || val === undefined)
+    return '00';
+  const txt = val?.toString();
   return txt.length > 1 ? txt : `0${txt}`;
 }
 
@@ -38,8 +41,21 @@ export class IrisaDate {
     this.second = d.getSeconds();
     this.locale = 'en';
   }
-  constructor(public locale: string = 'en') {
+  constructor(
+    public locale: string = 'en',
+    nullDate?: boolean,
+  ) {
 
+    if (nullDate) {
+      this.year = null;
+      this.month = null;
+      this.day = null;
+      this.hour = null;
+      this.minute = null;
+      this.second = null;
+      this.locale = locale;
+      return;
+    }
     if (locale === 'fa') {
       this.jalaliNow();
     } else if (locale === 'en') {
@@ -553,7 +569,7 @@ export class DateUtility {
       );
     }
 
-    let dayIndex = this.getNumDaysInMonth(locale);
+    let dayIndex = this.getNumDaysInMonth(locale, year, month - 1);
     if (day < 1 || (day > dayIndex)) {
       throw Error(`Invalid day "${day}". Day index has to be between 1 and ${dayIndex}.`);
     }
@@ -580,14 +596,13 @@ export class DateUtility {
     return jalaliMoment().clone().locale(locale);
   }
 
-  private static getNumDaysInMonth(locale: string = 'en'): number {
-    let clone = this.clone(locale);
+  static getNumDaysInMonth(locale: string = 'en', year: number, month: number): number {
     if (locale === 'fa') {
-      return clone.jDaysInMonth();
+      return jalaliMoment.jDaysInMonth(year, month);
     } else if (locale === 'en') {
-      return clone.daysInMonth();
+      return moment({ year, month }).daysInMonth();
     }
-
+    return 0;
   }
 
   static stringToMiladi(jalaliString: string) {
@@ -595,7 +610,21 @@ export class DateUtility {
       return null;
     }
     jalaliString = jalaliString.trimStart().trimEnd().replace(/\//g, "-")
-    jalaliString = jalaliString.split(' ').filter(r => r).join(' ')
+
+    let dateArray = jalaliString.split(' ');
+    let onlyDate = dateArray[0];
+    let onlyTime = dateArray.length > 1 ? dateArray[1] : "00:00:00";
+    let onlyDateArray = onlyDate.split("-")
+    let onlyTimeArray = onlyTime.split(":")
+    if (onlyDateArray?.length < 3) {
+      throw new Error(`Invalid date format ${jalaliString}`);
+    }
+
+    let onlyDateString = onlyDateArray.map(x => x.length > 1 ? x : `0${x}`).join('-');
+    let onlyTimeString = onlyTimeArray.map(x => x.length > 1 ? x : `0${x}`).join(':');
+    jalaliString = `${onlyDateString} ${onlyTimeString}`;
+
+    // jalaliString = jalaliString.split(' ').filter(r => r).join(' ')
 
     // if (jalaliString.includes('/')) {
     //   jalaliString = jalaliString.split('/').join('-')
@@ -620,14 +649,12 @@ export class DateUtility {
     ];
     let moment = jalaliMoment(jalaliString, validFormat, true).locale('en');
 
-    console.log("moment", moment);
     if (!moment.isValid()) {
       throw new Error(`Invalid date format ${jalaliString} ( valid format ${validFormat.toString()})`);
     }
 
     const tempArray = moment.toArray()
     if (tempArray.some(item => isNaN(item))) {
-      console.error(tempArray)
       throw new Error("Invalid date");
     }
 
@@ -639,7 +666,6 @@ export class DateUtility {
         throw new Error("Invalid date");
       }
     }
-    console.warn(moment.toObject())
 
     let irisaDate = this.createDate(
       years,
@@ -662,7 +688,20 @@ export class DateUtility {
     //   miladiString = miladiString.split('/').join('-')
     // }
     miladiString = miladiString.trimStart().trimEnd().replace(/\//g, "-")
-    miladiString = miladiString.split(' ').filter(r => r).join(' ');
+    let dateArray = miladiString.split(' ');
+    let onlyDate = dateArray[0];
+    let onlyTime = dateArray.length > 1 ? dateArray[1] : "00:00:00";
+    let onlyDateArray = onlyDate.split("-")
+    let onlyTimeArray = onlyTime.split(":")
+    if (onlyDateArray?.length < 3) {
+      throw new Error(`Invalid date format ${miladiString}`);
+    }
+
+    let onlyDateString = onlyDateArray.map(x => x.length > 1 ? x : `0${x}`).join('-');
+    let onlyTimeString = onlyTimeArray.map(x => x.length > 1 ? x : `0${x}`).join(':');
+    miladiString = `${onlyDateString} ${onlyTimeString}`;
+    // miladiString = miladiString.split(' ').filter(r => r).join(' ');
+
     let moment = jalaliMoment(miladiString, [
       'YYYY-MM-DD HH:mm:ss',
       'YYYY-MM-DD HH:mm',
@@ -685,7 +724,6 @@ export class DateUtility {
     }
 
     const { date, hours, milliseconds, minutes, months, seconds, years } = moment.toObject()
-    console.log('moment.toObject(): ', moment.toObject());
     if (years < 1000 || years > 1500 || months + 1 == 0 || months + 1 > 12) {
       if (years < 1000 || years > 1500) {
         return this.jalaliStringToJaliliObject(miladiString)
@@ -754,7 +792,6 @@ export class DateUtility {
 
     miladiString = miladiString.trimStart().trimEnd()
     let tempArray = miladiString.split(' ').filter(r => r)//.join(' ');
-    console.log('tempArray: ', tempArray);
     let date, time;
     if (tempArray.length > 1) {
       time = tempArray[1]
@@ -766,7 +803,6 @@ export class DateUtility {
     let [year, month, day] = [0, 0, 0]
     let [hour, minute, second] = [0, 0, 0]
     date = date.replace(/\//g, "-");
-    console.log('date: ', date);
     if (/\d{4}\-\d{2}\-\d{2}/.test(date)) {
       [year, month, day] = date.split('-')
     } else if (/\d{2}\-\d{2}\-\d{4}/.test(date)) {

@@ -70,9 +70,8 @@ export class TelegramFilterView implements OnInit, OnDestroy {
   selectedSender: number;
   selectedHour?: number;
 
-  selectedFrom: IrisaDate | string
-
-  selectedTo: IrisaDate | string
+  selectedFrom: IrisaDate | string;
+  selectedTo: IrisaDate | string;
 
   selectedTimeTo: string = null;
   autoRefresh: boolean = false;
@@ -158,12 +157,13 @@ export class TelegramFilterView implements OnInit, OnDestroy {
       });
   }
 
-  getSelectedStartDate(startDate: string | IrisaDate) {
-    this.selectedFrom = startDate
-  }
-  getSelectedEndDate(endDate: string | IrisaDate) {
-    this.selectedTo = endDate
-  }
+  // getSelectedStartDate(startDate: string | IrisaDate) {
+  //   // this.selectedFrom = startDate
+  // }
+  // getSelectedEndDate(endDate: string | IrisaDate) {
+  //   console.warn('endDate: ', endDate);
+  //   // this.selectedTo = endDate
+  // }
 
 
   selectedHourChanged() {
@@ -173,6 +173,7 @@ export class TelegramFilterView implements OnInit, OnDestroy {
       let toTime = new Date(((new Date()).setHours(now.getHours() + this.selectedHour)))
       this.selectedFrom = DateUtility.toApiDate(fromTime, "YYYY/MM/DD HH:mm:ss")
       this.selectedTo = DateUtility.toApiDate(toTime, "YYYY/MM/DD HH:mm:ss")
+
     }
   }
 
