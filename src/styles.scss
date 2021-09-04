@@ -1,0 +1,14 @@
+@import "@arc.module/extra-assets/styles/global-styles.scss";
+.content,
+.container {
+  background-color: #dfe1e6; // optional
+}
+
+// message service custom width
+$msg-types: "info", "warning", "danger", "success";
+
+@each $type in $msg-types {
+  .#{$type}-snack-bar-container {
+    max-width: 100vh !important;
+  }
+}

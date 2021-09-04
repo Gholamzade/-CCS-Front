@@ -1,0 +1,45 @@
+
+<table mat-table [dataSource]="planedheatList" *ngIf="planedheatList" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- metLine Column -->
+  <ng-container matColumnDef="metLine"  >
+    <th mat-header-cell *matHeaderCellDef> metLine. </th>
+    <td mat-cell *matCellDef="let element" > {{element.metLine}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="startTime"  >
+    <th mat-header-cell *matHeaderCellDef> startTime. </th>
+    <td mat-cell *matCellDef="let element" > {{element.startTime}} </td>
+  </ng-container>
+
+ <ng-container matColumnDef="endTime"  >
+    <th mat-header-cell *matHeaderCellDef> endTime. </th>
+    <td mat-cell *matCellDef="let element" > {{element.endTime}} </td>
+  </ng-container>
+
+
+ <ng-container matColumnDef="wtNetLiquidSteel"  >
+    <th mat-header-cell *matHeaderCellDef> wtNetLiquidSteel. </th>
+    <td mat-cell *matCellDef="let element" > {{element.wtNetLiquidSteel}} </td>
+  </ng-container>
+
+
+
+ <ng-container matColumnDef="ladleEmptyWeight"  >
+    <th mat-header-cell *matHeaderCellDef> ladleEmptyWeight. </th>
+    <td mat-cell *matCellDef="let element" > {{element.ladleEmptyWeight}} </td>
+  </ng-container>
+
+
+
+ <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!--
+<button mat-flat-button color="prime" class="button-sm">
+  prime
+</button> -->
+

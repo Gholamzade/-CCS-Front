@@ -1,0 +1,56 @@
+<div role="manage box for Report Groups" fxLayout="row" style="padding: 10px;" class="mat-expansion-panel"
+  *ngIf="selectedUnit">
+
+  <div fxFlex="60" class="leftAlign">
+    <span style="color: darkblue;font-weight: bolder;"> Report Groups </span>
+    <mat-icon aria-hidden="false" title="Add Report Group" class="pointer circle-btn add-btn"
+      (click)="AddReportGroup()">add
+    </mat-icon>
+  </div>
+
+  <div fxFlex="40" fxLayout="row" fxLayoutAlign="end center">
+
+    <div *ngIf="!reportGroupEditOrderMode" class="rightAlign">
+      <button mat-raised-button (click)="toggleReportGroup()">Edit Order <mat-icon>open_with</mat-icon></button>
+    </div>
+    <div *ngIf="reportGroupEditOrderMode" class="rightAlign marginRight10px">
+      <button mat-raised-button color="warn" (click)="toggleReportGroup(); resetReportGroupOrder()">
+        <span fxHide.lt-sm>Discard</span>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="reportGroupEditOrderMode" class="rightAlign marginRight10px">
+      <button mat-raised-button color="primary" (click)="toggleReportGroup();  SaveReportGroupOrder() ">
+        <span fxHide.lt-sm>save</span>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div role="list of ReportGroups" cdkDropList [cdkDropListData]="_reportGroups" (cdkDropListDropped)="drop($event)">
+  <mat-accordion class="headers-align">
+    <mat-expansion-panel hideToggle *ngFor="let reportGroup of _reportGroups" cdkDrag cdkDragLockAxis="y"
+      [cdkDragDisabled]="!reportGroupEditOrderMode">
+      <mat-expansion-panel-header fxLayout="row">
+        <div fxFlex>{{reportGroup.title}}</div>
+        <div fxFlex>{{reportGroup.serverAddress}}</div>
+        <div fxFlex="20" class="rightAlign">
+          <mat-icon *ngIf="!reportGroupEditOrderMode" aria-hidden="false" color="warn"
+            class="mainMenuOperationButton marginRight5px pointer"
+            (click)="RemoveReportGroup(reportGroup);$event.stopPropagation()">
+            delete</mat-icon>
+          <mat-icon *ngIf="!reportGroupEditOrderMode" aria-hidden="false" color="accent"
+            class="mainMenuOperationButton marginRight5px pointer "
+            (click)="EditReportGroup(reportGroup);$event.stopPropagation()">
+            create</mat-icon>
+          <mat-icon *ngIf="reportGroupEditOrderMode" aria-hidden="false"
+            class="mainMenuOperationButton marginRight5px handle" cdkDragHandle (click)="$event.stopPropagation()">
+            open_with</mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+      <report-list-presenter [reportGroup]="reportGroup"></report-list-presenter>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>

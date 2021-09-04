@@ -1,0 +1,20 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="'over'" [opened]="false">
+    <arc-sidenav-presenter *ngIf="loginStatus" (toggle)="drawer.toggle()"></arc-sidenav-presenter>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="container">
+    <div class="header" #headerElement *ngIf="loginStatus">
+      <arc-toolbar-presenter (toggle)="drawer.toggle()"></arc-toolbar-presenter>
+      <header-presenter></header-presenter>
+    </div>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+    <arc-footer-presenter *ngIf="loginStatus" class="footer"></arc-footer-presenter>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

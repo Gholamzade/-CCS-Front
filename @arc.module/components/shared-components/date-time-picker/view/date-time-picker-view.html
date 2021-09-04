@@ -1,0 +1,74 @@
+<mat-card class="scrollable-content">
+
+  <mat-card-content>
+    <div>
+
+      <mat-calendar #calendar [(selected)]="selectedDate" (selectedChange)="dateChanged($event)">
+      </mat-calendar>
+
+    </div>
+    <!-- 
+    <div *ngIf="showTime">
+      <mat-form-field appearance="outline">
+        <mat-label>Hour</mat-label>
+        <input matInput type="number" max="23" min="0" [formControl]="hourFormControl" />
+        <mat-error *ngIf="hourFormControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Minute</mat-label>
+        <input matInput type="number" max="59" min="0" [formControl]="minuteFormControl" />
+        <mat-error *ngIf="minuteFormControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div> -->
+    <table class="timepicker-table">
+      <tbody class="timepicker-tbody">
+        <tr>
+          <td>
+            <button type="button" mat-icon-button aria-label="expand_less icon" (click)="change('hour', true)"
+              [disabled]="disabled">
+              <mat-icon>expand_less</mat-icon>
+            </button>
+          </td>
+          <td></td>
+          <td>
+            <button type="button" mat-icon-button aria-label="expand_less icon" (click)="change('minute', true)">
+              <mat-icon>expand_less</mat-icon>
+            </button> </td>
+          <td></td>
+
+        </tr>
+
+        <tr>
+          <td>
+            <mat-form-field>
+              <input type="number" matInput max="23" min="0" [formControl]="hourFormControl">
+            </mat-form-field>
+          </td>
+          <td class="timepicker-spacer">&#58;</td>
+          <td>
+            <mat-form-field>
+              <input type="number" matInput type="number" max="59" min="0" [formControl]="minuteFormControl">
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" mat-icon-button aria-label="expand_more icon"
+              (click)="minuteFormControl.setValue(minuteFormControl.value)" [disabled]="disabled">
+              <mat-icon>expand_more</mat-icon>
+            </button> </td>
+          <td></td>
+          <td>
+            <button type="button" mat-icon-button aria-label="expand_more icon" (click)="change('minute', false)">
+              <mat-icon>expand_more</mat-icon>
+            </button> </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    <button mat-raised-button color="light">Cancel</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,36 @@
+.full-width-table {
+  width: 100%;
+}
+.title {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 3px;
+  color: gray;
+  margin: 0 5px;
+  min-width: 75px;
+}
+.p-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.custom-dialog {
+  mat-dialog-container {
+    padding: 0;
+    font-size: 0.8rem;
+    overflow-y: scroll;
+  }
+}
+
+::ng-deep .dialog-back-drop {
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.irisa-table {
+  width: 100%;
+}
+
+.header-cell-div {
+  text-align: center;
+}

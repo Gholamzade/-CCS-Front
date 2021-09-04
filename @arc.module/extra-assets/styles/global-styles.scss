@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~jsoneditor/dist/jsoneditor.min.css";
+@import "~@angular/cdk/overlay-prebuilt";
+@import "../styles/irisa-button";
+
+// if irisa thme with  primary success secondary warning danger info ready and realted functions ==>  enable this
+// @import '../styles/theming/irisa-theme.scss';
+
+@import "./default-theme";
+
+@import "../styles/alerts";
+@import "../styles/typography";
+@import "../styles/input";
+@import "../styles/irisa-table";
+@import "../styles/irisa-modals";
+// @import '../styles/material.scss';
+
+html,
+body {
+  height: 100%;
+  background-color: map-get($white-color, 3);
+}
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.timepicker-backdrop-overlay,
+.timepicker-overlay {
+  z-index: 2000 !important;
+}
+
+.circle-btn {
+  display: inline-block;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+.delete-btn {
+  color: red;
+}
+.remove-from-group-btn {
+  color: orangered;
+}
+
+.edit-btn {
+  color: orange;
+}
+.add-btn {
+  color: green;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.cdk-overlay-pane {
+  margin: 10px;
+}
+
+*[mat-dialog-title] {
+  opacity: 0.5;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+// .mat-success {
+//   color: #fff !important;
+//   background-color: #28a745 !important;
+// }
+// .mat-success[disabled] {
+//   background-color: rgba(0, 0, 0, 0.12) !important;
+// }
+
+p-paginator {
+  width: 100%;
+  background-color: #fff;
+}
+
+html {
+  [dir="rtl"] & {
+    text-align: right;
+  }
+  [dir="ltr"] & {
+    text-align: center;
+  }
+}

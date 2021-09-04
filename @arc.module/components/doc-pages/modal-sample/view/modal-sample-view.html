@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+
+    <p>در صورتی که نیاز به modal با امکانات دیگر هستید، می توانید با الگو گرفتن از dialogService و ConfirmModalPresenter
+      ، برحسب نیاز modal خود را پیاده سازی کنید ، ولی باید طبق طراحی های انجام شده ، این پیاده سازی انجام شود
+      .به عنوان مثال وسط چین بودن دکمه های تایید و انصراف ، رنگ دکمه ها ، تغییر text-align عنوان با توجه direction صفحه
+      و ... </p>
+
+    <hr>
+
+    <p>متد <strong>confirm</strong> در <strong>arc.module/services/dialog.service</strong> دارای دو ورودی است :</p>
+    <p style="color: cornflowerblue;direction: ltr;">confirm(data: ConfirmModal, matDialogConfig?:
+      MatDialogConfig){{'{'}}......{{'}'}}</p>
+    <p>ورودی data از نوع ConfirmModal در مسیر <strong>arc.module/models/interfaces/confirm-modal</strong> می باشد </p>
+    <p>ورودی matDialogConfig نیز از نوع MatDialogConfig می باشد که توضیحات کامل در سایت انگولار متریال موجود است .</p>
+    <a href="https://material.angular.io/components/dialog/api#MatDialogConfig"
+      target="_blank">https://material.angular.io/components/dialog/api#MatDialogConfig</a>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card style="margin-top: 1%;">
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+      <button mat-flat-button color="success" class="button-lg" (click)="openSuccessDialog()">
+        دکمه بزرگ
+      </button>
+      <button mat-flat-button color="info" class="button-lg" (click)="openInfoDialog()">دکمه بزرگ
+      </button>
+
+      <button mat-flat-button color="warning" class="button-lg" (click)="openWarningDialog()">دکمه بزرگ
+      </button>
+      <button mat-flat-button color="danger" class="button-lg" (click)="openDangerDialog()">دکمه بزرگ
+      </button>
+    </div>
+  </mat-card-content>
+
+</mat-card>

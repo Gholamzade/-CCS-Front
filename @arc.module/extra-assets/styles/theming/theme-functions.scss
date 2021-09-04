@@ -1,0 +1,82 @@
+@import "~@angular/material/theming";
+@import "../irisa-palete";
+// primary
+// success
+// secondary
+// warning
+// danger
+// info
+@function irisa-mat-palette($base-palette, $default: 5, $lighter: 2, $darker: 7, $text: $default) {
+  //  @return mat-palette($base-palette, $default, $lighter, $darker, $text: $default);
+  $result: map_merge(
+    $base-palette,
+    (
+      default: map-get($base-palette, $default),
+      lighter: map-get($base-palette, $lighter),
+      darker: map-get($base-palette, $darker),
+      text: map-get($base-palette, $text),
+    )
+  );
+  @return $result;
+}
+
+@function irisa-light-theme(
+  $primary,
+  $accent,
+  $warn: irisa-mat-palette($red-color),
+  $success: irisa-mat-palette($green-color),
+  $info: irisa-mat-palette($cyan-color),
+  $danger: irisa-mat-palette($yellow-color),
+  $warning: irisa-mat-palette($mat-green),
+  $secondary: irisa-mat-palette($mat-green)
+) {
+  // @return map-merge(mat-light-theme($primary, $accent, $warn),
+  //  (
+  //    success: $success,
+  //    info: irisa-mat-palette($mat-green),
+  //    danger: irisa-mat-palette($mat-green),
+  //    warning: irisa-mat-palette($mat-green),
+  //    secondary: irisa-mat-palette($mat-green),
+  //  ));
+
+  // This function creates a container object for the individual component theme mixins. Consumers
+  // can construct such an object by calling this function, or by building the object manually.
+  // There are two possible ways to invoke this function in order to create such an object:
+  //
+  //    (1) Passing in a map that holds optional configurations for individual parts of the
+  //        theming system. For `color` configurations, the function only expects the palettes
+  //        for `primary` and `accent` (and optionally `warn`). The function will expand the
+  //        shorthand into an actual configuration that can be consumed in `-color` mixins.
+  //    (2) Legacy pattern: Passing in the palettes as parameters. This is not as flexible
+  //        as passing in a configuration map because only the `color` system can be configured.
+  //
+  // If the legacy pattern is used, we generate a container object only with a light-themed
+  // configuration for the `color` theming part.
+  @if $accent != null {
+    @return _mat-create-backwards-compatibility-theme(
+      _mat-validate-theme(
+        (
+          _is-legacy-theme: true,
+          color: _mat-create-light-color-config($primary, $accent, $warn),
+        )
+      )
+    );
+  }
+  // If the map pattern is used (1), we just pass-through the configurations for individual
+  // parts of the theming system, but update the `color` configuration if set. As explained
+  // above, the color shorthand will be expanded to an actual light-themed color configuration.
+  $result: $primary;
+  @if map_get($primary, color) {
+    $color-settings: map_get($primary, color);
+    $primary: map_get($color-settings, primary);
+    $accent: map_get($color-settings, accent);
+    $warn: map_get($color-settings, warn);
+    $result: map_merge(
+      $result,
+      (
+        color: _mat-create-light-color-config($primary, $accent, $warn),
+      )
+    );
+  }
+  @return _mat-create-backwards-compatibility-theme(_mat-validate-theme($result));
+}

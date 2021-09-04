@@ -1,0 +1,52 @@
+<div mat-dialog-title>
+  <span>Edit user: {{user.username}}</span>
+</div>
+<div mat-dialog-content ngForm #myForm="ngForm">
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="user.name" name="name" required>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>LastName</mat-label>
+    <input matInput [(ngModel)]="user.family" name="family" required>
+  </mat-form-field>
+
+
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Current password</mat-label>
+    <input matInput [(ngModel)]="user.oldPassword" name="password" required type="password">
+  </mat-form-field>
+
+  <div *ngIf="isPasswordChanged">
+    <mat-form-field style="width: 100%;">
+      <mat-label>New password</mat-label>
+      <input matInput [(ngModel)]="newPassword" name="newPass" required type="password" #newPass="ngModel">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput [(ngModel)]="confirmPassword" name="confirmPass" required type="password" #confirmPass="ngModel">
+    </mat-form-field>
+    <span mat-label *ngIf="confirmPass.touched && newPassword !== confirmPassword" style="color:darkred">confirm
+      password does not match</span>
+  </div>
+
+  <div>
+    <button mat-raised-button *ngIf="isPasswordChanged" (click)="isPasswordChanged=false"
+      color="warn">cancel change password</button>
+  </div>
+
+  <div *ngIf="!isPasswordChanged">
+    <button mat-raised-button (click)="isPasswordChanged=true" color="primary">Change Password</button>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button color="primary"
+    [disabled]="!myForm.valid || (isPasswordChanged && newPassword!==confirmPassword)"
+    (click)="submitChanges()"
+    cdkFocusInitial>Submit</button>
+</div>

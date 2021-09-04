@@ -1,0 +1,37 @@
+table{
+    width:100%;
+   }
+
+
+   .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+  }
+
+
+  .item {
+    font-size: 100px;
+    margin: 8px;
+    text-align: center;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  }
+
+  .headerContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .headerItem{
+   margin: 3px;
+   padding: 10px;
+    text-align: center;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    width: 25%;
+  }
+
+ label{
+      font-weight: bold;
+      margin: 3px;
+  }

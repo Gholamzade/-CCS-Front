@@ -1,0 +1,19 @@
+<div mat-dialog-title>
+  <span *ngIf="reportGroup.reportGroupId">Edit Report Group</span>
+  <span *ngIf="!reportGroup.reportGroupId">Create Report Group</span>
+</div>
+<div mat-dialog-content ngForm #myForm="ngForm">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="reportGroup.title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Server Address</mat-label>
+    <input matInput [(ngModel)]="reportGroup.serverAddress" name="serverAddress" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

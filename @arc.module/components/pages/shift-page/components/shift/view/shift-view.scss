@@ -1,0 +1,24 @@
+.new-shift-container {
+  position:sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.shift-list{
+  height: 30vh;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.has-shift{
+  background-color:orangered;
+}
+
+.no-shift{
+  background-color:silver;
+}
+
+.minute-box{
+  height: 15px;
+}

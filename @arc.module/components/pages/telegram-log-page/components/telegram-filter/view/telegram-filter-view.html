@@ -1,0 +1,155 @@
+<mat-card class="filter-card" style="margin: 10px;">
+  <mat-card-header>
+    <mat-card-title>Set Telegram Filters</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>request tel ID</mat-label>
+
+        <mat-select multiple [(ngModel)]="selectedRequestTelegramIds">
+          <div class="search-input">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
+              <mat-checkbox (change)="onCheckedAll($event,'request')" fxFlex="28%" style="text-align: center;">
+                All</mat-checkbox>
+              <mat-form-field appearance="outline" fxFlex="70%">
+                <input type="text" matInput [formControl]="requestTelegramControl" autocomplete="off">
+              </mat-form-field>
+
+            </div>
+          </div>
+          <mat-option *ngFor="let option of filteredRequestTelegrams$ | async" [value]="option.telegramId">
+            {{ option.idWithName }}
+          </mat-option>
+        </mat-select>
+        <mat-spinner matSuffix diameter="20" *ngIf="!telegrams" color="primary"></mat-spinner>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>response tel ID</mat-label>
+        <mat-select multiple [(ngModel)]="selectedResponseTelegramIds">
+          <div class="search-input">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
+              <mat-checkbox (change)="onCheckedAll($event,'response')" fxFlex="28%" style="text-align: center;">
+                All</mat-checkbox>
+              <mat-form-field appearance="outline" appearance="outline" fxFlex="70%">
+                <input type="text" matInput [formControl]="responseTelegramControl" autocomplete="off">
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <mat-option *ngFor="let option of filteredResponseTelegrams$ | async" [value]="option.telegramId">
+            {{ option.idWithName }}
+          </mat-option>
+        </mat-select>
+        <mat-spinner matSuffix diameter="20" *ngIf="!telegrams" color="primary"></mat-spinner>
+      </mat-form-field>
+
+
+
+      <!-- <mat-form-field style="width: 100%;" fxFlex.sm="0 1 calc(50% - 17px)" fxFlex.gt-sm="0 2 calc(50% - 17px)">
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let telegram of selectedTelegrams" [selectable]="true" [removable]="true"
+              (removed)="remove(telegram)">
+              {{telegram.telegramId}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input type="text" placeholder="telegram Id..." #telegramIdInput [formControl]="telegramIdCtrl"
+              [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event,'telegramId')">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event,'telegramId')">
+            <mat-option *ngFor="let telegram of (filteredTelegramsById | async)" [value]="telegram.telegramId">
+              {{telegram.telegramId}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;" fxFlex.sm="0 1 calc(50% - 17px)" fxFlex.gt-sm="0 2 calc(50% - 17px)">
+          <mat-chip-list #chipList2>
+            <mat-chip *ngFor="let telegram of selectedTelegrams" [selectable]="true" [removable]="true"
+              (removed)="remove(telegram)">
+              {{telegram.name}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input type="text" placeholder="Telegram Name" #telegramTitleInput [formControl]="telegramTitleCtrl"
+              [matAutocomplete]="auto2" [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event,'telegramTitle')">
+          </mat-chip-list>
+          <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selected($event,'telegramTitle')">
+            <mat-option *ngFor="let telegram of (filteredTelegramsByTitle | async)" [value]="telegram.telegramId">
+              {{telegram.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> -->
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>Reciver unit</mat-label>
+        <mat-select [(ngModel)]="selectedReciver">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let topping of units" [value]="topping.unitId">{{ topping.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>Sender unit</mat-label>
+        <mat-select [(ngModel)]="selectedSender">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let topping of units" [value]="topping.unitId">{{
+            topping.title
+            }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)" [selectedDate]="selectedFrom"
+        [label]="'Start Date'" [placeholder]="'Start Date'" [showTime]="true" [locale]="'fa'"
+        [buttonsLabel]="{submit:'بستن',cancel:'انصراف'}"
+       >
+      </date-time-picker-overlay-presenter> -->
+      <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)" [selectedDate]="selectedFrom"
+        [label]="'Start Date'" [placeholder]="'Start Date'" [showTime]="true" [locale]="'en'">
+      </date-time-picker-overlay-presenter>
+
+      <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedEndDate($event)" [selectedDate]="selectedTo"
+        [label]="'End Date'" [placeholder]="'End Date'" [showTime]="true" [locale]="'en'">
+      </date-time-picker-overlay-presenter>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>Last hours</mat-label>
+        <mat-select [(ngModel)]="selectedHour" (ngModelChange)="selectedHourChanged()" name="Last Hour">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let item of lastHours" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%" fxFlex.gt-md="0 1 23%"
+        fxLayoutAlign="center center">
+        <button type="submit" mat-raised-button color="primary" (click)="submitForm()" class="action-margin">
+          Filter
+        </button>
+        <button mat-raised-button color="primary" (click)="clearForm()" class="action-margin">Clear</button>
+        <mat-checkbox [(ngModel)]="autoRefresh" class="action-margin">Auto refresh</mat-checkbox>
+      </div>
+
+    </div>
+  </mat-card-content>
+  <!-- <mat-card-actions fxLayoutAlign="center">
+    <button type="submit" mat-raised-button color="primary" (click)="submitForm()">
+      Filter
+    </button>
+    <button mat-raised-button color="primary" (click)="clearForm()">Clear</button>
+    <mat-checkbox [(ngModel)]="autoRefresh">Auto refresh</mat-checkbox>
+  </mat-card-actions> -->
+</mat-card>

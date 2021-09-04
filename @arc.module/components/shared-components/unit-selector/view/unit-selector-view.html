@@ -1,0 +1,10 @@
+<div role="unit selector">
+  <mat-form-field>
+    <h3>Select Unit</h3>
+    <mat-select [(ngModel)]="selectedUnit" (ngModelChange)="onUnitChange()">
+      <mat-option *ngFor="let unit of Units" [value]="unit">
+        {{unit.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -1,0 +1,50 @@
+<div class="back">
+</div>
+
+
+
+
+
+<div class="card">
+  <img src="assets/imgs/irisa-logo.svg" class="logo">
+
+  <h3 style="text-align: center;font-size:1.2rem;font-weight:bold;">{{title}}</h3>
+
+  <div class="login-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input (keyup.enter)="loginClicked()" required [(ngModel)]="username" matInput
+        [type]="uHide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="uHide = !uHide" [attr.aria-label]="'Hide username'"
+        [attr.aria-pressed]="uHide">
+        <mat-icon>{{uHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>password</mat-label>
+      <input matInput [type]="pHide ? 'password' : 'text'" (keyup.enter)="loginClicked()" required
+        [(ngModel)]="password">
+      <button mat-icon-button matSuffix (click)="pHide = !pHide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="pHide">
+        <mat-icon>{{pHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <br>
+    <mat-spinner *ngIf="inProcess" style="margin: auto;" diameter="30"></mat-spinner>
+    <mat-error>{{_error}}</mat-error>
+    <button *ngIf="!inProcess" mat-flat-button color="primary" (click)="loginClicked()">Login</button>
+
+  </div>
+
+
+  <mat-divider style="margin-top: 5px;"></mat-divider>
+
+  <h6 style="text-align: center;margin-bottom: 0;">
+    International Systems Engineering & Automation Company
+  </h6>
+  <h6 style="text-align: center;">1992-2020 ©</h6>
+
+</div>

@@ -1,0 +1,362 @@
+@import "./irisa-palete";
+
+// .secondary-button{
+//   background-color: map_get($cyan-color, 3) !important;
+//   color: #ffffff !important;
+//   &:hover {
+//     background-color: map_get($cyan-color, 4) !important;
+//     color: #ffffff !important;
+//   }
+
+// }
+
+.mat {
+  &-secondary {
+    background-color: map_get($irisa-secondary, fill) !important;
+    color: #ffffff !important;
+
+    &:hover {
+      background-color: map_get($irisa-secondary, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-secondary, light) !important;
+      color: map_get($irisa-secondary, disabled) !important;
+    }
+  }
+
+  &-secondary-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-secondary, fill) !important;
+    border: 1px solid map_get($irisa-secondary, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-secondary, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-secondary, disabled) !important;
+      border: 1px solid map_get($irisa-secondary, disabled) !important;
+    }
+  }
+
+  &-secondary-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-secondary, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-secondary, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-secondary, disabled) !important;
+    }
+  }
+  ////////////////////////////////////////////////////////////////////////////
+
+  &-info {
+    background-color: map_get($irisa-info, fill) !important;
+    color: #ffffff !important;
+    &:hover {
+      background-color: map_get($irisa-info, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-info, light) !important;
+      color: map_get($irisa-info, disabled) !important;
+    }
+  }
+
+  &-info-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-info, fill) !important;
+    border: 1px solid map_get($irisa-info, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-info, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-info, disabled) !important;
+      border: 1px solid map_get($irisa-info, disabled) !important;
+    }
+  }
+
+  &-info-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-info, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-info, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-info, disabled) !important;
+    }
+  }
+
+  &-danger {
+    background-color: map_get($irisa-danger, fill) !important;
+    color: #ffffff !important;
+    &:hover {
+      background-color: map_get($irisa-danger, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-danger, light) !important;
+      color: map_get($irisa-danger, disabled) !important;
+    }
+  }
+
+  &-danger-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-danger, fill) !important;
+    border: 1px solid map_get($irisa-danger, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-danger, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-danger, disabled) !important;
+      border: 1px solid map_get($irisa-danger, disabled) !important;
+    }
+  }
+
+  &-danger-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-danger, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-danger, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-danger, disabled) !important;
+    }
+  }
+
+  &-warning {
+    background-color: map_get($irisa-warning, fill) !important;
+    color: #ffffff !important;
+    &:hover {
+      background-color: map_get($irisa-warning, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-warning, light) !important;
+      color: map_get($irisa-warning, disabled) !important;
+    }
+  }
+
+  &-warning-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-warning, fill) !important;
+    border: 1px solid map_get($irisa-warning, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-warning, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-warning, disabled) !important;
+      border: 1px solid map_get($irisa-warning, disabled) !important;
+    }
+  }
+
+  &-warning-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-warning, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-warning, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-warning, disabled) !important;
+    }
+  }
+
+  &-success {
+    background-color: map_get($irisa-success, fill) !important;
+    color: #ffffff !important;
+    &:hover {
+      background-color: map_get($irisa-success, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-success, light) !important;
+      color: map_get($irisa-success, disabled) !important;
+    }
+  }
+
+  &-success-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-success, fill) !important;
+    border: 1px solid map_get($irisa-success, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-success, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-success, disabled) !important;
+      border: 1px solid map_get($irisa-success, disabled) !important;
+    }
+  }
+
+  &-success-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-success, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-success, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-success, disabled) !important;
+    }
+  }
+
+  &-prime {
+    background-color: map_get($irisa-prime, fill) !important;
+    color: #ffffff !important;
+    &:hover {
+      background-color: map_get($irisa-prime, hover) !important;
+    }
+    &:disabled {
+      background-color: map_get($irisa-prime, light) !important;
+      color: map_get($irisa-prime, disabled) !important;
+    }
+  }
+
+  &-prime-outline {
+    background-color: #ffffff !important;
+    color: map_get($irisa-prime, fill) !important;
+    border: 1px solid map_get($irisa-prime, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-prime, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-prime, disabled) !important;
+      border: 1px solid map_get($irisa-prime, disabled) !important;
+    }
+  }
+
+  &-prime-text {
+    background-color: #ffffff !important;
+    color: map_get($irisa-prime, fill) !important;
+    &:hover {
+      background-color: map_get($irisa-prime, light) !important;
+    }
+    &:disabled {
+      background-color: #ffffff !important;
+      color: map_get($irisa-prime, disabled) !important;
+    }
+  }
+}
+
+.button-xl {
+  min-width: 160px !important;
+  height: 48px !important;
+  // margin: 25px 40px 40px 0 !important;
+  padding: 8px 18px 9px !important;
+  margin: 8px !important;
+  border-radius: 8px !important;
+  line-height: 31px !important;
+
+  > .mat-button-wrapper {
+    min-width: 124px !important;
+    // height: 31px;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 31px !important;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.button-lg {
+  min-width: 144px !important;
+  height: 44px !important;
+  // margin: 45px 48px 39px 8px;
+  margin: 8px !important;
+  padding: 8px 18px 9px !important;
+  border-radius: 8px !important;
+  line-height: 28px !important;
+
+  > .mat-button-wrapper {
+    min-width: 70px !important;
+    // height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 28px !important;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.button-md {
+  min-width: 128px !important;
+  height: 40px !important;
+  margin: 8px !important;
+  padding: 6px 20px !important;
+  border-radius: 8px !important;
+  line-height: 28px !important;
+
+  > .mat-button-wrapper {
+    min-width: 88px !important;
+    // height: 28px;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 28px !important;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.button-sm {
+  min-width: 112px !important;
+  height: 36px !important;
+  margin: 8px !important;
+  padding: 6px 20px 5px !important;
+  border-radius: 8px !important;
+  line-height: 25px !important;
+
+  > .mat-button-wrapper {
+    min-width: 72px !important;
+    // height: 25px;
+    // font-family: IRANYekanFN;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 25px !important;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.button-xs {
+  min-width: 96px !important;
+  height: 32px !important;
+  margin: 8px !important;
+  padding: 3px 23px 4px !important;
+  border-radius: 8px !important;
+  line-height: 25px !important;
+
+  > .mat-button-wrapper {
+    min-width: 50px !important;
+    // height: 25px;
+    // font-family: IRANYekanFN;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 25px !important;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

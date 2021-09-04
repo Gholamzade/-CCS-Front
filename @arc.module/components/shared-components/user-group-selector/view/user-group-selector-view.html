@@ -1,0 +1,7 @@
+<mat-form-field appearance="fill" style="width: 100%;">
+  <mat-label *ngIf="Title!==''">{{Title}}</mat-label>
+  <mat-label *ngIf="Title===''">User Groups</mat-label>
+  <mat-select [(ngModel)]="SelectedGroups" multiple (ngModelChange)="SelectedGroupsChanged()">
+    <mat-option *ngFor="let group of UserGroups" [value]="group">{{group.title}}</mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,43 @@
+.button-margin {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.operation-btn {
+  min-height: 25px;
+  padding: 12px 32px 12px 32px;
+}
+
+.icon-action {
+  cursor: pointer;
+}
+
+.header-cell-div {
+  // text-align: right; // change to right if use serach input in header cell
+  min-width: 6rem; // change based your need
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+//xl
+@media screen and (min-width: 1920px) and (max-width: 5000px) {
+}
+
+//lg
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+}
+
+//md
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+}
+
+//sm
+@media screen and (min-width: 600px) and (max-width: 959px) {
+}
+
+//xs
+@media screen and (max-width: 599px) {
+}

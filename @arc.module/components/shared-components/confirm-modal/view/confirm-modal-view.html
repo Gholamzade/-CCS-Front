@@ -1,0 +1,29 @@
+<div class="modal-heading" [dir]="direction">
+  <div class="centralize centralize-{{messageType}}">
+    <ng-container *ngIf="!messageIcon else icon">
+      <mat-icon *ngIf="messageType === 'danger'" class="icon icon-danger">cancel</mat-icon>
+      <mat-icon *ngIf="messageType === 'warning'" class="icon icon-warning">error</mat-icon>
+      <mat-icon *ngIf="messageType === 'success'" class="icon icon-success">check_circle</mat-icon>
+      <mat-icon *ngIf="messageType === 'info'" class="icon icon-info">info</mat-icon>
+      <mat-icon *ngIf="messageType === 'primary'" class="icon icon-info">info_outlined</mat-icon>
+    </ng-container>
+    <ng-template #icon>
+      <mat-icon class="icon">{{messageIcon}}</mat-icon>
+    </ng-template>
+  </div>
+  <div class="heading" [dir]="titleDirection">
+    {{title|TranslatePipe}}
+  </div>
+
+</div>
+
+<div class="modal-content" [dir]="messageDirection">
+  {{message|TranslatePipe}}
+</div>
+
+<div class="modal-actions">
+  <button mat-flat-button class="button-lg" [color]="messageType"
+    (click)="onConfirm(true)">{{confirmText|TranslatePipe}}</button>
+  <button mat-flat-button class="button-lg" [color]="messageType+'-outline'"
+    *ngIf="['danger','warning'].includes(messageType)" (click)="onClose(false)">{{cancelText|TranslatePipe}}</button>
+</div>

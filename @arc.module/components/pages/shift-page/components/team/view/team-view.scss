@@ -1,0 +1,11 @@
+
+.new-team-container {
+  position:sticky;
+  top: 0;
+  z-index: 1000;
+  width: 90%;
+}
+.team-list{
+  height: 30vh;
+  overflow-y: auto;
+}

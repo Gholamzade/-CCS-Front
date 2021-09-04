@@ -1,0 +1,177 @@
+// Fix toolbar to the bottom and make it 50px in height
+footer {
+  // position: fixed;
+  bottom: 0px;
+  overflow: hide;
+  width: 100%;
+  height: 64px; // Note: iPhonePlus requires 80px, so will need to be variable, but not handling that in this demo.
+
+  // width: 1280px;
+  // margin: 32px 0 0;
+  // padding: 6px 46px 19px 25px;
+  box-shadow: 0 2px 8px 0 rgba(9, 30, 66, 0.1);
+  background-color: #ffffff;
+}
+
+.toolbar-icon {
+  line-height: 0; // Set to zero or will affect spacing between icon and text
+}
+
+.toolbar-icon-text {
+  line-height: 1.8; // Proper spacing between icon and text
+  // font-size: 70%; // Smaller text size for proper display under icon
+}
+
+.active-menu-item {
+  color: black;
+}
+
+.time-section .time {
+  min-width: 241px;
+  height: 25px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 25px;
+  letter-spacing: normal;
+  color: #172b4d;
+  [dir="rtl"] & {
+    margin: 20px 0 19px 25px;
+  }
+  [dir="ltr"] & {
+    margin: 20px 25px 19px 0;
+  }
+}
+
+.footer-alert {
+  // text-align: center;
+  // font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  box-shadow: none;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  min-height: 3rem;
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.alert {
+  border: none;
+  min-height: 4rem;
+
+  .verticalLine {
+    border-right: 2px solid;
+    border-color: inherit;
+    height: 2rem;
+  }
+}
+
+.date-time-section {
+  text-align: center;
+  [dir="rtl"] & {
+    direction: ltr;
+    padding-inline-start: 1.625rem;
+    display: inline-grid;
+  }
+  > span {
+    width: 100%;
+  }
+}
+
+.show-more-section {
+  position: relative;
+}
+.show-more {
+  position: absolute;
+  width: 6.313rem;
+  height: 2.5rem;
+  background-color: #dfe1e6;
+  bottom: -9px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  z-index: -5;
+  cursor: pointer;
+}
+.show-more-action {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #253858;
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+}
+
+//xl
+@media screen and (min-width: 1920px) and (max-width: 5000px) {
+  .alert {
+    &-success .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-info .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-warning .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+  }
+}
+
+//lg
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .alert {
+    &-success .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-info .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-warning .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+  }
+}
+
+//md
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .alert {
+    &-success .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-info .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+    &-warning .text {
+      min-width: 31rem;
+      overflow: hidden;
+    }
+  }
+}
+
+//sm
+@media screen and (min-width: 600px) and (max-width: 959px) {
+}
+
+//xs
+@media screen and (max-width: 599px) {
+}

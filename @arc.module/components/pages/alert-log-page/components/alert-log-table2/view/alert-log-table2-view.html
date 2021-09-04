@@ -1,0 +1,64 @@
+<mat-card id='tableResult' style="margin: 10px;">
+  <mat-card-header>
+    <mat-card-title>Alert Log List</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="irisa-table-container mat-elevation-z8">
+      <table mat-table [dataSource]="alertLogList?.alertLogItems" class="irisa-table irisa-row-hover" #table>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+
+          <div [ngSwitch]="column.columnDef">
+            <ng-container *ngSwitchCase="'operation'">
+              <th mat-header-cell fxHide.gt-sm *matHeaderCellDef></th>
+              <td mat-cell fxHide.gt-sm *matCellDef="let element">
+                <button mat-mini-fab color="primary" type="button" (click)="showDetails(element)">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'logText'">
+              <th mat-header-cell *matHeaderCellDef fxHide.lt-sm>
+                <div class="header-cell-div">{{ column.header }}</div>
+              </th>
+              <td mat-cell *matCellDef="let element" fxHide.lt-sm>
+                <div class="cell-div">{{column.cell(element)}}</div>
+              </td>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'title'">
+              <th mat-header-cell *matHeaderCellDef fxHide.lt-md>
+                <div class="header-cell-div">{{ column.header }}</div>
+              </th>
+              <td mat-cell *matCellDef="let element" fxHide.lt-md>
+                <div class="cell-div">{{column.cell(element)}}</div>
+              </td>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+              <th mat-header-cell *matHeaderCellDef>
+                <div class="header-cell-div">{{ column.header }}</div>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="cell-div">{{column.cell(element)}}</div>
+              </td>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+
+
+    <!-- <mat-paginator #paginator [pageIndex]="alertLogList?.pageNumber" [pageSizeOptions]="[10,20,30,40,50]"
+      [length]="alertLogList?.total" (page)="changePage($event)">
+    </mat-paginator> -->
+    <p-paginator (onPageChange)="primePaginate($event)" [rows]="defaultRows" [totalRecords]="alertLogList?.total"
+      [rowsPerPageOptions]="[5,10,20,30]" [showCurrentPageReport]="true"
+      [currentPageReportTemplate]="currentPageReportTemplate" [showPageLinks]="showPageLinks$|async">
+    </p-paginator>
+  </mat-card-content>
+</mat-card>

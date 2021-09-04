@@ -1,0 +1,28 @@
+<div mat-dialog-title>
+  <span *ngIf="report.reportId">Edit Report</span>
+  <span *ngIf="!report.reportId">Create Report</span>
+</div>
+
+<div mat-dialog-content ngForm #myForm="ngForm">
+  <user-group-selector-presenter [SelectedGroupsId]="selectedGroupsId"
+    (ChangedSelectedGroups)="onSelectedGroupsChange($event)"></user-group-selector-presenter>
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="report.title" name="title" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="report.name" name="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Revision</mat-label>
+    <input matInput [(ngModel)]="report.revision" name="revision">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

@@ -1,0 +1,52 @@
+<footer class="footer">
+  <div [dir]="dir" fxFlex [fxLayout]="'row'" fxLayoutAlign="space-between center">
+
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(12% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
+      fxFlex.lg="0 1 calc(20% - 0.5rem)" fxFlex.xl="0 1 calc(22% - 0.5rem)" style="text-align: center;">
+      <!-- <mat-spinner diameter="20"></mat-spinner> -->
+    </div>
+
+    <div [ngClass.lt-lg]="['footer-alert-lt-lg']" [ngClass]="'footer-alert'"
+      style="align-self: start;align-items: baseline">
+
+      <!-- <div class="show-more-section" *ngIf="lastLog">
+        <div class="show-more">
+          <button class="show-more-action" mat-button (click)="showMore()">{{'showMoreFooter'|TranslatePipe}}</button>
+
+        </div>
+      </div> -->
+      <div *ngIf="lastLog" (click)="showMore()" [ngClass]="cssClass" fxLayout="row" fxLayout.lt-sm="column"
+        fxLayoutGap="0.5rem" fxLayoutAlign="space-between center" style="cursor: pointer;">
+
+        <div fxFlex="calc(75% - 0.5rem)" fxLayout="row" fxLayoutAlign="flex-start center">
+          <mat-icon fxHide.lt-lg style="vertical-align: middle;">{{lastLogIcon}}</mat-icon>
+          <span class="text">{{lastLog.body}} </span>
+
+        </div>
+        <div class="verticalLine"></div>
+
+        <div fxFlex="calc(25% - 0.5rem)" class="date-time-section">
+          <span class="date-time">
+            {{selectedLanguage === 'fa' ? (lastLog.alertLogDate|miladiDateToJalali) :
+            (lastLog.alertLogDate|jalaliDateToMiladi) }}
+            <!-- <div class="vertical-divider"></div> -->
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(12% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
+      fxFlex.lg="0 1 calc(20% - 0.5rem)" fxFlex.xl="0 1 calc(22% - 0.5rem)" fxFlexAlign="center"
+      style="text-align: center;" (click)="changeDateType()" [matTooltip]="dateTimeTooltip"
+      [matTooltipPosition]="'above'" matTooltipHideDelay="3000" [dir]="dir" class="time-section">
+      <!-- <div class="time" >{{dateTime}}</div> -->
+      <div fxHide.lt-lg class="time" *ngIf="dateType==='JALALI'"> {{dayOfWeek}} <span
+          style="display: inline-flex;">{{date}}</span> | ساعت {{time}}
+      </div>
+      <div fxHide.lt-lg class="time" *ngIf="dateType==='MILADI'"> {{dayOfWeek}} <span>{{date}}</span> | Time {{time}}
+      </div>
+    </div>
+
+  </div>
+</footer>

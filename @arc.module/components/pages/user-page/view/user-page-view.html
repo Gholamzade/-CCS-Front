@@ -1,0 +1,86 @@
+<div>
+  <div role="userGroupBox" style="text-align: center;margin: 10px;">
+    <mat-icon title="{{'Create UserGroup'|TranslatePipe}}" class="pointer circle-btn add-btn" (click)="AddUserGroup()"
+      style="margin: 3px;">
+      add</mat-icon>
+    <mat-form-field appearance="fill">
+      <mat-label>{{'Select a user group'|TranslatePipe}}</mat-label>
+      <mat-select [(ngModel)]="selectedGroup" (ngModelChange)="onGroupChange()">
+        <mat-option *ngFor="let group of Groups" [value]="group">
+          {{group.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-icon *ngIf="selectedGroup" title="Delete UserGroup " class="pointer circle-btn delete-btn "
+      style="margin: 3px;" (click)="RemoveUserGroup(selectedGroup)">delete</mat-icon>
+    <mat-icon *ngIf="selectedGroup" title="Edit UserGroup" class="pointer circle-btn edit-btn " style="margin: 3px;"
+      (click)="EditUserGroup(selectedGroup);$event.stopPropagation()">edit</mat-icon>
+  </div>
+
+
+  <div role="assigned users" *ngIf="selectedGroup" style="margin: 10px;">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{selectedGroup.title}} {{'Users'|TranslatePipe}}</mat-card-title>
+        <mat-icon aria-hidden="false" class="addMenuButton circle-btn add-btn" (click)="AddUser(selectedGroup)">
+          person_add</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <div role="listitem" *ngFor="let user of assignedUsers()" fxLayout="row">
+          <div fxFlex>{{user.username}}</div>
+          <div fxFlex>{{user.name+' '+user.family}}</div>
+          <div fxFlex fxHide.xs>
+            <mat-checkbox [disabled]="true" [checked]="user.isActive">is active</mat-checkbox>
+          </div>
+          <div fxFlex fxHide.xs>
+            <mat-checkbox [disabled]="true" [checked]="user.isService">is service</mat-checkbox>
+          </div>
+          <div fxFlex class="rightAlign">
+            <mat-icon aria-hidden="false"
+              class="mainMenuOperationButton marginRight5px pointer circle-btn remove-from-group-btn"
+              (click)="ChangeGroupOfUser(user,null);$event.stopPropagation()">person_remove</mat-icon>
+
+            <mat-icon aria-hidden="false" class="mainMenuOperationButton marginRight5px pointer circle-btn delete-btn"
+              (click)="RemoveUser(user);$event.stopPropagation()">delete</mat-icon>
+
+            <mat-icon aria-hidden="false" class="mainMenuOperationButton marginRight5px pointer circle-btn edit-btn"
+              (click)="EditUser(user);$event.stopPropagation()">create</mat-icon>
+
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div role="unassinged users" *ngIf="selectedGroup" style="margin:10px;">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Unassigned Users</mat-card-title>
+        <mat-icon aria-hidden="false" class="addMenuButton circle-btn add-btn" (click)="AddUser(null)">person_add
+        </mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <div role="listitem" *ngFor="let user of unassignedUsers()">
+          <div fxFlex>{{user.username}}</div>
+          <div fxFlex>{{user.name+' '+user.family}}</div>
+          <div fxFlex fxHide.xs>
+            <mat-checkbox [disabled]="true" [checked]="user.isActive">is active</mat-checkbox>
+          </div>
+          <div fxFlex fxHide.xs>
+            <mat-checkbox [disabled]="true" [checked]="user.isService">is service</mat-checkbox>
+          </div>
+          <div fxFlex class="rightAlign">
+            <mat-icon aria-hidden="false" class="mainMenuOperationButton marginRight5px pointer  circle-btn add-btn"
+              (click)="ChangeGroupOfUser(user,selectedGroup);$event.stopPropagation()">group_add</mat-icon>
+
+            <mat-icon aria-hidden="false" class="mainMenuOperationButton marginRight5px pointer circle-btn delete-btn"
+              (click)="RemoveUser(user);$event.stopPropagation()">delete</mat-icon>
+            <mat-icon aria-hidden="false" class="mainMenuOperationButton marginRight5px pointer circle-btn edit-btn"
+              (click)="EditUser(user);$event.stopPropagation()">create</mat-icon>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

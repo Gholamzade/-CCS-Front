@@ -1,0 +1,276 @@
+<mat-card>
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title>انواع دکمه</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+    <p>
+      دکمه هایی با رنگ کامل و تو پر نسبت به دکمه های outline و دکمه های
+      outline نسبت به دکمه های text اولویت بیشتری دارند
+    </p>
+    <p style="font-size: 1.5rem;font-weight: bold;">
+      prime > prime-outline > prime-text
+    </p>
+    <p>
+      success :
+      معمولا برای دکمه هایی ماندد "افزودن" استفاده می شوند ،
+      عمل پشت آنها در صورت انجام باعث تغییر اساسی در روند کلی سیستم نمیشود
+    </p>
+
+    <p>
+      info :
+
+      از این دکمه ها برای نمایش اطلاعات استفاده میشود ، به عنوان مثال باز کردن یک پنجره برای نمایش اطلاعات یک کلاف ( فقط
+      نمایش )
+      ، یا برای نمایش یک پیام اطلاعاتی به کاربر مثلا نمایش یک متن راهنما
+    </p>
+
+    <p>
+      Warning :
+      دکمه های هشدار به گونه ای طراحی شده اند که کاربران را قبل از استفاده دقیق فکر کنند.
+      بهتر است همراه توضیحات باشند تا مشخص شود که عمل دکمه باعث چه تغییری میشوند .
+      به عنوان مثال ویرایش اطلاعات یک کلاف در لیستی از کلاف ها که باعث باز شدن پنجره ویرایش میشود، نمایش یک پیام هشدار
+      به کاربر و ...
+    </p>
+
+    <p>
+      danger :
+      سطح هشدار این دکمه ها از warning بیشتر است و
+      این دکمه برای نشان دادن یک اقدام مخرب برای کاربر مانند پاک کردن دائمی داده ها استفاده می شود.
+      .
+      حتما بعد از فشرده شدن یک پیام اخطار به کاربر نمایش داده شود و در صورت تایید کاربر عمل پشت دکمه انجام گیرد
+    </p>
+
+    <p>
+      prime :
+      . عمل اصلی را در صفحه انجام میدهد . به عنوان مثال دکمه ثبت در یک فرم
+      بهتر است چندین دکمه از این نوع در یک صفحه استفاده نشود زیرا تاثیر و اولویت عمل دکمه را کاهش میدهد و برای کاربر سخت
+      تر میشود که بعد از زدن دکمه چه
+      کاری انجام دهد.
+    </p>
+
+    <p>
+      Secondary :
+      اولویت این دکمه ها کمتر از prime است .
+      در صفحاتی که چندین prime استفاده شود ، برای کاربر مبهم است که در ادامه چه کاری انجام دهد ، پس بهتر است
+      صفحه را با تقسیم به قسمت های متفاوت و قرار دادن دکمه های Secondary برای قسمت ها ،برای کاربر ساده تر کنیم.
+      دکمه های Secondary فقط در کنار دکمه اصلی قابل استفاده هستند. به عنوان بخشی از یک جفت ، عملکرد دکمه Secondary انجام
+      عملکرد منفی مجموعه مانند "لغو" یا "برگشت" است. به طور جداگانه از یک دکمه Secondary استفاده نکنید و برای یک اقدام
+      مثبت از دکمه Secondary استفاده نکنید
+    </p>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+
+        <button mat-flat-button color="success" class="button-sm">
+          success
+        </button>
+        <button mat-flat-button color="success" class="button-sm" disabled>
+          success
+        </button>
+        <button mat-flat-button color="success-outline" class="button-sm">
+          success-outline
+        </button>
+        <button mat-flat-button color="success" class="button-sm" disabled>
+          success-outline
+        </button>
+        <button mat-flat-button color="success-text" class="button-sm">
+          success-text
+        </button>
+        <button mat-flat-button color="success-text" class="button-sm" disabled>
+          success-text
+        </button>
+
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="info" class="button-sm">
+          info
+        </button>
+        <button mat-flat-button color="info" class="button-sm" disabled>
+          info
+        </button>
+        <button mat-flat-button color="info-outline" class="button-sm">
+          info-outline
+        </button>
+        <button mat-flat-button color="info" class="button-sm" disabled>
+          info-outline
+        </button>
+        <button mat-flat-button color="info-text" class="button-sm">
+          info-text
+        </button>
+        <button mat-flat-button color="info-text" class="button-sm" disabled>
+          info-text
+        </button>
+
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="secondary" class="button-sm">
+          secondary
+        </button>
+        <button mat-flat-button color="secondary" class="button-sm" disabled>
+          secondary
+        </button>
+        <button mat-flat-button color="secondary-outline" class="button-sm">
+          secondary-outline
+        </button>
+        <button mat-flat-button color="secondary" class="button-sm" disabled>
+          secondary-outline
+        </button>
+        <button mat-flat-button color="secondary-text" class="button-sm">
+          secondary-text
+        </button>
+        <button mat-flat-button color="secondary-text" class="button-sm" disabled>
+          secondary-text
+        </button>
+      </div>
+
+
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="warning" class="button-sm">
+          warning
+        </button>
+        <button mat-flat-button color="warning" class="button-sm" disabled>
+          warning
+        </button>
+        <button mat-flat-button color="warning-outline" class="button-sm">
+          warning-outline
+        </button>
+        <button mat-flat-button color="warning" class="button-sm" disabled>
+          warning-outline
+        </button>
+        <button mat-flat-button color="warning-text" class="button-sm">
+          warning-text
+        </button>
+        <button mat-flat-button color="warning-text" class="button-sm" disabled>
+          warning-text
+        </button>
+      </div>
+
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="danger" class="button-sm">
+          danger
+        </button>
+        <button mat-flat-button color="danger" class="button-sm" disabled>
+          danger
+        </button>
+        <button mat-flat-button color="danger-outline" class="button-sm">
+          danger-outline
+        </button>
+        <button mat-flat-button color="danger" class="button-sm" disabled>
+          danger-outline
+        </button>
+        <button mat-flat-button color="danger-text" class="button-sm">
+          danger-text
+        </button>
+        <button mat-flat-button color="danger-text" class="button-sm" disabled>
+          danger-text
+        </button>
+
+      </div>
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="prime" class="button-sm">
+          prime
+        </button>
+        <button mat-flat-button color="prime" class="button-sm" disabled>
+          prime
+        </button>
+        <button mat-flat-button color="prime-outline" class="button-sm">
+          prime-outline
+        </button>
+        <button mat-flat-button color="prime" class="button-sm" disabled>
+          prime-outline
+        </button>
+        <button mat-flat-button color="prime-text" class="button-sm">
+          prime-text
+        </button>
+        <button mat-flat-button color="prime-text" class="button-sm" disabled>
+          prime-text
+        </button>
+      </div>
+
+    </div>
+
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card style="margin-top: 1%;">
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title>اندازه دکمه</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+
+      <div fxFlex="0 1 100%" dir="ltr" style="text-align: center;">
+
+        <button mat-flat-button color="success" class="button-xs">
+          class="button-xs"
+        </button>
+        <button mat-flat-button color="success" class="button-sm">
+          class="button-sm"
+        </button>
+        <button mat-flat-button color="success" class="button-md">
+          class="button-md"
+        </button>
+        <button mat-flat-button color="success" class="button-lg">
+          class="button-lg"
+        </button>
+        <button mat-flat-button color="success" class="button-xl">
+          class="button-xl"
+        </button>
+
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card style="margin-top: 1%;">
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title>دکمه همراه آیکون</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+
+      <div fxFlex="0 1 calc(50% - 1rem)" style="text-align: center;">
+        <p>direction : LTR</p>
+        <button mat-flat-button color="prime" class="button-xl">
+          <mat-icon>info_outlined</mat-icon>
+          submit
+        </button>
+
+        <button mat-flat-button color="danger" class="button-xl">
+          <mat-icon>delete</mat-icon>
+          delete
+        </button>
+
+      </div>
+      <div fxFlex="0 1 calc(50% - 1rem)" style="text-align: center;">
+        <p>direction : RTL</p>
+        <button mat-flat-button color="prime" class="button-lg">
+          submit
+          <mat-icon>info_outlined</mat-icon>
+        </button>
+
+        <button mat-flat-button color="danger" class="button-lg">
+          delete
+          <mat-icon>delete</mat-icon>
+
+        </button>
+
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>

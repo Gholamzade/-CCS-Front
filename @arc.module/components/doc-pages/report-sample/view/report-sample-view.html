@@ -1,0 +1,21 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
+  <div appearance="outline" fxLayout="row wrap" fxLayoutAlign="space-around baseline" fxFlex="0 1 100%">
+    <date-time-picker-overlay-presenter fxFlex="0 1 30%" (onSelectedDate)="getSelectedStartDate($event)"
+      [selectedDate]="startDate" [label]="'Start Date'" [placeholder]="'Start Date'" [showTime]="false" [locale]="'fa'">
+    </date-time-picker-overlay-presenter>
+
+    <date-time-picker-overlay-presenter fxFlex="0 1 30%" (onSelectedDate)="getSelectedEndDate($event)"
+      [selectedDate]="endDate" [label]="'End Date'" [placeholder]="'End Date'" [showTime]="false" [locale]="'fa'">
+    </date-time-picker-overlay-presenter>
+    <div fxFlex="0 1 30%">
+      <button mat-raised-button color="primary" (click)="search()">search</button>
+    </div>
+  </div>
+  <div appearance="outline" fxFlex.xs="0 1 100%" fxFlex.gt-xs="0 1 100%">
+    <telerik-report-viewer [reportFile]="'ProductCoils.trdp'" [parameters]="params|async"
+      [styles]="viewerContainerStyle">
+    </telerik-report-viewer>
+  </div>
+
+
+</div>

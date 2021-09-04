@@ -1,0 +1,69 @@
+.irisa-msg {
+  position: fixed;
+  width: 25rem;
+}
+
+.msg-icon {
+  > mat-icon {
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.irisa-msg-message {
+  overflow: hidden;
+
+  &-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .irisa-msg-message-header {
+      [dir="rtl"] & {
+        margin: 0 0.5rem 0 0;
+      }
+      [dir="ltr"] & {
+        margin: 0 0 0 0.5rem;
+      }
+      // width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+}
+
+.irisa-msg-message-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.irisa-msg-message-detail {
+  [dir="rtl"] & {
+    margin: 0 0.5rem 0 0;
+  }
+  [dir="ltr"] & {
+    margin: 0 0 0 0.5rem;
+  }
+  width: 100%;
+  margin: 0.5rem 0 0 0;
+  text-align: justify;
+  flex: 1 1 auto;
+}
+
+.irisa-msg-icon-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.irisa-msg-icon-close.p-link {
+  cursor: pointer;
+}
+
+.icon-action {
+  cursor: pointer;
+}

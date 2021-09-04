@@ -1,0 +1,54 @@
+<div class="sublist">
+  <div role="manage box for submenus" fxLayout="row" class="sublist-header">
+    <div fxFlex="40" class="leftAlign">
+      <span style="color: darkblue;font-weight: bolder;">Submenu</span>
+      <mat-icon aria-hidden="false" class="pointer circle-btn add-btn" (click)="AddSubMenu()">add</mat-icon>
+    </div>
+    <div fxFlex="60" fxLayout="row" fxLayoutAlign="end center">
+      <div *ngIf="!subMenuEditOrderMode" class="rightAlign">
+        <button mat-raised-button (click)="toggleSubMenu()">Edit Order
+          <mat-icon>open_with</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="subMenuEditOrderMode" class="rightAlign marginRight10px">
+        <button mat-raised-button color="warn" (click)="toggleSubMenu(); resetSubmenuOrder()">
+          <span fxHide.lt-sm>Discard</span>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="subMenuEditOrderMode" class="rightAlign">
+        <button mat-raised-button color="primary" (click)="toggleSubMenu(); SaveSubMenuOrder()">
+          <span fxHide.lt-sm>Save</span>
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div role="submenu list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="_submenus"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let subMenu of _submenus" [cdkDragDisabled]="!subMenuEditOrderMode" cdkDrag cdkDragLockAxis="y" fxLayout="row">
+      <div fxFlex class="leftAlign">{{subMenu.titleEn}}</div>
+      <div fxFlex class="leftAlign">{{subMenu.titleFa}}</div>
+      <div fxFlex class="leftAlign" fxHide.xs>{{subMenu.captionEn}}</div>
+      <div fxFlex class="leftAlign" fxHide.xs>{{subMenu.captionFa}}</div>
+      <div fxFlex class="leftAlign" fxHide.xs>{{subMenu.route}}</div>
+      <div fxFlex class="leftAlign" fxHide.xs>{{subMenu.shortcut}}</div>
+
+      <div class="" fxFlex="10" fxFlex.xs="20">
+        <mat-icon *ngIf="!subMenuEditOrderMode" aria-hidden="false" color="warn"
+          class="subMenuOperationButton marginRight5px pointer"
+          (click)="RemoveSubMenu(subMenu);$event.stopPropagation()">delete</mat-icon>
+        <mat-icon *ngIf="!subMenuEditOrderMode" aria-hidden="false" color="accent"
+          class="subMenuOperationButton marginRight5px pointer" (click)="EditSubMenu(subMenu);$event.stopPropagation()">
+          create</mat-icon>
+        <mat-icon *ngIf="subMenuEditOrderMode" aria-hidden="false" class="subMenuOperationButton handle" cdkDragHandle
+          (click)="$event.stopPropagation()">open_with</mat-icon>
+      </div>
+
+    </div>
+  </div>
+</div>

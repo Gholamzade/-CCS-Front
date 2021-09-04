@@ -1,0 +1,10 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
+  <telegram-filter-presenter fxFlex.sm="0 1 100%" fxFlex.md="0 1 100%" fxFlex.gt-md="0 1 100%" fxHide.xs>
+  </telegram-filter-presenter>
+  <button class="sticky-search-btn" mat-fab color="primary" fxHide.gt-xs (click)="showFilters()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <telegram-grid-presenter [ngStyle.xs]="{'padding-top':'10%'}" fxFlex.sm="0 1 100%" fxFlex.md="0 1 100%"
+    fxFlex.gt-md="0 1 100%"></telegram-grid-presenter>
+
+</div>

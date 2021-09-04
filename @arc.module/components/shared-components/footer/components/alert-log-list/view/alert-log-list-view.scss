@@ -1,0 +1,34 @@
+// *{
+//     margin: 0;
+//     padding: 0;
+//     box-shadow:unset;
+// }
+
+.alert-log {
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  
+  &-success{
+    background-color: lighten(#5cb85c, 15%);
+    border-color: lighten(#5cb85c, 10%);
+    color: darken(#3e473e, 15%);
+  }
+  &-warning{
+    background-color: lighten(#E2A41F, 15%);
+    border-color: lighten(#E2A41F, 10%);
+    color: darken(#4e4a40, 15%);
+  }
+  &-danger{
+    background-color: lighten(#d43f3a, 15%);
+    border-color: lighten(#d43f3a, 10%);
+    color: darken(#5c2e2c, 15%);
+  }
+  &-info{
+    background-color: rgba(127, 188, 236, 1.0);
+    border-color: rgba(127, 188, 236, 1.0);
+    color: rgb(72, 74, 77);
+  }
+}

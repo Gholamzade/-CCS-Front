@@ -1,0 +1,33 @@
+<div mat-dialog-title>
+  <p>Send Alert {{alert.alertId}} ({{alert.title}})</p>
+</div>
+
+<div mat-dialog-content>
+
+
+  <mat-form-field *ngIf="hasPrm1" appearance="outline">
+    <mat-label>prm1- {{alert.prm1Title}}</mat-label>
+    <input matInput [(ngModel)]="simulateAlert.prm1">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="hasPrm2" appearance="outline">
+    <mat-label>prm2- {{alert.prm2Title}}</mat-label>
+    <input matInput [(ngModel)]="simulateAlert.prm2">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="hasPrm3" appearance="outline">
+    <mat-label>prm3- {{alert.prm3Title}}</mat-label>
+    <input matInput [(ngModel)]="simulateAlert.prm3">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Message:</mat-label>
+    <input matInput disabled [value]="alert.template.replace('@1',simulateAlert.prm1||'@1').replace('@2',simulateAlert.prm2||'@2').replace('@3',simulateAlert.prm3||'@3')">
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" (click)="onNoClick()">cancel</button>
+  <button mat-raised-button color="primary" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

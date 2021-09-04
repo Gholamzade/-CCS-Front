@@ -1,0 +1,134 @@
+@import "../fonts/css/style.scss";
+@import "~@angular/material/theming";
+// @include mat-core();
+
+$heading-font-family: "IRANYekanFN !important";
+$yekan-font-family: "iranyekan !important";
+$button-font-family: "IRANYekanFN !important";
+
+// $typography: mat-typography-config(
+//   $font-family: $yekan-font-family,
+//   $display-4: mat-typography-level(112px, $font-family: $heading-font-family),
+//   $display-3: mat-typography-level(56px, $font-family: $heading-font-family),
+//   $display-2: mat-typography-level(45px, $font-family: $heading-font-family),
+//   $display-1: mat-typography-level(34px, $font-family: $heading-font-family),
+//   $headline: mat-typography-level(24px, $font-family: $heading-font-family),
+//   $title: mat-typography-level(20px, $font-family: $heading-font-family),
+// );
+
+// $font-size,
+// $line-height: $font-size,
+// $font-weight: 400,
+// $font-family: null,
+// $letter-spacing: normal
+
+$typography: mat-typography-config(
+  $font-family: $yekan-font-family,
+  $button: mat-typography-level(16px, $button-font-family),
+);
+@include angular-material-typography($typography);
+
+.heading-big {
+  min-width: 272px;
+  height: 83px;
+  margin: 0 4px 12px 0;
+  font-family: IRANYekanFN;
+  font-size: 48px;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.73;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.heading-1 {
+  min-width: 155px;
+  height: 69px;
+  margin: 12px 4px 12px 117px;
+  font-family: IRANYekanFN;
+  font-size: 40px;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.73;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.heading-2 {
+  min-width: 133px;
+  height: 55px;
+  margin: 12px 4px 12px 139px;
+  font-family: IRANYekanFN;
+  font-size: 32px;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.72;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.heading-3 {
+  min-width: 104px;
+  height: 41px;
+  margin: 12px 0 0 172px;
+  font-family: IRANYekanFN;
+  font-size: 24px;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.title-1 {
+  min-width: 99px;
+  height: 41px;
+  margin: 0 0 12px;
+  font-family: IRANYekanFN;
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.title-2 {
+  min-width: 74px;
+  height: 35px;
+  margin: 12px 0 12px 25px;
+  font-family: IRANYekanFN;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}
+
+.title-3 {
+  min-width: 66px;
+  height: 28px;
+  margin: 12px 0 0 33px;
+  font-family: IRANYekanFN;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+  text-align: left;
+  color: #344563;
+}

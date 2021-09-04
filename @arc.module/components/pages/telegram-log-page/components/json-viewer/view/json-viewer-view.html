@@ -1,0 +1,27 @@
+<div fxLayout="row wrap" style="overflow-x: scroll;overflow-y: scroll;max-height: 62vh;">
+  <div style="margin: 10px;">
+    <!-- <div>
+      <button mat-button mat-raised-button color="primary"
+        [disabled]="!selectedTelegramLogData || unitOfTelegramLog.unitType==='L1'" (click)="openDialog()">
+        simulate
+      </button>
+    </div> -->
+    <div>
+      <p>Telegram Duration : {{selectedTelegramLogData?.duration}} (ms)</p>
+      <hr>
+      Request Data:
+      <ngx-json-viewer [expanded]="true" [json]="requestData" style="overflow-y: scroll;max-height: 12vh;">
+      </ngx-json-viewer>
+      <hr>
+    </div>
+    <div>
+
+      Response Data:
+      <ngx-json-viewer [expanded]="true" [json]="responseData" style="overflow-y: scroll;max-height: 12vh;">
+      </ngx-json-viewer>
+    </div>
+  </div>
+  <div fxHide.gt-xs>
+    <button mat-raised-button (click)="onClose()" color="primary">close</button>
+  </div>
+</div>

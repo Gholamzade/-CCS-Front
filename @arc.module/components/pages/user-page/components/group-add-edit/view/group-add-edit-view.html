@@ -1,0 +1,17 @@
+<div *ngIf="group">
+  <div mat-dialog-title>
+    <span *ngIf="group?.userGroupId !== 0">{{'Edit group'|TranslatePipe}}</span>
+    <span *ngIf="group?.userGroupId === 0">{{'Create new group'|TranslatePipe}}</span>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label translateTo>Title</mat-label>
+      <input matInput [(ngModel)]="group.title" name="title" required>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="link" [mat-dialog-close]>{{'cancel'|TranslatePipe}}</button>
+    <button mat-raised-button color="primary" [disabled]="!group.title"
+      (click)="onOkClick()">{{'submit'|TranslatePipe}}</button>
+  </div>
+</div>

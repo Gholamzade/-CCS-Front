@@ -1,0 +1,51 @@
+<div class="sublist">
+  <div role="manage box for reports " fxLayout="row" class="sublist-header" style="padding: 10px;">
+    <div fxFlex="40" class="leftAlign">
+      <span style="color: darkblue;font-weight: bolder;">Reports</span>
+      <mat-icon aria-hidden="false" class="pointer circle-btn add-btn" (click)="AddReport()">add</mat-icon>
+    </div>
+    <div fxFlex="60" fxLayout="row" fxLayoutAlign="end center">
+      <div *ngIf="!reportEditOrderMode" class="rightAlign">
+        <button mat-raised-button (click)="toggleReport()">Edit Order
+          <mat-icon>open_with</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="reportEditOrderMode" class="rightAlign marginRight10px">
+        <button mat-raised-button color="warn" (click)="toggleReport(); resetReportOrder()">
+          <span fxHide.lt-sm>Discard</span>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="reportEditOrderMode" class="rightAlign">
+        <button mat-raised-button color="primary" (click)="toggleReport(); SaveReportOrder()">
+          <span fxHide.lt-sm>Save</span>
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div role="report list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="_reports"
+    (cdkDropListDropped)="drop($event)">
+    <div [cdkDragDisabled]="!reportEditOrderMode" class="example-box" *ngFor="let report of _reports" cdkDrag
+      cdkDragLockAxis="y" fxLayout="row">
+      <div fxFlex class="leftAlign">title: {{report.title}}</div>
+      <div fxFlex class="leftAlign">name: {{report.name}}</div>
+      <div fxFlex fxHide.xs class="leftAlign">revision: {{report.revision}}</div>
+
+      <div fxFlex="10" fxFlex.xs="20">
+        <mat-icon *ngIf="!reportEditOrderMode" aria-hidden="false" class="subMenuOperationButton marginRight5px pointer"
+          color="warn" (click)="RemoveReport(report);$event.stopPropagation()">delete</mat-icon>
+        <mat-icon *ngIf="!reportEditOrderMode" aria-hidden="false" class="subMenuOperationButton marginRight5px pointer"
+          color="accent" (click)="EditReport(report);$event.stopPropagation()">create</mat-icon>
+        <mat-icon *ngIf="reportEditOrderMode" aria-hidden="false" class="subMenuOperationButton handle" cdkDragHandle
+          (click)="$event.stopPropagation()">open_with</mat-icon>
+      </div>
+
+    </div>
+  </div>
+
+</div>

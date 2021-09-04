@@ -1,0 +1,74 @@
+<mat-card>
+  <div fxLayout="row">
+    <div>
+      <button mat-mini-fab color="accent" (click)="addAlert()" style="margin: 0 10px;">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  </div>
+</mat-card>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Title"> {{row.alertId+' - '+ row.title}} </mat-cell>mat-cell>
+    </ng-container>
+
+    <!-- Template Column -->
+    <ng-container matColumnDef="template">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Template </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Template"> {{row.template}} </mat-cell>
+    </ng-container>
+
+    <!-- alert type Column -->
+    <ng-container matColumnDef="alertTypeFK">
+      <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+      <mat-cell fxHide fxShow.gt-sm *matCellDef="let row" data-label="Alert Type"> {{row.alertTypeFk | getAlertTypeName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isSound">
+      <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef> isSound </mat-header-cell>
+      <mat-cell fxHide fxShow.gt-sm *matCellDef="let row" data-label="isSound">
+        <mat-checkbox [disabled]="true" [(ngModel)]="row.isSound"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="isPopup">
+      <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef> isPopup </mat-header-cell>
+      <mat-cell fxHide fxShow.gt-sm *matCellDef="let row" data-label="isPopup">
+        <mat-checkbox [disabled]="true" [(ngModel)]="row.isPopup"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef> isActive </mat-header-cell>
+      <mat-cell fxHide fxShow.gt-sm *matCellDef="let row" data-label="isActive">
+        <mat-checkbox [disabled]="true" [(ngModel)]="row.isActive"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="saveInHistory">
+      <mat-header-cell fxHide fxShow.gt-sm *matHeaderCellDef> saveInHistory </mat-header-cell>
+      <mat-cell fxHide fxShow.gt-sm *matCellDef="let row" data-label="saveInHistory">
+        <mat-checkbox [disabled]="true" [(ngModel)]="row.saveInHistory"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="options">
+      <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayout="row wrap" >
+        <button color="warn" [disabled]="row.alertId===1000" mat-button (click)="removeAlert(row)">Delete</button>
+        <button color="accent" [disabled]="row.alertId===1000" mat-button (click)="editAlert(row)">Edit</button>
+        <button color="primary" mat-button (click)="sendAlert(row)">Send</button>
+        <button mat-button fxHide fxShow.lt-sm fxShow.sm (click)="moreDetails(row)">...</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+</div>

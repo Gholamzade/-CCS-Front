@@ -1,0 +1,190 @@
+// @import '~@angular/material/theming';
+// $heading-font-family: 'IRANYekanFN !important';
+// $yekan-font-family: 'iranyekan !important';
+// $button-font-family: 'IRANYekanFN !important';
+
+// // $typography: mat-typography-config(
+// //   $font-family: $yekan-font-family,
+// //   $body-2:  mat-typography-level(0.875rem, 1.563rem, normal,$yekan-font-family),
+// // );
+// // @include mat-list-typography($typography);
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.setting {
+  width: 20px;
+  height: 19.3px;
+  color: #0052cc;
+  cursor: pointer;
+}
+
+.user-details {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  min-width: 263px;
+  min-height: 64px;
+  background-color: #deebff;
+}
+
+.user-details[dir="rtl"] {
+  padding: 11px 23px 11px 16px;
+}
+.user-details[dir="ltr"] {
+  padding: 11px 16px 11px 23px;
+}
+
+.full-name {
+  min-width: 5.938rem;
+  min-height: 1.563rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.79;
+  letter-spacing: normal;
+  text-align: right;
+  color: #172b4d;
+
+  [dir="rtl"] & {
+    text-align: right;
+    margin: 0.688rem 0 0 5.125rem;
+  }
+  [dir="ltr"] & {
+    text-align: left;
+    margin: 0.688rem 5.125rem 0 0;
+  }
+}
+
+.user-name {
+  [dir="rtl"] & {
+    margin: 0 0 0.688rem 5.125rem;
+  }
+  [dir="ltr"] & {
+    margin: 0 0 0.688rem 0rem;
+  }
+
+  min-width: 4.75rem;
+  height: 1.063rem;
+  font-size: 0.625rem;
+  font-weight: normal;
+  line-height: 1.7;
+  color: #172b4d;
+}
+
+.mat-list-single-selected-option {
+  background: rgb(0 0 0 / 0%) !important;
+  color: #0065ff !important  ;
+}
+
+// .mat-list-icon{
+//   color: #c1c7d0  ;
+// }
+
+.expansion-panel-header {
+  height: 3.125rem;
+
+  [dir="ltr"] & {
+    padding: 0px 32px 0px 23px !important;
+  }
+  [dir="rtl"] & {
+    padding: 0px 23px 0px 32px !important;
+  }
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+
+  &-title {
+    min-width: 10.563rem;
+    height: 1.063rem;
+    // margin: 0 0 0 799px;
+    // font-family: IRANYekan;
+    font-size: 0.625rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.7;
+    letter-spacing: normal;
+    text-align: center;
+    color: #6b778c;
+  }
+}
+
+.version {
+  height: 1.063rem;
+  font-size: 0.625rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.063rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #6b778c;
+
+  [dir="rtl"] & {
+    min-width: 3.313rem;
+    margin: 0 6.5rem 1.5rem 7.125rem;
+  }
+  [dir="ltr"] & {
+    min-width: 4.313rem;
+    margin: 0 8rem 1.5rem 6rem;
+  }
+}
+
+.irisa-section {
+  position: absolute;
+  bottom: 0;
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  background-color: #ffff;
+}
+
+.accordion {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.side-menu {
+  background-color: #ffff;
+}
+
+.mat-list-base {
+  padding-top: 0;
+}
+
+.list-title {
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.563rem;
+  letter-spacing: normal;
+  height: 1.563rem !important;
+
+  [dir="ltr"] & {
+    padding: 0.4rem 7.188rem 0.4rem 0.438rem;
+  }
+  [dir="rtl"] & {
+    padding: 0.4rem 0.438rem 0.4rem 7.188rem;
+  }
+}
+
+.setting-section {
+  [dir="rtl"] & {
+    text-align: left;
+  }
+  [dir="ltr"] & {
+    text-align: right;
+  }
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0;
+}

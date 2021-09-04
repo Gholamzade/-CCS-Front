@@ -1,0 +1,34 @@
+.danger-modal-panel {
+  mat-dialog-container {
+    border-top: 5px solid #ff5630;
+    border-radius: 0.5rem;
+  }
+}
+
+.warning-modal-panel {
+  mat-dialog-container {
+    border-top: 5px solid #ffab00;
+    border-radius: 0.5rem;
+  }
+}
+
+.info-modal-panel {
+  mat-dialog-container {
+    border-top: 5px solid #00b8d9;
+    border-radius: 0.5rem;
+  }
+}
+
+.success-modal-panel {
+  mat-dialog-container {
+    border-top: 5px solid #36b37e;
+    border-radius: 0.5rem;
+  }
+}
+
+.primary-modal-panel {
+  mat-dialog-container {
+    border-top: 5px solid #0065ff;
+    border-radius: 0.5rem;
+  }
+}

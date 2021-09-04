@@ -1,0 +1,56 @@
+.date-picker-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+.mat-card.scrollable-content {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 76vh;
+  width: 60%;
+
+  > .mat-card-title-group {
+    display: block;
+  }
+
+  > .mat-card-content {
+    overflow-y: auto;
+  }
+}
+
+$fontSizeIcon: 24px;
+$sizeButtonMeridian: 36px;
+
+.timepicker {
+  font-size: 13px;
+  form {
+    min-width: 90px;
+    .timepicker-table {
+      .timepicker-tbody {
+        tr {
+          td {
+            text-align: center;
+
+            &.timepicker-spacer {
+              font-weight: bold;
+            }
+
+            .mat-icon-button {
+              height: $fontSizeIcon;
+              width: $fontSizeIcon;
+              line-height: $fontSizeIcon;
+              .mat-icon {
+                font-size: $fontSizeIcon;
+              }
+            }
+            .mat-form-field {
+              width: 20px;
+              max-width: 20px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

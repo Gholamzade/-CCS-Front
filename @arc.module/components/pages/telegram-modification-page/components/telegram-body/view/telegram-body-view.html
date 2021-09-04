@@ -1,0 +1,14 @@
+<div mat-dialog-title>
+  <p>telegram body (Id: {{telegram.telegramId}})</p>
+</div>
+
+<div mat-dialog-content>
+
+  <div>
+    <ngx-json-viewer [json]="telegram.body"></ngx-json-viewer>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close]>ok</button>
+</div>

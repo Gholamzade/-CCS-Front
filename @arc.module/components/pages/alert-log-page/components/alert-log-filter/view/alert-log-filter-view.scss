@@ -1,0 +1,38 @@
+.full-width-table {
+  width: 100%;
+}
+
+.visible {
+  visibility: visible;
+  // display: flex;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
+.hidden {
+  visibility: hidden;
+
+  // display: none;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.form-title {
+  min-width: 9.875rem;
+  min-height: 1.75rem;
+  margin: 1rem 0 0 0;
+  font-size: 1rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+
+  color: #172b4d;
+  [dir="rtl"] & {
+    text-align: right;
+  }
+  [dir="ltr"] & {
+    text-align: left;
+  }
+}

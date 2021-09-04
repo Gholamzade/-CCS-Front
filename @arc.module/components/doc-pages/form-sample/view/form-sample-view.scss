@@ -1,0 +1,25 @@
+
+.w-100{
+  width: 100%;
+}
+
+
+.form-title{
+  min-width: 9.875rem;
+  min-height: 1.75rem;
+  margin: 1rem 0 0 0;
+  font-size: 1rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: normal;
+
+  color: #172b4d;
+  [dir='rtl'] & {
+    text-align: right;
+  }
+  [dir='ltr'] & {
+    text-align: left;
+  }
+}

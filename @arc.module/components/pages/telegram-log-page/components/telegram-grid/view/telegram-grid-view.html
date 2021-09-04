@@ -1,0 +1,105 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
+
+  <div class="table-container mat-elevation-z8" [ngClass.xs]="'table-container-xs'" fxFlex.xs="0 1 100%"
+    fxFlex.sm="0 1 68%" fxFlex.md="0 1 68%" fxFlex.gt-md="0 1 68%">
+    <div class="centralize" *ngIf="loadingSimpleTelegramLogs">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-table *ngIf="telegramLogList && telegramLogList.telegramLogItems && !loadingSimpleTelegramLogs"
+      [dataSource]="telegramLogList.telegramLogItems" #table>
+      <ng-container matColumnDef="requestId">
+        <mat-header-cell *matHeaderCellDef> Telegram Id </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <!-- <span class="title" fxHide.gt-xs>Telegram Id: </span>
+          {{element.requestId}} -->
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Telegram Id :</div>
+            <div class="width-100">{{element.requestId}}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="telegramTitle">
+        <mat-header-cell *matHeaderCellDef> Tel Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Tel Name :</div>
+            <div class="width-100">{{ element.requestId | getTelegramNameById:telegrams }}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="srcUnitFk">
+        <mat-header-cell *matHeaderCellDef> Sender Unit </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Sender Unit :</div>
+            <!-- <div class="width-100">{{ getUnitById(element.srcUnitFk).title }}</div> -->
+            <div class="width-100">{{element?.srcUnitFk |unitParse :allUnits:'title' }}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dstUnitFk">
+        <mat-header-cell *matHeaderCellDef> Reciever Unit </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Reciever Unit :</div>
+            <!-- <div class="width-100">{{ getUnitById(element.dstUnitFk).title }}</div> -->
+            <div class="width-100">{{ element?.dstUnitFk |unitParse :allUnits:'title'}}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="telegramLogDate">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Date :</div>
+            <div class="width-100">{{ element.telegramLogDate | date: "medium" }}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="simulated">
+        <mat-header-cell *matHeaderCellDef> Simulated </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="width-100" style="display: flex;">
+            <div class="width-100" fxHide.gt-xs>Simulated :</div>
+            <div class="width-100">
+              <div *ngIf="!element.simulated">NO</div>
+              <div *ngIf="element.simulated">YES</div>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="operation-btn">
+        <mat-header-cell *matHeaderCellDef fxHide.gt-xs> </mat-header-cell>
+        <mat-cell *matCellDef="let element" fxHide.gt-xs>
+          <button mat-raised-button color="primary" (click)="openJsonViewerDialog(element)">ُShow Details</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" fxHide.xs>
+      </mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout="row wrap" fxLayout.lt-sm="column"
+        fxLayoutAlign.xs="center center" (click)="selectTelegramLog(row)"
+        [ngClass]="{'highlightTableColor': selectedTelegramLogData?.telegramLogId == row.telegramLogId}"></mat-row>
+
+
+    </mat-table>
+  </div>
+  <div fxFlex="30%" fxHide.xs>
+    <json-viewer-presenter [selectedRow]="selectedTelegramLogRow|async" [allUnits]="allUnits">
+    </json-viewer-presenter>
+  </div>
+  <mat-paginator fxFlex="68%" *ngIf=" telegramLogList" #paginator [pageIndex]="telegramLogList?.pageIndex"
+    [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 100]" [length]="telegramLogList?.total" (page)="changePage($event)"
+    [hidePageSize]="true">
+  </mat-paginator>
+
+
+</div>

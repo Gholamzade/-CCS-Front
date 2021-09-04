@@ -1,0 +1,34 @@
+<div mat-dialog-title>
+  <p>Edit telegram (Id: {{telegram.telegramId}})</p>
+</div>
+
+<div mat-dialog-content>
+
+  <div>
+    <user-group-selector-presenter [SelectedGroupsId]="selectedGroupsId" [title]="'Restricted User Groups'"
+      (ChangedSelectedGroups)="onSelectedGroupsChange($event)">
+    </user-group-selector-presenter>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="telegram.description">
+  </mat-form-field>
+
+  <div>
+    <mat-checkbox [(ngModel)]="telegram.enabled">
+      Enabled
+    </mat-checkbox>
+  </div>
+
+  <div>
+    <mat-checkbox [(ngModel)]="telegram.saveInHistory">
+      save In History
+    </mat-checkbox>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

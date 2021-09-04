@@ -1,0 +1,42 @@
+<div mat-dialog-title style="display: flex;">
+  <div style="width:50%;text-align: start;color: black;">
+    {{'alerts'|TranslatePipe}}
+  </div>
+
+  <span style="text-align: end;width: 50%;">
+    <button mat-flat-button (click)="close()" color="secondary-text">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+
+</div>
+
+<div mat-dialog-content style="padding-bottom: 0.5rem;">
+
+  <div *ngFor="let item of alertLogs" [ngClass]="{
+    'alert':true,
+    'alert-info' : item.type == alertType.INFO,
+    'alert-warning':item.type == alertType.WARNING,
+    'alert-success':item.type == alertType.SUCCESS
+  }" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="0.5rem" fxLayoutAlign="space-between center">
+
+    <div fxFlex="calc(70% - 0.5rem)" fxLayout="row" fxLayoutAlign="flex-start center">
+      <mat-icon fxHide.lt-lg style="vertical-align: middle;" *ngIf="item.type == alertType.WARNING">warning</mat-icon>
+      <mat-icon fxHide.lt-lg style="vertical-align: middle;" *ngIf="item.type == alertType.SUCCESS">done</mat-icon>
+      <mat-icon fxHide.lt-lg style="vertical-align: middle;" *ngIf="item.type == alertType.INFO">info</mat-icon>
+      <span class="text">{{item.body}} </span>
+    </div>
+    <div class="verticalLine"></div>
+
+    <div fxFlex="calc(30% - 0.5rem)" class="date-time-section">
+
+      <span class="date-time">
+        {{selectedLanguage === 'fa' ? (item.alertLogDate|miladiDateToJalali) :
+        (item.alertLogDate|jalaliDateToMiladi) }}
+        <!-- <div class="vertical-divider"></div> -->
+      </span>
+    </div>
+
+  </div>
+
+</div>

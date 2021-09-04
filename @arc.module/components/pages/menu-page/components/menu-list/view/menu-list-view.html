@@ -1,0 +1,54 @@
+<div role="manage box for menus" fxLayout="row" style="padding: 10px;" class="mat-expansion-panel" *ngIf="selectedUnit">
+
+  <div fxFlex="60" class="leftAlign">
+    <span style="color: darkblue;font-weight: bolder;"> Main Menu </span>
+    <mat-icon aria-hidden="false" title="Add Menu" class="pointer circle-btn add-btn" (click)="AddMenu()">add
+    </mat-icon>
+  </div>
+
+  <div fxFlex="40" fxLayout="row" fxLayoutAlign="end center">
+
+    <div *ngIf="!mainMenuEditOrderMode" class="rightAlign">
+      <button mat-raised-button (click)="toggleMenu()">Edit Order <mat-icon>open_with</mat-icon></button>
+    </div>
+    <div *ngIf="mainMenuEditOrderMode" class="rightAlign marginRight10px">
+      <button mat-raised-button color="warn" (click)="toggleMenu(); resetMenuOrder()">
+        <span fxHide.lt-sm>Discard</span>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="mainMenuEditOrderMode" class="rightAlign marginRight10px">
+      <button mat-raised-button color="primary" (click)="toggleMenu();  SaveMenuOrder() ">
+        <span fxHide.lt-sm>save</span>
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div role="list of menus" cdkDropList [cdkDropListData]="_menus" (cdkDropListDropped)="drop($event)">
+  <mat-accordion class="headers-align">
+    <mat-expansion-panel hideToggle *ngFor="let menu of _menus" cdkDrag cdkDragLockAxis="y"
+      [cdkDragDisabled]="!mainMenuEditOrderMode">
+      <mat-expansion-panel-header fxLayout="row">
+        <div fxFlex>{{menu.titleEn}}</div>
+        <div fxFlex>{{menu.titleFa}}</div>
+        <div fxFlex fxHide.xs>{{menu.captionEn}}</div>
+        <div fxFlex fxHide.xs>{{menu.captionFa}}</div>
+        <div fxFlex class="rightAlign">
+          <mat-icon *ngIf="!mainMenuEditOrderMode" aria-hidden="false" color="warn"
+            class="mainMenuOperationButton marginRight5px pointer" (click)="RemoveMenu(menu);$event.stopPropagation()">
+            delete</mat-icon>
+          <mat-icon *ngIf="!mainMenuEditOrderMode" aria-hidden="false" color="accent"
+            class="mainMenuOperationButton marginRight5px pointer " (click)="EditMenu(menu);$event.stopPropagation()">
+            create</mat-icon>
+          <mat-icon *ngIf="mainMenuEditOrderMode" aria-hidden="false"
+            class="mainMenuOperationButton marginRight5px handle" cdkDragHandle (click)="$event.stopPropagation()">
+            open_with</mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+      <submenu-list-presenter [menu]="menu"></submenu-list-presenter>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>

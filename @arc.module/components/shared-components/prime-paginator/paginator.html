@@ -1,0 +1,102 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px" fxLayoutAlign="space-between center"
+  [class]="styleClass" [ngStyle]="style" [ngClass]="'p-paginator p-component'"
+  *ngIf="alwaysShow ? true : (pageLinks && pageLinks.length > 1)">
+
+
+  <span class="irisa-paginator-end" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(28% - 5px)" fxFlex.md="0 1 calc(14% - 5px)"
+    fxFlex.lg="0 1 calc(18% - 5px)" *ngIf="rowsPerPageOptions || templateRight" fxHide.xl fxHide.sm>
+    <mat-form-field *ngIf="rowsPerPageOptions" style="width: 4rem;text-align: center;">
+      <mat-select (selectionChange)="onRppChange($event)" [(value)]="rows" [(ngModel)]="rows">
+        <mat-option *ngFor="let row of rowsPerPageItems" [value]="row.value">{{row.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="p-paginator-right-content" *ngIf="templateRight">
+      <ng-container *ngTemplateOutlet="templateRight; context: {$implicit: paginatorState}"></ng-container>
+    </div>
+  </span>
+
+
+  <span class="irisa-paginator-end" fxFlex.xl="0 1 calc(23% - 5px)" *ngIf="rowsPerPageOptions || templateRight"
+    fxHide.lt-xl>
+
+    <span class="per-page">
+      <span class="before"> {{'Show'|TranslatePipe}}</span>
+      <mat-form-field *ngIf="rowsPerPageOptions" style="width: 4rem;text-align: center;">
+
+        <mat-select (selectionChange)="onRppChange($event)" [(value)]="rows" [(ngModel)]="rows">
+          <mat-option *ngFor="let row of rowsPerPageItems" [value]="row.value">{{row.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="p-paginator-right-content" *ngIf="templateRight">
+        <ng-container *ngTemplateOutlet="templateRight; context: {$implicit: paginatorState}"></ng-container>
+      </div>
+      <span class="after">
+        {{ 'Row In Per Page'|TranslatePipe }}
+
+      </span>
+    </span>
+
+  </span>
+
+  <span class="irisa-paginator-center" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(55% - 5px)"
+    fxFlex.md="0 1 calc(48% - 5px)" fxFlex.lg="0 1 calc(43% - 5px)" fxFlex.xl="0 1 calc(42% - 5px)"
+    *ngIf="showFirstLastIcon || showPageLinks || showJumpToPageDropdown">
+
+    <a mat-flat-button *ngIf="showFirstLastIcon" type="button" [disabled]="isFirstPage()"
+      (click)="changePageToFirst($event)" matRipple class="p-paginator-first p-paginator-element p-link"
+      [ngClass]="{'p-disabled':isFirstPage()}">
+      <!-- <span class="p-paginator-icon pi pi-angle-double-left"></span> -->
+      <mat-icon>first_page</mat-icon>
+
+    </a>
+    <a mat-flat-button type="button" [disabled]="isFirstPage()" (click)="changePageToPrev($event)" matRipple
+      class="p-paginator-prev p-paginator-element p-link" [ngClass]="{'p-disabled':isFirstPage()}">
+      <!-- <span class="p-paginator-icon pi pi-angle-left"></span> -->
+      <mat-icon>chevron_left</mat-icon>
+
+    </a>
+    <span class="p-paginator-pages" *ngIf="showPageLinks">
+      <a mat-flat-buttontype="button" *ngFor="let pageLink of pageLinks"
+        class="p-paginator-page p-paginator-element p-link" [ngClass]="{'p-highlight': (pageLink-1 == getPage())}"
+        (click)="onPageLinkClick($event, pageLink - 1)" matRipple>{{pageLink}}</a>
+    </span>
+
+    <!-- <mat-form-field *ngIf="showJumpToPageDropdown" style="width: 4rem;text-align: center;">
+
+      <mat-select (selectionChange)="onPageDropdownChange($event)" [(value)]="rows" [ngModel]="getPage()">
+        <mat-option *ngFor="let row of pageItems" [value]="row.value">{{row.label}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+
+    <a mat-flat-button type="button" [disabled]="isLastPage()" (click)="changePageToNext($event)" matRipple
+      class="p-paginator-next p-paginator-element p-link" [ngClass]="{'p-disabled':isLastPage()}">
+      <!-- <span class="p-paginator-icon pi pi-angle-right"></span> -->
+      <mat-icon>chevron_right</mat-icon>
+
+    </a>
+    <a mat-flat-button *ngIf="showFirstLastIcon" type="button" [disabled]="isLastPage()"
+      (click)="changePageToLast($event)" matRipple class="p-paginator-last p-paginator-element p-link"
+      [ngClass]="{'p-disabled':isLastPage()}">
+      <!-- <span class="p-paginator-icon pi pi-angle-double-right" ></span> -->
+      <mat-icon>last_page</mat-icon>
+    </a>
+
+  </span>
+
+
+  <span class="irisa-paginator-start" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(36% - 5px)"
+    fxFlex.md="0 1 calc(30% - 5px)" fxFlex.lg="0 1 calc(30% - 5px)" fxFlex.xl="0 1 calc(27% - 5px)"
+    *ngIf="templateLeft || showCurrentPageReport">
+
+    <div class="p-paginator-left-content" *ngIf="templateLeft">
+      <ng-container *ngTemplateOutlet="templateLeft; context: {$implicit: paginatorState}"></ng-container>
+    </div>
+
+    <span class="p-paginator-current" *ngIf="showCurrentPageReport">{{currentPageReport}}</span>
+
+  </span>
+
+</div>

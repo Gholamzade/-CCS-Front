@@ -1,0 +1,201 @@
+<mat-card>
+  <mat-card-content>
+    <div class="form-title">فرم نمونه</div>
+
+    <div class="form-divider">
+      <div class="ink"></div>
+    </div>
+
+    <div [formGroup]="form" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem"
+      fxLayoutAlign="flex-start flex-start">
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+        class="static-position">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" formControlName="type">
+        <mat-error>
+          <mat-icon aria-hidden="false">info_outlined</mat-icon>
+          از matPrefix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام نمیدهد.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+        class="static-position">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" formControlName="type">
+        <mat-hint>
+          <mat-icon>info_outlined</mat-icon>
+          از matPrefix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام نمیدهد.
+        </mat-hint>
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <mat-label>stop Reason</mat-label>
+        <mat-select formControlName="reason">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let item of reasons" [value]="item.reasonId">
+            {{ item.reasonName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)"
+          [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
+          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedEndDate($event)"
+          [selectedDate]="form?.controls?.endDate?.value" [label]="'زمان پایان*'" [placeholder]="'زمان پایان*'"
+          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'ثبت',cancel:'لغو'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <mat-label>Coil Number</mat-label>
+        <mat-select formControlName="coil">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let item of coils" [value]="item.coilId">
+            {{ item.coilNumber }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="comment"></textarea>
+
+      </mat-form-field>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+        <button mat-flat-button color="prime" type="submit" class="button-lg" (click)="submit()">دکمه بزرگ
+        </button>
+
+      </div>
+    </div>
+
+    <form [formGroup]="form2">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start center"
+        class="secondary-form form-input-padding">
+
+        <div class="form-title">دسته اطلاعات دوم</div>
+        <div class="form-divider">
+          <div class="ink"></div>
+        </div>
+
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt5">
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt6">
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt7">
+        </mat-form-field>
+
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start center"
+        class="secondary-form form-input-padding">
+        <div class="form-title">دسته اطلاعات اول</div>
+        <div class="form-divider">
+          <div class="ink"></div>
+        </div>
+
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)"
+          class="static-position">
+          <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+          <input matInput placeholder="placeholder" formControlName="txt2">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+          fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)">
+          <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedDate($event)"
+            [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
+            [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'ثبت',cancel:'انصراف'}">
+          </date-time-picker-overlay-presenter>
+        </div>
+
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+          fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(33% - 1rem)" class="form-input-padding">
+          <button mat-flat-button color="prime" type="submit" class="button-lg" (click)="submit()">ثبت
+          </button>
+          <button mat-flat-button type="reset" color="secondary-outline" class="button-lg">انصراف
+          </button>
+
+        </div>
+      </div>
+
+    </form>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+      <div style="width: 100%;padding: 2%;">
+        دکمه ها به ترتیب اولویت و نوع عمل دکمه از ابتدای خط به انتها (
+        صفحه راست به چپ اولیوت از راست به چپ و در صفحه چپ به راست بلعکس
+        )
+      </div>
+      <button mat-flat-button color="success" class="button-lg">
+        <mat-icon>info_outline</mat-icon>
+        دکمه بزرگ
+      </button>
+      <button mat-flat-button color="info-outline" class="button-lg">دکمه بزرگ
+      </button>
+      <button mat-flat-button color="secondary" class="button-lg">دکمه بزرگ
+      </button>
+      <button mat-flat-button color="warning-outline" class="button-lg">دکمه بزرگ
+      </button>
+      <button mat-flat-button color="danger-text" class="button-lg">دکمه بزرگ
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

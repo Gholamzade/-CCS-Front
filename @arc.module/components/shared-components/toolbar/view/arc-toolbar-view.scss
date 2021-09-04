@@ -1,0 +1,195 @@
+.title {
+  min-width: 8.875rem;
+  height: 2.563rem;
+  font-weight: 800;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.563rem;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-align: start;
+}
+
+.arc-toolbar {
+  background-color: #0052cc;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #ffffff;
+  [dir="ltr"] & {
+    padding: 0 4rem 0.688rem 1.5rem;
+  }
+  [dir="rtl"] & {
+    padding: 0 1.5rem 0.688rem 4rem;
+  }
+
+  mat-select {
+    font-size: 0.875rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+  }
+  ::ng-deep .mat-select-value {
+    color: #ffffff !important;
+  }
+  ::ng-deep .mat-select-arrow {
+    color: #ffffff !important;
+  }
+}
+
+.toolbar {
+  width: 100%;
+  height: inherit;
+  align-items: center;
+
+  [dir="ltr"] & {
+    padding: 0 3rem 0 1rem;
+  }
+  [dir="rtl"] & {
+    padding: 0 1rem 0 3rem;
+  }
+
+  > .actions {
+    [dir="rtl"] & {
+      margin-left: 1rem;
+    }
+    [dir="ltr"] & {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.route-event {
+  mat-icon {
+    [dir="ltr"] & {
+      transform: rotate(180deg);
+    }
+  }
+
+  .forward {
+    margin-left: 1rem;
+  }
+}
+
+.customer-info {
+  [dir="ltr"] & {
+    padding: 0.75rem 0 0.688rem 0;
+  }
+  [dir="rtl"] & {
+    padding: 0.75rem 0 0.688rem 0;
+  }
+}
+
+%alert-body {
+  content: "";
+  height: 70%; //You can change this if you want smaller/bigger borders
+  width: 1px;
+  position: absolute;
+  right: 0;
+  top: 0.5rem; // If you want to set a smaller height and center it, change this value
+  background-color: #ffffff; // The color of your border
+}
+
+// .alert-body {
+//   position: relative;
+
+//   // [dir="ltr"] & {
+//   &::after {
+//     @extend %alert-body;
+//   }
+//   // }
+//   // [dir="rtl"] & {
+//   &::before {
+//     @extend %alert-body;
+//   }
+//   // }
+// }
+.verticalLine {
+  border-right: 2px solid #ffffff;
+  height: 2rem;
+}
+
+.date-time {
+  margin-inline-start: 1rem;
+}
+
+:host .alert {
+  margin-bottom: 0;
+  box-shadow: none;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.toolbar-alert-lt-lg {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.mat-toolbar-single-row {
+  color: #ffffff;
+  height: 4rem;
+  box-shadow: 0 0 0.5rem 0.125rem rgba(0, 82, 204, 0.32);
+  background-color: #0052cc;
+  [dir="ltr"] & {
+    padding: 0.75rem 4rem 0.688rem 1.5rem;
+  }
+  [dir="rtl"] & {
+    padding: 0.75rem 1.5rem 0.688rem 4rem;
+  }
+}
+
+.customer-logo {
+  min-width: 4.863rem;
+  height: 2rem;
+
+  background-color: #ffffff;
+  [dir="ltr"] & {
+    margin: 0.25rem 0.888rem 0.313rem 1rem;
+  }
+  [dir="rtl"] & {
+    margin: 0.25rem 1rem 0.313rem 0.888rem;
+  }
+}
+
+.alert-danger .text {
+  // min-width: 24rem;
+  // overflow: hidden;
+  word-break: break-all;
+}
+
+//xl
+@media screen and (min-width: 1920px) and (max-width: 5000px) {
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+//lg
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+//md
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .title {
+    font-size: 1.1rem;
+  }
+}
+
+//sm
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .title {
+    font-size: 1rem;
+  }
+}
+
+//xs
+@media screen and (max-width: 599px) {
+  .title {
+    font-size: 0.8rem;
+  }
+}

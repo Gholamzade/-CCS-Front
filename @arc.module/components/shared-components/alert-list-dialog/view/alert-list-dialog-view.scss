@@ -1,0 +1,42 @@
+.time-section .time {
+  min-width: 241px;
+  height: 25px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 25px;
+  letter-spacing: normal;
+  color: #172b4d;
+  [dir="rtl"] & {
+    margin: 20px 0 19px 25px;
+  }
+  [dir="ltr"] & {
+    margin: 20px 25px 19px 0;
+  }
+}
+
+.alert {
+  border: none;
+  min-height: 4rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  // padding-bottom: 0.5rem;
+  .verticalLine {
+    border-right: 2px solid;
+    border-color: inherit;
+    height: 2rem;
+  }
+}
+
+.date-time-section {
+  text-align: center;
+  [dir="rtl"] & {
+    direction: ltr;
+    padding-inline-start: 1.625rem;
+    display: inline-grid;
+  }
+  > span {
+    width: 100%;
+  }
+}

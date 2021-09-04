@@ -1,0 +1,83 @@
+<div mat-dialog-title>
+  <p *ngIf="!isInEditMode">New Alert</p>
+  <p *ngIf="isInEditMode">Edit alert (Id: {{alert.alertId}})</p>
+</div>
+
+<div mat-dialog-content fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="10px" ngForm #myForm="ngForm">
+
+  <mat-form-field *ngIf="!isInEditMode" appearance="outline" fxFlex="100">
+    <mat-label>Alert Id</mat-label>
+    <input matInput [(ngModel)]="alert.alertId" name="alertId" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Alert type</mat-label>
+    <mat-select [(ngModel)]="alert.alertTypeFk" (ngModelChange)="alertTypeChange()" name="alertTypeFk">
+      <mat-option *ngFor="let alertType of alertTypes" [value]="alertType.value">
+        {{alertType.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div fxFlex="0 1 calc(50% - 10px)">
+    <user-group-selector-presenter [SelectedGroupsId]="selectedGroupsId" [title]="'Restricted User Groups'"
+      (ChangedSelectedGroups)="onSelectedGroupsChange($event)">
+    </user-group-selector-presenter>
+  </div>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)" appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="alert.title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)" appearance="outline">
+    <mat-label>template</mat-label>
+    <input matInput [(ngModel)]="alert.template" name="template">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)" appearance="outline">
+    <mat-label>Prm1 title</mat-label>
+    <input matInput [(ngModel)]="alert.prm1Title" name="prm1Title">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)" appearance="outline">
+    <mat-label>Prm2 title</mat-label>
+    <input matInput [(ngModel)]="alert.prm2Title" name="prm2Title">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)" appearance="outline">
+    <mat-label>Prm3 title</mat-label>
+    <input matInput [(ngModel)]="alert.prm3Title" name="prm3Title">
+  </mat-form-field>
+
+  <hr fxFlex="100">
+
+  <div fxFlex="0 1 calc(50% - 10px)">
+    <mat-checkbox [(ngModel)]="alert.isActive" name="isActive">
+      is active
+    </mat-checkbox>
+  </div>
+
+  <div fxFlex="0 1 calc(50% - 10px)">
+    <mat-checkbox [(ngModel)]="alert.saveInHistory" name="saveInHistory">
+      save In History
+    </mat-checkbox>
+  </div>
+
+  <div fxFlex="0 1 calc(50% - 10px)" *ngIf="alert.alertTypeFk===3">
+    <mat-checkbox  [disabled]="alert.isSound" [(ngModel)]="alert.isPopup" name="isPopup">
+      is popup
+    </mat-checkbox>
+  </div>
+
+  <div fxFlex="0 1 calc(50% - 10px)" *ngIf="alert.alertTypeFk===3" >
+    <mat-checkbox [(ngModel)]="alert.isSound" (change)="isSoundChanged()" name="isSound">
+      is sound
+    </mat-checkbox>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onOkClick()">Ok</button>
+</div>

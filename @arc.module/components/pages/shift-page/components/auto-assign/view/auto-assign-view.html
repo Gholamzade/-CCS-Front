@@ -1,0 +1,49 @@
+<div role="add-day" style="text-align: center;">
+  <div>
+    <h3>
+      Select the year first then schedule shift times
+    </h3>
+  </div>
+  <mat-form-field appearance="outline" style="padding-right: 10px;">
+    <input hidden type="text" matInput [matDatepicker]="dp" />
+    <input type="text" matInput readonly [ngModel]="year" placeholder="Select year..." />
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)"
+      panelClass="example-month-picker">
+    </mat-datepicker>
+  </mat-form-field>
+
+  <button mat-mini-fab color="primary" style="margin-right: 20px;" *ngIf="year" (click)="addDay()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" *ngIf="year" (click)="delDay()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
+
+<div #scrollMe class="container" mat-dialog-content>
+  <div class="item" *ngFor="let i of days">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-card-title>Day{{ i }}</mat-card-title>
+        <div *ngFor="let itemShift of shifts">
+          <label>{{ itemShift.title }} : </label>
+          <mat-form-field style="width: 90px;">
+            <mat-label>Team</mat-label>
+            <mat-select (selectionChange)="onChangeTeam($event, i, itemShift)">
+              <mat-option *ngFor="let itemTeam of teams" [value]="itemTeam">
+                <p>{{ itemTeam.title }}</p>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" *ngIf="year && days.length > 0" class="item" (click)="assgin()">
+    Assgin
+  </button>
+</div>

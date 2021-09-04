@@ -1,0 +1,107 @@
+<div fxLayout="row wrap" style="margin-bottom: 10px;">
+  <div fxFlex="0.0694444444444444" *ngFor="let minute of minutesOfADay; let i = index" [ngClass]="getClass(minute)" class="minute-box" [title]="getTitle(i)"></div>
+</div>
+
+
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" class="new-shift-container" ngForm #addForm="ngForm">
+  <div fxFlex="0 1 calc(25% - 10px)" fxFlex.sm="0 1 calc(50% - 10px)" style="text-align: center;">
+    <mat-form-field class="form-field" style="width: 100%;">
+      <mat-label>New Shift</mat-label>
+      <input matInput type="text" [(ngModel)]="titleToAdd" name="title" required (ngModelChange)="shiftTitleChanged(null)">
+    </mat-form-field>
+    <div mat-label *ngIf="takenShiftTitleToAdd" style="color:red">
+      shift title is taken</div>
+  </div>
+
+  <div fxFlex="0 1 calc(35% - 10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="3" style="text-align: center;">
+    <span style="font-size: 12px;">Start</span>
+    <ngx-timepicker-field [format]="24" [(ngModel)]="startTimeValue" name="startTime" style="display: inline-block;height: 50px;">
+    </ngx-timepicker-field>
+  </div>
+  <div fxFlex="0 1 calc(35% - 10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="4" style="text-align: center;">
+    <span style="font-size: 12px;">End</span>
+    <ngx-timepicker-field [format]="24" [(ngModel)]="endTimeValue" name="endTime" style="display: inline-block;height: 50px;">
+    </ngx-timepicker-field>
+  </div>
+  <div fxFlex="0 1 calc(5% - 10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="2" style="text-align: center;">
+    <button mat-mini-fab color="primary" (click)="add()" [disabled]="!addForm.valid || takenShiftTitleToAdd">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+<hr>
+
+
+
+<div class="shift-list" style="text-align: center;">
+  <div *ngFor="let item of shiftArray" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px"
+    style="padding: 5px 0;border-bottom: 1px solid gray;" ngForm #editForm="ngForm">
+
+    <!--col1 -->
+    <div fxFlex="0 1 calc(22% -10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="1">
+      <span fxHide.gt-md *ngIf="!item.isEditing" style="opacity: 0.7;">title: </span>
+      <span *ngIf="!item.isEditing"> {{item.title}}</span>
+      <mat-form-field *ngIf="item.isEditing" style="width: 100%;">
+        <mat-label>edit Shift</mat-label>
+        <input matInput [(ngModel)]="titleToEdit" name="title" (ngModelChange)="shiftTitleChanged(item)">
+      </mat-form-field>
+      <div mat-label *ngIf="item.isEditing && takenShiftTitleToEdit" style="color:red">
+        shift title is taken</div>
+    </div>
+
+    <!--col2 -->
+    <div fxFlex="0 1 calc(32% -10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="4">
+      <span fxHide.gt-md style="opacity: 0.7;">start: </span>
+      <span *ngIf="!item.isEditing"> {{item.startTime}}</span>
+      <ngx-timepicker-field *ngIf="item.isEditing" [format]="24" [(ngModel)]="editStartTime" name="startTime"
+        style="display: inline-block;height: 50px;"></ngx-timepicker-field>
+    </div>
+
+    <!--col3 -->
+    <div fxFlex="0 1 calc(32% -10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="5">
+      <span fxHide.gt-md style="opacity: 0.7;">end: </span>
+      <span *ngIf="!item.isEditing"> {{item.endTime}}</span>
+      <ngx-timepicker-field *ngIf="item.isEditing" [format]="24" [(ngModel)]="editEndTime" name="endTime"
+        style="display: inline-block;height: 50px;"></ngx-timepicker-field>
+    </div>
+
+
+    <div fxFlex="0 1 calc(14% -10px)" fxFlex.sm="0 1 calc(50% - 10px)" fxFlexOrder.sm="2">
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="requestEdit(item)">
+        <mat-icon color="accent">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button *ngIf="item.isEditing" (click)="doneEdit(item)" [disabled]="!editForm.valid || takenShiftTitleToEdit">
+        <mat-icon color="primary">done</mat-icon>
+      </button>
+
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="delete(item)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="item.isEditing" (click)="cancelEdit(item)">
+        <mat-icon color="warn">clear</mat-icon>
+      </button>
+    </div>
+    <!--col4 -->
+    <!-- <div fxFlexOrder.sm="2">
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="requestEdit(item)">
+        <mat-icon color="accent">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button *ngIf="item.isEditing" (click)="doneEdit(item)">
+        <mat-icon color="primary">done</mat-icon>
+      </button>
+    </div> -->
+
+    <!--col5 -->
+    <!-- <div fxFlexOrder.sm="3">
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="delete(item)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="item.isEditing" (click)="cancelEdit(item)">
+        <mat-icon color="warn">clear</mat-icon>
+      </button>
+    </div> -->
+  </div>
+</div>

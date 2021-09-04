@@ -1,0 +1,102 @@
+<div class="side-menu">
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="start center" class="user-details" [dir]="dir">
+
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 22%" fxFlex.md="0 1 22%" fxFlex.gt-md="0 1 18%" class="account-section">
+      <mat-icon>
+        account_circle
+      </mat-icon>
+    </div>
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 35%" fxFlex.md="0 1 29%" fxFlex.gt-md="0 1 35%" class="name-section"
+      fxLayout="row wrap">
+      <span class="full-name" [dir]="dir"> {{this.user?.name + ' ' + this.user?.family}}</span>
+      <span class="user-name" [dir]="dir"> {{this.user?.username}}</span>
+    </div>
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 28%" fxFlex.md="0 1 28%" fxFlex.gt-md="0 1 39%" class="setting-section">
+      <mat-icon class="setting" (click)="editUser()">
+        settings
+      </mat-icon>
+    </div>
+  </div>
+  <!-- <mat-divider style="margin-top: 1rem;"></mat-divider> -->
+  <div class="accordion">
+    <mat-accordion [multi]="true" [dir]="dir">
+      <mat-expansion-panel *ngFor="let menu of menus">
+        <mat-expansion-panel-header class="expansion-panel-header">
+          <mat-panel-title style="font-weight: bolder;">
+            {{menu.titleEn|TranslatePipe}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-selection-list [multiple]="false" #submenus>
+          <mat-list-option [dir]="dir" class="list-title" *ngFor="let sub of menu.subMenus" (click)="onClick(sub)">
+            <mat-icon mat-list-icon>{{sub.route|iconSetter}}</mat-icon>
+            <span [routerLink]="['/'+sub.route]"> {{sub.titleEn|TranslatePipe}}</span>
+
+          </mat-list-option>
+        </mat-selection-list>
+        <!-- <p>
+          Option selected: {{|json}}
+        </p> -->
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="reportGroups && reportGroups.length > 0">
+        <mat-expansion-panel-header id="reportGroups-menu" class="expansion-panel-header">
+          <mat-panel-title style="font-weight: bolder;">
+            {{'Reports'|TranslatePipe}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let group of reportGroups">
+            <mat-expansion-panel-header id="report-menu" class="expansion-panel-header">
+              <mat-panel-title style="font-weight: bolder;">
+                {{group.title|TranslatePipe}}
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <button *ngFor="let report of group.reports" mat-button color="primary" style="width: 100%;"
+              (click)="navigateToReport(report)">{{report.title|TranslatePipe}}</button>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!production">
+
+        <mat-expansion-panel-header class="expansion-panel-header">
+          <mat-panel-title style="font-weight: bolder;">
+            {{'ArcDocuments'|TranslatePipe}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-selection-list [multiple]="false" #submenus>
+          <mat-list-option [dir]="dir" class="list-title" *ngFor="let doc of docRoutes">
+            <mat-icon mat-list-icon>{{doc.path|iconSetter}}</mat-icon>
+            <span [routerLink]="['/document/'+doc.path]"> {{doc.title|TranslatePipe}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel hideToggle (click)="logOut()">
+        <mat-expansion-panel-header class="expansion-panel-header">
+          <mat-panel-title style="font-weight: bolder;">
+            {{'Logout'|TranslatePipe}}
+          </mat-panel-title>
+          <mat-panel-description style="justify-content: flex-end">
+            <mat-icon>logout</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="irisa-section" [dir]="dir">
+    <img src="assets/imgs/irisa-logo.svg" class="logo">
+    <div class="logo-title">{{'Designed and implemented by Irisa Company'|TranslatePipe}}</div>
+
+    <div class="version" [dir]="dir"> {{'Version'|TranslatePipe}} {{_version}} </div>
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<mat-nav-list>
+  <div mat-list-item style="direction: rtl;text-align: center" *ngFor="let alertLog of alertLogs" [ngClass]="{
+    'alert-log':true,
+    'alert-log-info' : alertLog.type == alertType.INFO,
+    'alert-log-warning':alertLog.type == alertType.WARNING,
+    'alert-log-success':alertLog.type == alertType.SUCCESS
+  }">
+    <span mat-line style="display: flex;">
+      <mat-icon *ngIf="alertLog.type == alertType.WARNING">warning</mat-icon>
+      <mat-icon *ngIf="alertLog.type == alertType.SUCCESS">done</mat-icon>
+      <mat-icon *ngIf="alertLog.type == alertType.INFO">info</mat-icon>
+      <p>{{alertLog.body}} </p>
+    </span>
+    <span mat-line style="display: flex;">
+      <p style="font-weight: bold;"> {{alertLog.alertLogDate | isoDateToLocale}}</p>
+    </span>
+  </div>
+  <mat-nav-list>

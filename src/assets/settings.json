@@ -1,0 +1,6 @@
+{
+  "appTitle": "CCS",
+  "serverAddresses": ["http://localhost:5010"],
+  "language": "en",
+  "footerAlertCount": 5
+}

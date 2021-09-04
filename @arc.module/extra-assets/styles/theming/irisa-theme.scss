@@ -1,0 +1,98 @@
+// @import "../fonts/css/style.scss";
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@import "~@angular/material/theming";
+@import "./theme-functions";
+// ? 1. Default theme
+// primary
+// success
+// secondary
+// warning
+// danger
+// info
+$irisa-primary: irisa-mat-palette($mat-indigo);
+// accent == warning
+$irisa-accent: irisa-mat-palette($yellow-color);
+$irisa-warning: $irisa-accent;
+// warn == danger
+$irisa-warn: irisa-mat-palette($red-color);
+$irisa-danger: $irisa-warn;
+
+$irisa-success: irisa-mat-palette($green-color);
+$irisa-secondary: irisa-mat-palette($black-color);
+
+$irisa-info: irisa-mat-palette($cyan-color);
+
+$irisa-theme: irisa-light-theme(
+  $irisa-primary,
+  $irisa-accent,
+  $irisa-warn,
+  $irisa-success,
+  $irisa-info,
+  $irisa-danger,
+  $irisa-warning,
+  $irisa-secondary
+);
+
+// // ? 2. Define an alternate dark theme.
+// $dark-primary: mat-palette($mat-blue-grey);
+// $dark-accent: mat-palette($mat-amber, A200, A100, A400);
+// $dark-warn: mat-palette($mat-deep-orange);
+// $dark-theme: mat-dark-theme(
+//   (
+//     color: (
+//       primary: $dark-primary,
+//       accent: $dark-accent,
+//       warn: $dark-warn,
+//     ),
+//   )
+// );
+
+// ? 3. Define a custom heading typography config
+// $heading-font-family: 'iranyekan !important';
+// $yekan-font-family: 'iranyekan !important';
+
+// $typography: mat-typography-config(
+//   $font-family: $yekan-font-family,
+//   $display-4: mat-typography-level(112px, $font-family: $heading-font-family),
+//   $display-3: mat-typography-level(56px, $font-family: $heading-font-family),
+//   $display-2: mat-typography-level(45px, $font-family: $heading-font-family),
+//   $display-1: mat-typography-level(34px, $font-family: $heading-font-family),
+//   $headline: mat-typography-level(24px, $font-family: $heading-font-family),
+//   $title: mat-typography-level(20px, $font-family: $heading-font-family),
+// );
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+
+@include mat-core();
+// ? changed
+// import custom component themes         // ? changed
+@import "./custom-component-themes.scss"; // ? changed
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@include angular-material-theme($irisa-theme); // ? changed
+@include custom-components-theme($irisa-theme); // ? changed
+
+// ? added
+
+// Include the dark color styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
+
+// .dark-theme {
+//   @include angular-material-color($dark-theme);
+// }
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+// @include angular-material-typography($typography);
+
+// ? added

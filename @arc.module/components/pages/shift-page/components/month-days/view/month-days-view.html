@@ -1,0 +1,41 @@
+<div style="padding-left: 8px;"><h2>List of planned shifts (a month of a year):</h2></div>
+<div role="date-select" style="padding-left: 8px;">
+  <mat-form-field fxFlex.sm="0 1 calc(50% - 17px)" fxFlex.md="0 1 calc(33.33% - 17px)"
+    fxFlex.gt-md="0 1 calc(25% - 17px)" appearance="outline">
+    <input hidden type="text" matInput [matDatepicker]="dp" >
+    <!-- <mat-form-field class="example-full-width">
+      <mat-label>Month and Year</mat-label>
+      <input type="text" matInput readonly [ngModel]="selectedDate" >
+    </mat-form-field> -->
+    <input type="text" matInput readonly [ngModel]="selectedDate" placeholder="Select date ..." >
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+      (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+    </mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div class="container" role="days-of-month-list">
+  <div class="item" *ngFor="let dayValue of daysValue;let i=index" >
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-card-title>{{dayValue.day}}</mat-card-title>
+        <div *ngFor="let itemShift of dayValue.shiftTeamList">
+          <label [style.color]=itemShift.team?.color>{{itemShift.shift.title}} : </label>
+          <mat-form-field style="max-width: 100px;">
+            <mat-label>Team</mat-label>
+            <mat-select [(value)]="itemShift.team"
+            [style.color]="itemShift.team?.color"
+            (selectionChange)="onChangeTeam($event,itemShift.shift,dayValue)">
+              <mat-option *ngFor="let itemTeam of teams" [value]="itemTeam" >
+                <p [style.color]=itemTeam.color>{{itemTeam.title}}</p>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+</div>

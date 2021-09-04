@@ -1,0 +1,48 @@
+<div mat-dialog-title>
+  <span *ngIf="!submenu.submenuId">New Submenu</span>
+  <span *ngIf="submenu.submenuId">Edit Submenu</span>
+</div>
+
+<div mat-dialog-content fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="10px" ngForm #myForm="ngForm">
+  <div fxFlex="100">
+    <user-group-selector-presenter [SelectedGroupsId]="selectedGroupsId"
+      (ChangedSelectedGroups)="onSelectedGroupsChange($event)"></user-group-selector-presenter>
+  </div>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>English Title</mat-label>
+    <input matInput [(ngModel)]="submenu.titleEn" required name="titleEn">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Farsi Title</mat-label>
+    <input matInput [(ngModel)]="submenu.titleFa" required name="titleFa">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>English Caption</mat-label>
+    <input matInput [(ngModel)]="submenu.captionEn" name="captionEn">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Farsi Caption</mat-label>
+    <input matInput [(ngModel)]="submenu.captionFa" name="captionFa">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Route</mat-label>
+    <input matInput [(ngModel)]="submenu.route" required name="route">
+  </mat-form-field>
+
+  <div fxFlex="0 1 calc(50% - 10px)">
+    <mat-form-field style="width: 100%;">
+      <mat-label>Shortcut</mat-label>
+      <input matInput [(ngModel)]="submenu.shortcut" required pattern="^(?:[0-9])$" name="shortcut" #shortcut="ngModel">
+    </mat-form-field>
+    <span mat-labe *ngIf="shortcut.errors?.pattern" style="color:darkred">please enter a digit between 0 and 9</span>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

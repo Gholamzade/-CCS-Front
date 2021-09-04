@@ -1,0 +1,30 @@
+<div mat-dialog-title>
+  <span *ngIf="!menu.menuId">Create Menu</span>
+  <span *ngIf="menu.menuId">Edit Menu</span>
+</div>
+
+<div mat-dialog-content ngForm #myForm="ngForm">
+    <mat-form-field>
+      <mat-label>English Title</mat-label>
+      <input matInput [(ngModel)]="menu.titleEn" required name="titleEn">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Farsi Title</mat-label>
+      <input matInput [(ngModel)]="menu.titleFa" name="titleFa">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>English Caption</mat-label>
+      <input matInput [(ngModel)]="menu.captionEn" name="captionEn">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Farsi Caption</mat-label>
+      <input matInput [(ngModel)]="menu.captionFa" name="captionFa">
+    </mat-form-field>
+  </div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="link" [mat-dialog-close]>cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

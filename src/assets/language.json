@@ -1,0 +1,196 @@
+{
+  "languages": [
+    {
+      "langIndex": 0,
+      "langSymbol": "en",
+      "langTitle": "انگلیسی",
+      "direction": "ltr"
+    },
+    {
+      "langIndex": 1,
+      "langSymbol": "fa",
+      "langTitle": "فارسی",
+      "direction": "rtl"
+    },
+    {
+      "langIndex": 2,
+      "langSymbol": "ar",
+      "langTitle": "العربی",
+      "direction": "rtl"
+    }
+  ],
+  "phrases": {
+    "Designed and implemented by Irisa Company": [
+      "Designed and implemented by IRISA Company",
+      "طراحی و پیاده سازی توسط شرکت ایریسا"
+    ],
+    "Version": [
+      "Version",
+      "ورژن"
+    ],
+    "Row In Per Page": [
+      "Row In Per Page",
+      "ردیف در هر صفحه"
+    ],
+    "Show": [
+      "Show",
+      "نمایش"
+    ],
+    "of": [
+      "of",
+      "از"
+    ],
+    "now":["Now","زمان حال"],
+    "Total Records": [
+      "Total Records",
+      "تعداد کل"
+    ],
+    "Show Page Number": [
+      "Show Page Number",
+      "نمایش صفحه شماره"
+    ],
+    "Set Telegram Filters": [
+      "Set Telegram Filters",
+      "فیلتر تلگرام ها"
+    ],
+    "Telegram Logs": [
+      "Telegram Logs",
+      "لاگ تلگرام ها"
+    ],
+    "Alert Logs": [
+      "Alert Logs",
+      "لاگ هشدارها"
+    ],
+    "confirmDangerAlert":["OK","مشاهده شد"],
+    "showMoreFooter":["Show More","نمایش بیشتر"],
+    "alerts":["Alerts","هشدار ها"],
+    "User Definition": [
+      "User Definition",
+      "کاربران"
+    ],
+    "Shift Definition": [
+      "Shift Definition",
+      "شیفت"
+    ],
+    "Menu Definition": [
+      "Menu Definition",
+      "منوها"
+    ],
+    "Alert Definition": [
+      "Alert Definition",
+      "هشدار"
+    ],
+    "Report Definition": [
+      "Report Definition",
+      "تعریف گزارش"
+    ],
+    "Telegram Modification": [
+      "Telegram Modification",
+      "ویرایش تلگرام ها"
+    ],
+    "System": [
+      "System",
+      "سیستم"
+    ],
+    "Reports": [
+      "Reports",
+      "گزارش ها"
+    ],
+    "Create UserGroup": [
+      "Create UserGroup",
+      "ایجاد گروه کاربری"
+    ],
+    "Select a user group": [
+      "Select a user group",
+      "انتخاب گروه کاربری"
+    ],
+    "Users": [
+      "Users",
+      "کاربران"
+    ],
+    "Unassigned Users": [
+      "Unassigned Users",
+      "کاربران انتصاب داده نشده"
+    ],
+    "FirstName": [
+      "First Name",
+      "نام"
+    ],
+    "LastName": [
+      "LastName",
+      "نام خانوادگی"
+    ],
+    "UserName": [
+      "UserName",
+      "نام کاربری"
+    ],
+    "username is taken": [
+      "username is taken",
+      "نام کاربری قبلا انتخاب شده"
+    ],
+    "Password": [
+      "Password",
+      "کلمه عبور"
+    ],
+    "Confirm Password": [
+      "Confirm Password",
+      "تکرار کلمه عبور"
+    ],
+    "confirm password does not match": [
+      "confirm password does not match",
+      "عدم تطبیق با کلمه عبور"
+    ],
+    "cancel": [
+      "Cancel",
+      "لغو"
+    ],
+    "submit": [
+      "Submit",
+      "ثبت"
+    ],
+    "Is Active": [
+      "Is Active",
+      "فعال"
+    ],
+    "Is Service": [
+      "Is Service",
+      "سرویس"
+    ],
+    "Change Password": [
+      "Change Password",
+      "تغییر کلمه عبور"
+    ],
+    "Edit user": [
+      "Edit User",
+      "ویرایش کاربر"
+    ],
+    "Create User": [
+      "Create User",
+      "ایجاد کاربر"
+    ],
+    "unAssigned Group": [
+      "unAssigned Group",
+      "کاربران انتصاب داده نشده"
+    ],
+    "Edit group": [
+      "Edit group",
+      "ویرایش گروه"
+    ],
+    "Create new group": [
+      "Create new group",
+      "ایجاد گروه جدید"
+    ],
+    "Title": [
+      "Title",
+      "عنوان"
+    ],
+    "Logout": [
+      "Logout",
+      "خروج"
+    ],
+     "ArcDocuments": [
+      "Arc Documents",
+      "مستندات معماری"
+    ]
+  }
+}

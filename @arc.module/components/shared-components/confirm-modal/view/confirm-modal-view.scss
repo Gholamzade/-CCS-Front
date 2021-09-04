@@ -1,0 +1,117 @@
+@import "../../../../extra-assets/styles/irisa-palete.scss";
+
+.modal-heading {
+  display: inline-flex;
+  width: 100%;
+  margin: 1.125rem 0 0 0;
+  align-items: center;
+
+  [dir="rtl"] & {
+    float: right;
+  }
+  [dir="ltr"] & {
+    float: left;
+  }
+  // justify-content: space-between;
+  // align-items: center;
+  // flex-wrap: wrap;
+  [dir="rtl"].heading {
+    padding: 0 0.5rem 0 0;
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #172b4d;
+  }
+
+  [dir="ltr"].heading {
+    padding: 0 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #172b4d;
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 0 0;
+  > button {
+    margin: 0.5rem;
+  }
+}
+
+.modal-content {
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #172b4d;
+  max-width: 31.125rem;
+}
+
+.centralize {
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  fill: currentColor;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin-inline-end: 0.5rem;
+  > mat-icon {
+    height: 64px;
+    width: 64px;
+    background-repeat: no-repeat;
+    fill: currentColor;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-success {
+    background-color: map-get($irisa-success, light);
+  }
+  &-info {
+    background-color: map-get($irisa-info, light);
+  }
+  &-warning {
+    background-color: map-get($irisa-warning, light);
+  }
+  &-danger {
+    background-color: map-get($irisa-danger, light);
+  }
+}
+
+.icon {
+  font-size: 2.2rem;
+
+  &-success {
+    color: map-get($irisa-success, fill);
+    // background-color: map-get($irisa-success, light);
+  }
+  &-info {
+    color: map-get($irisa-info, fill);
+    // background-color: map-get($irisa-info, light);
+  }
+  &-warning {
+    color: map-get($irisa-warning, fill);
+    // background-color: map-get($irisa-warning, light);
+  }
+  &-danger {
+    color: map-get($irisa-danger, fill);
+    // background-color: map-get($irisa-danger, light);
+  }
+}

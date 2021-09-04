@@ -1,0 +1,51 @@
+<div mat-dialog-title>Alert {{alert.alertId}}</div>
+<div mat-dialog-content fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap.gt-xs="10px">
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Title</mat-label>
+    <input matInput disabled [value]="alert.title">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Alert type</mat-label>
+    <input matInput disabled [value]="alert.alertTypeFk | getAlertTypeName">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>Template</mat-label>
+    <input matInput disabled [value]="alert.template">
+  </mat-form-field>
+
+  <hr fxFlex="100">
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>prm1 title</mat-label>
+    <input matInput disabled [value]="alert.prm1Title">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>prm2 title</mat-label>
+    <input matInput disabled [value]="alert.prm2Title">
+  </mat-form-field>
+
+  <mat-form-field fxFlex="0 1 calc(50% - 10px)">
+    <mat-label>prm3 title</mat-label>
+    <input matInput disabled [value]="alert.prm3Title">
+  </mat-form-field>
+
+
+  <hr fxFlex="100">
+
+  <mat-checkbox fxFlex="0 1 calc(50% - 10px)" [disabled]="true" [(ngModel)]="alert.isActive">IsActive</mat-checkbox>
+  <mat-checkbox fxFlex="0 1 calc(50% - 10px)" [disabled]="true" [(ngModel)]="alert.saveInHistory">SaveInHistory</mat-checkbox>
+  <mat-checkbox fxFlex="0 1 calc(50% - 10px)" [disabled]="true" [(ngModel)]="alert.isSound">IsSound</mat-checkbox>
+  <mat-checkbox fxFlex="0 1 calc(50% - 10px)" [disabled]="true" [(ngModel)]="alert.isPopup">IsPopup</mat-checkbox>
+
+  <!-- <div class="div" fxLayout="row" fxLayout.xs="column">
+      usergroup
+  </div> -->
+
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-around center">
+  <button mat-raised-button color="primary" [matDialogClose]>Close</button>
+</div>

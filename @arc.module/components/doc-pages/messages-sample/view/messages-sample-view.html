@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+
+    <p>در صورتی که نیاز به نمایش message با امکانات دیگر هستید، می توانید با الگو گرفتن از MessageData و MessageView
+      ، برحسب نیاز message خود را پیاده سازی کنید ، ولی باید طبق طراحی های انجام شده ، این پیاده سازی انجام شود
+      .به عنوان مثال رنگ دکمه ها ، تغییر text-align عنوان با توجه direction صفحه
+      و ... </p>
+
+    <hr>
+
+    <p>متد <strong>openSnackBar</strong> در <strong>arc.module/services/message.service</strong> دارای دو ورودی است :
+    </p>
+    <p style="color: cornflowerblue;direction: ltr;">openSnackBar(data: MessageData, matSnackBarConfig?:
+      MatSnackBarConfig){{'{'}}......{{'}'}}</p>
+    <p>ورودی data از نوع MessageData در مسیر <strong>arc.module/models/interfaces/message.ts</strong> می باشد </p>
+    <p>ورودی MatSnackBarConfig نیز از نوع matSnackBarConfig می باشد که توضیحات کامل در سایت انگولار متریال موجود است .
+    </p>
+    <p>
+      از فیلد های MatSnackBarConfig می توان به فیلد <strong>panelCss</strong> اشاره کرد ، که به صورت آرایه ای از کلاس
+      های css می باشد . کلاس های alert-danger,alert-warning,alert-success,alert-info
+      برای اعمال رنگ بندی های طراحی شده می باشد . برای تغییر عرض میتوان کلاس های دلخواه css تعریف کرد و به عنوان ایندکسی
+      از آرایه در <strong>panelCss</strong> قرار داد به عنوان مثال 4 کلاس با پسوند <strong>-snack-bar-container</strong>
+      در styles.scss
+    </p>
+    <a href="https://material.angular.io/components/snack-bar/api#MatSnackBarConfig"
+      target="_blank">https://material.angular.io/components/snack-bar/api#MatSnackBarConfig</a>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card style="margin-top: 1%;">
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'">
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem" fxLayoutAlign="flex-start center">
+      <button mat-flat-button color="success" class="button-lg" (click)="showSuccess()">
+        success
+      </button>
+      <button mat-flat-button color="info" class="button-lg" (click)="showInfo()">info
+      </button>
+
+      <button mat-flat-button color="warning" class="button-lg" (click)="showWarning()">warning
+      </button>
+      <button mat-flat-button color="danger" class="button-lg" (click)="showDanger()">danger
+      </button>
+    </div>
+  </mat-card-content>

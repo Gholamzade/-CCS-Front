@@ -1,0 +1,141 @@
+<div class="arc-toolbar" [dir]="dir">
+  <div fxLayout="row" class="toolbar" fxLayoutGap="0.5rem" fxLayoutAlign="space-between center">
+    <!-- <div fxFlex="15" fxFill fxFlexOrder="1" fxFlexOrder.sm="1" style="overflow: hidden;"> -->
+    <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(12% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
+      fxFlex.lg="0 1 calc(25% - 0.5rem)" fxFlex.xl="0 1 calc(20% - 0.5rem)" class="customer-info">
+      <span fxLayout="row" style="text-align: center;">
+        <div fxFlex="15%" fxFlex.xs="0 1 10%">
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        </div>
+        <!-- <span> -->
+        <img fxFlex="20%" src="assets/imgs/customer-logo.svg" class="customer-logo">
+        <!-- </span> -->
+        <span fxFlex="65%" fxHide.lt-sm class="title">{{title}}</span>
+      </span>
+
+    </div>
+
+    <div fxHide.lt-md style="align-self: start;align-items: baseline" ngClass.lt-md="toolbar-alert-lt-lg">
+      <ng-container *ngIf="toolbarLogs && toolbarLogs.length > 0">
+
+        <div class="alert alert-danger" [dir]="dir" *ngFor="let alertLog of toolbarLogs;let i = index;"
+          [hidden]="i != 0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="0.5rem"
+          fxLayoutAlign="space-between center" [ngStyle]="{'display':i != 0 ? 'none':'flex'}">
+
+          <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(15% - 0.5rem)" fxFlex.md="0 1 calc(69% - 0.5rem)"
+            fxFlex.lg="0 1 calc(69% - 0.5rem)" fxFlex.xl="0 1 calc(70% - 0.5rem)" fxLayout="row"
+            fxLayoutAlign="flex-start center" class="alert-body">
+            <mat-icon fxHide.lt-lg [matTooltip]="alertLog.body">error_outline</mat-icon>
+            <span class="text">{{alertLog.body|summerizeText:200}} </span>
+            <div class="verticalLine"></div>
+
+          </div>
+
+          <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(15% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
+            fxFlex.lg="0 1 calc(15% - 0.5rem)" fxFlex.xl="0 1 calc(15% - 0.5rem)">
+            <span class="date-time"> {{alertLog.alertLogDate|miladiDateToJalali:'time'}}</span>
+          </div>
+
+          <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(15% - 0.5rem)" fxFlex.md="0 1 calc(15% - 0.5rem)"
+            fxFlex.lg="0 1 calc(15% - 0.5rem)" fxFlex.xl="0 1 calc(15% - 0.5rem)">
+            <button color="danger-text" class="button-sm" mat-raised-button (click)="toolbarLogConfirmed(alertLog)">
+              {{'confirmDangerAlert'|TranslatePipe}}
+            </button>
+
+          </div>
+
+        </div>
+
+
+      </ng-container>
+
+    </div>
+
+
+    <div class="actions" [dir]="dir" fxFlex.sm="0 1 calc(13% - 0.5rem)" fxFlex.md="0 1 calc(12% - 0.5rem)"
+      fxFlex.lg="0 1 calc(20% - 0.5rem)" fxFlex.xl="0 1 calc(17% - 0.5rem)" fxHide.lt-sm>
+
+
+      <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="0.5rem"
+        style="width: 100%;text-align: center;">
+        <div dir="ltr" class="route-event" fxFlex.md="calc(35% - 0.5rem)" fxFlex.lg="calc(24% - 0.5rem)"
+          fxFlex.xl="calc(20% - 0.5rem)" fxHide.lt-lg>
+          <button mat-icon-button title="refresh" (click)="docEvents('refresh')">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+
+        <div class="route-event" fxFlex.md="calc(35% - 0.5rem)" fxFlex.lg="calc(24% - 0.5rem)"
+          fxFlex.xl="calc(20% - 0.5rem)" fxHide.lt-lg>
+          <button mat-icon-button class="back" (click)="docEvents('back')">
+            <mat-icon [dir]="dir">arrow_forward</mat-icon>
+          </button>
+        </div>
+        <div class="route-event" fxFlex.md="calc(35% - 0.5rem)" fxFlex.lg="calc(24% - 0.5rem)"
+          fxFlex.xl="calc(20% - 0.5rem)" fxHide.lt-lg>
+          <button mat-icon-button class="forward" (click)="docEvents('forward')">
+            <mat-icon [dir]="dir">arrow_back</mat-icon>
+          </button>
+        </div>
+        <div fxFlex.sm="calc(72% - 0.5rem)" fxFlex.md="calc(80% - 0.5rem)" fxFlex.lg="calc(24% - 0.5rem)"
+          fxFlex.xl="calc(20% - 0.5rem)">
+          <mat-select panelClass="language" (selectionChange)="changeLanguage.emit($event)" [(value)]="defaultLanguage"
+            *ngIf="languages && languages.length > 1">
+            <mat-option *ngFor="let lang of languages" [value]="lang">
+              {{lang}}
+            </mat-option>
+          </mat-select>
+
+        </div>
+        <div fxFlex.sm="calc(72% - 0.5rem)" fxFlex.md="calc(35% - 0.5rem)" fxFlex.lg="calc(24% - 0.5rem)"
+          fxFlex.xl="calc(20% - 0.5rem)">
+          <button mat-icon-button (click)="logOut();">
+            <mat-icon>
+              logout
+            </mat-icon>
+          </button>
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<div fxHide.gt-sm style="align-self: start;align-items: baseline">
+  <ng-container *ngIf="toolbarLogs && toolbarLogs.length > 0">
+
+    <div class="alert alert-danger" [dir]="dir" *ngFor="let alertLog of toolbarLogs;let i = index;" [hidden]="i != 0"
+      fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="0.5rem" fxLayoutAlign="space-between center"
+      [ngStyle]="{'display':i != 0 ? 'none':'flex'}">
+
+      <div fxFlex="0 1 calc(75% - 0.5rem)" fxLayout="row" fxLayoutAlign="flex-start center" class="alert-body">
+        <mat-icon fxHide.lt-lg [matTooltip]="alertLog.body">error_outline</mat-icon>
+        <span class="text" style="text-align: center;">{{alertLog.body|summerizeText:200}} </span>
+        <div class="verticalLine"></div>
+
+      </div>
+
+      <div ffxFlex="0 1 calc(10% - 0.5rem)">
+        <span class="date-time"> {{alertLog.alertLogDate|miladiDateToJalali:'time'}}</span>
+      </div>
+
+      <div fxFlex="0 1 calc(10% - 0.5rem)">
+        <button color="danger-text" class="button-sm" mat-raised-button (click)="toolbarLogConfirmed(alertLog)">
+          {{'confirmDangerAlert'|TranslatePipe}}
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </ng-container>
+</div>

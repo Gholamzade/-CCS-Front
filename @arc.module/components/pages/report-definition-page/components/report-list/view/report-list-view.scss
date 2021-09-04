@@ -1,0 +1,21 @@
+.handle {
+  cursor: move;
+}
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  box-sizing: border-box;
+  font-size: 90%;
+  display: flex;
+  color: darkslategray;
+}
+
+
+.sublist{
+  border: 1px solid;
+  border-radius: 3px;
+}
+.sublist-header{
+  padding: 10px;
+  background: lightgray;
+}

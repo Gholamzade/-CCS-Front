@@ -1,0 +1,161 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+  <mat-card class="filter-card" style="margin: 10px;">
+    <!-- <mat-card-header>
+      <mat-card-title></mat-card-title>
+    </mat-card-header> -->
+
+    <mat-card-content>
+      <div class="form-title">Set Log Filters</div>
+
+      <div class="form-divider">
+        <div class="ink"></div>
+      </div>
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="1rem">
+        <!------------------------------------------------------------------------------------------------------------->
+        <!-------------------------------------Select Alerts code------------------------------------------------------>
+        <mat-form-field appearance="outline" style="width: 100%;" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.gt-sm="0 2 calc(50% - 1rem)">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let alert of selectedAlerts" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(alert)">
+              {{alert.alertId}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input type="text" placeholder="Alert Id..." #alertIdInput [formControl]="alertIdCtrl"
+              [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event,'alertId')">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event,'alertId')">
+            <mat-option *ngFor="let alert of (filteredAlertsById | async)" [value]="alert.alertId">
+              {{alert.alertId}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <!-------------------------------------Select Alerts Name------------------------------------------------------>
+
+        <mat-form-field appearance="outline" style="width: 100%;" fxFlex.sm="0 1 calc(50% - 1rem)"
+          fxFlex.gt-sm="0 2 calc(50% - 1rem)">
+          <mat-chip-list #chipList2>
+            <mat-chip *ngFor="let alert of selectedAlerts" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(alert)">
+              {{alert.title}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input type="text" placeholder="Alerts Name" #alertTitleInput [formControl]="alertTitleCtrl"
+              [matAutocomplete]="auto2" [matChipInputFor]="chipList2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event,'alertTitle')">
+          </mat-chip-list>
+          <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selected($event,'alertTitle')">
+            <mat-option *ngFor="let alert of (filteredAlertsByTitle | async)" [value]="alert.alertId">
+              {{alert.title}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <!---------------------------------------------------------------------------------------------------------->
+      <!-------------------------------------expansion-panel------------------------------------------------------>
+      <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-expansion-panel [expanded]="true" class="irisa-expansion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="align-items: center;">
+              Advanced Search
+            </mat-panel-title>
+            <mat-panel-description dir="rtl">
+              <!-- <button mat-mini-fab color="primary" type="button">
+                <mat-icon>search</mat-icon>
+              </button> -->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="form-divider">
+            <div class="ink"></div>
+          </div>
+          <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1rem" class="form-input-padding">
+            <!------------------------------------------------------------------------------------------------------------->
+            <!-------------------------------------From Date------------------------------------------------------>
+            <!-- <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <input matInput [ngxMatDatetimePicker]="picker1" placeholder="From Date" [formControl]="fromDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="true" [stepHour]="1"
+                [stepMinute]="1" [stepSecond]="1" [touchUi]="true" [enableMeridian]="false" [disableMinute]="false"
+                [hideTime]="false">
+              </ngx-mat-datetime-picker>
+            </mat-form-field> -->
+            <div fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)">
+              <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)"
+                [selectedDate]="this.fromDate?.value" [label]="'Start Date'" [placeholder]="'Start Date'"
+                [showTime]="true" [locale]="'en'">
+              </date-time-picker-overlay-presenter>
+            </div>
+
+            <!------------------------------------------------------------------------------------------------------------->
+            <!-------------------------------------To Data------------------------------------------------------>
+            <!-- <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <input matInput [ngxMatDatetimePicker]="picker2" placeholder="To Date" [formControl]="toDate">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="true" [stepHour]="1"
+                [stepMinute]="1" [stepSecond]="1" [touchUi]="true" [enableMeridian]="false" [disableMinute]="false"
+                [hideTime]="false">
+              </ngx-mat-datetime-picker>
+            </mat-form-field> -->
+            <div fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)">
+              <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedEndDate($event)"
+                [selectedDate]="this.toDate?.value" [label]="'End Date'" [placeholder]="'End Date'" [showTime]="true"
+                [locale]="'en'">
+              </date-time-picker-overlay-presenter>
+            </div>
+            <!------------------------------------------------------------------------------------------------------------->
+
+            <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <mat-label>Parameter 1</mat-label>
+              <input matInput formControlName="prm1">
+            </mat-form-field>
+
+            <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <mat-label>Parameter 2</mat-label>
+              <input matInput formControlName="prm2">
+            </mat-form-field>
+
+            <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <mat-label>Parameter 3</mat-label>
+              <input matInput formControlName="prm3">
+            </mat-form-field>
+            <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select placeholder="Type" formControlName="alertType">
+                <mat-option [value]="undefined"></mat-option>
+                <mat-option *ngFor="let aType of alertTypeList" [value]="aType.value">
+                  {{ aType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(33.33% - 1rem)"
+              fxFlex.gt-md="0 1 calc(25% - 1rem)" appearance="outline">
+              <mat-label>Date Period</mat-label>
+              <mat-select placeholder="Date Period" formControlName="datePeriod">
+                <mat-option *ngFor="let period of datePeriods" [value]="period.value">
+                  {{ period.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="prime" class="button-md" type="submit">Search</button>
+      <button mat-flat-button color="secondary-outline" class="button-md" type="button"
+        (click)="resetForm()">Clear</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

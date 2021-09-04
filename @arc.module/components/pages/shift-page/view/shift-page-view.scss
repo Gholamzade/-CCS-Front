@@ -1,0 +1,49 @@
+
+
+.docs-example-viewer-wrapper{
+  display: block;
+  border: 1px solid rgba(0,0,0,.2);
+  margin:20px;
+  border-radius: 4px;
+}
+
+.team-viewer{
+ display: inline-block;
+  border: 1px solid rgba(0,0,0,.2);
+  // width: 20%;
+  margin:20px;
+  padding: 10px;
+
+  border-radius: 4px;
+}
+.shift-viewer{
+   display: inline-block;
+border: 1px solid rgba(0,0,0,.2);
+margin:20px;
+padding: 10px;
+
+border-radius: 4px;
+}
+.container{
+  display: flex;
+  margin: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  // width: 35%;
+}
+.item{
+  display: inline-block;
+margin:0 10px;
+}
+.auto-assign-viewer{
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,.2);
+  margin:20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.div-spacer {
+  flex: 1 1 auto;
+}
+

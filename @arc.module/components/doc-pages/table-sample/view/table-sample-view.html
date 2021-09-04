@@ -1,0 +1,208 @@
+<mat-tab-group mat-align-tabs="end" [selectedIndex]="1">
+  <mat-tab label="OVERVIEW">
+    <mat-card class="overview" dir="rtl">
+      <mat-card-header>
+        <mat-card-title>Table</mat-card-title>
+      </mat-card-header>
+      <mat-card-content dir="rtl">
+        در این جدول ستون ها به صورت داینامیک تعریف شده اند ، این ستون ها به صورت آرایه ای از
+        field,header, styles,cell(function) تعریف شده اند .
+        در صورت اضافه کردن ستون جدید ، این ستون باید به این آرایه اضافه شود.
+        عرض (width) ستون ها به به این دلیل مقدار ثابت داده شده اند تا در صورت نیاز به تعداد ستون زیاد از اسکرول افقی
+        استفاده شود.
+        ستون مربوط به عملیات ها به صورت ثابت (sticky) تعریف شده تا در صورت اسکرول افقی تغییر مکان ندهد.
+        در صورت نیاز به اعمال یه عمل خاص روی ستون مربوطه یا یک استایل خاص از ngSwitch
+        استفاده شده و در قسمت ngSwitchCase کد html مربوطه را قرار می دهیم.
+
+        <p>
+          اسم ها و عناوین به کار برده شده به عنوان مثال هستند.
+          به ترتیب از راست به چپ اگر دکمه ای باعث تغییر در رکورد ها شود سمت راست ، جستجو کلی وسط مایل چپ و جستجو پیشرفته
+          بر حسب اهمیت در قسمت چپ قرار داده شده اند .
+          برحسب نیاز یا تغییر کاربرد و اهمیت دکمه رنگ آن ممکن است تغییر کند
+        </p>
+        <p>
+          فیلد های جستجو در هدر هر ستون به صورت دلخواه قرار داده شده اند و برحسب نیاز می توان از آنها استفاده کرد و منطق
+          نمایش یا عدم نمایش آنها را با تغییر در TableColumn interface
+          ، پیاده سازی کرد.
+          در صورت حذف این جستجو ها بهتر است هدر هر ستون به صورت center قرار گیرد.
+          برای تغییر text-align , width هر ستون میتوان کلاس
+          header-cell-div را تغییر داد.
+          البته اگر هر ستون استایل خود را دارد میتوان در آرایه ستون ها
+          آن را تغییر داد.
+
+          <b>مانند تعریف ستون operation-btn در آرایه columns</b>
+        </p>
+        <p>
+          <b>ستون عملیات :</b>
+          دکمه ها به ترتیب اولویت از راست به چپ در حالت rtl و بالعکس در lrt.
+          رنگ دکمه ها نیز براساس درجه اهمیت کاربردشان و نوع کار انتخاب شوند.
+          دکمه های آیکونی ، برای کارهایی که کاربر تا جای امکان بهتر است انجام ندهد ( البته بهتر است از دکم های آیکون دار
+          تا جای ممکن برای اپراتور استفاده نشود )
+        </p>
+
+        <p>
+          تا جای ممکن بهتر است از مرتب سازی روی ستون استفاده نشود چون با کلیک اشتباه ترتیب های مد نظر اپراتور تغییر
+          میکند.
+          برای حذف دایرکتیو mat-sort-header از ستون جداول حذف شود و
+          matSortChange event از تگ table نیز حذف شود
+          در صورت نیاز به پیاده سازی
+          ، تابع sortData باید پیاده سازی شود برحسب نیاز اپراتور
+        </p>
+        <p>
+          کلاس های اصلی در فایل irisa-table در معماری تعریف شده و کلاس های استایل مربوط به جدول فعلی در فایل مربوط به
+          کامپوننت قرار دارد.
+
+
+        </p>
+        <p> <b>
+          CCS-Front\@arc.module\extra-assets\styles\irisa-table.scss ==> فایل مربوط به استایل معماری
+          </b></p>
+        <p>
+          ستون های sticky ابتدای جدول براساس direction
+          در آرایه stickyHeaders و ستون های انتهایی مانند عملیات در stickyEndHeaders
+          قرار دارند
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card style="margin-top: 1rem;" dir="rtl">
+
+      <mat-card-content dir="rtl">
+        <p>
+          برای اعمال تغییرات روی جدول ، ابتدا table را در یک div به عنوان container قرار دهید. به div به عنوان container
+          کلاس "irisa-table-container" و به جدول کلاس "irisa-table" را اعمال کنید.
+          در صورت نیاز به hover مانند مثال کلاس irisa-row-hover را نیز به table اعمال کنید .
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card style="margin-top: 1rem;" dir="rtl">
+
+      <mat-card-content dir="rtl">
+        <p>
+          p-paginator نیز شبیه به کامپوننت پکیج primeNG پیاده سازی شده است
+        </p>
+        <p>
+          نمونه کامل آن در سورس صفحه موجود است و به عنوان نمونه عملی در صفحه alertLogs استفاده شده است
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="EXAMPLE">
+
+    <div>
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="12px" fxLayoutAlign="baseline center"
+        class="irisa-table-section" [dir]="dir">
+        <div class="irisa-table-title">
+          <h1>
+            Table Title
+          </h1>
+        </div>
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 12px)" fxFlex.md="0 1 calc(50% - 12px)"
+          fxFlex.gt-md="0 1 calc(50% - 12px)">
+          <button mat-flat-button color="success" class="button-md">افزودن</button>
+        </div>
+
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(30% - 12px)" fxFlex.md="0 1 calc(30% - 12px)"
+          fxFlex.gt-md="0 1 calc(30% - 12px)">
+          <mat-form-field appearance="outline" style="width: 100%;" class="remove-padding-bottom">
+            <mat-label>جستجو</mat-label>
+
+            <input matInput placeholder="جستجو" [formControl]="testCtrl">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(20% - 12px)" fxFlex.md="0 1 calc(20% - 12px)"
+          fxFlex.gt-md="0 1 calc(20% - 12px)">
+          <button mat-flat-button color="prime-text" class="button-md">جستجو پیشرفته</button>
+        </div>
+        <div class="irisa-table-container mat-elevation-z8">
+
+          <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="exitProducedCoilList"
+            *ngIf="exitProducedCoilList" class="irisa-table irisa-row-hover">
+
+            <ng-container *ngFor="let column of columns" [matColumnDef]="column.field" [sticky]="isSticky(column.field)"
+              [stickyEnd]="isStickyEnd(column.field)">
+
+              <ng-container [ngSwitch]="column.field">
+                <ng-container *ngSwitchCase="'operation-btn'">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <div [style]="column.styles">{{ column.header }}</div>
+
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="operation-btn" [style]="column.styles">
+                      <button mat-flat-button [color]="'prime'" class="button-sm button-margin">
+                        {{
+                        element.name !=='ACTR' ? 'Already sent' : 'Send To WareHouse'
+                        }}
+                      </button>
+                      <button mat-flat-button color="success" class="button-sm button-margin">مشاهده
+                      </button>
+                      <mat-icon color="prime-outline" class="button-margin icon-action">text_snippet</mat-icon>
+
+                      <mat-icon color="warning-outline" class="button-margin icon-action">edit</mat-icon>
+                      <mat-icon color="danger-outline" class="button-margin icon-action">delete</mat-icon>
+
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <!------------------------------------------------------------
+                    you can create button with icon instead  mat-sort-header and
+                    set click event on it
+                  -------------------------------------------------------------->
+                    <div class="header-cell-div" [style]="column.styles"> {{ column.header }}</div>
+
+                    <!------------------------------------------------------------
+                    you can add another field in TableColumn interface (seachable:boolean)
+                    and show search input based that field value
+                    <mat-form-field appearance="outline" *ngIf="column.searchable">
+                  -------------------------------------------------------------->
+                    <mat-form-field appearance="outline">
+                      <mat-label>جستجو در ستون</mat-label>
+
+                      <input matInput placeholder="جستجو در ستون" [formControl]="testCtrl">
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+
+
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="cell-div" [style]="column.styles">
+                      {{column.cell(element)}}
+                    </div>
+                  </td>
+                </ng-container>
+
+              </ng-container>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" class="mat-header-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+        </div>
+        <!-- <mat-paginator style="width: 100%;" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+        <!-- <paginator-presenter></paginator-presenter> -->
+        <p-paginator (onPageChange)="primePaginate($event)" [rows]="5" [totalRecords]="exitProducedCoilList.length"
+          [rowsPerPageOptions]="[5,10,20,30]" [showCurrentPageReport]="true"
+          [currentPageReportTemplate]="currentPageReportTemplate" [showPageLinks]="showPageLinks$|async">
+        </p-paginator>
+      </div>
+
+    </div>
+
+
+
+
+  </mat-tab>
+
+</mat-tab-group>

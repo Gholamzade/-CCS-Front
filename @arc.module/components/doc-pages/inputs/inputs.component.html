@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-header [dir]="'rtl'">
+    <mat-card-title>Inputs</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [dir]="'rtl'" style="height: 35vh;">
+
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px">
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" [formControl]="testCtrl">
+        <mat-hint>
+          <mat-icon aria-hidden="false">info_outlined</mat-icon>
+          متن راهنمای تکست فیلد
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" [formControl]="test2Ctrl">
+        <mat-error>
+          <mat-icon aria-hidden="false">info_outlined</mat-icon>
+          متن راهنمای تکست فیلد
+        </mat-error>
+      </mat-form-field>
+
+
+    </div>
+
+
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" style="padding-top: 1rem;">
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" [formControl]="test2Ctrl">
+        <mat-hint>
+          <mat-icon aria-hidden="false">info_outlined</mat-icon>
+          از matPrefix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام نمیدهد.
+        </mat-hint>
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="test3Ctrl">
+
+        <mat-hint>
+          <mat-icon aria-hidden="false">info_outlined</mat-icon>
+          از matSuffix برای نمایش آیکون داخل اینپوت استفاده کنید در صورتی که این آیکن عملی انجام میدهد مثلا فراخوانی یک
+          فانکشن.
+        </mat-hint>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان textarea</mat-label>
+
+        <textarea matInput></textarea>
+
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 48%" fxFlex.md="0 1 31%"
+        fxFlex.gt-md="0 1 23%">
+        <mat-label>عنوان textarea</mat-label>
+        <div>
+          <input matInput>
+          <div>
+            مترمربع
+          </div>
+        </div>
+
+      </mat-form-field> -->
+    </div>
+
+  </mat-card-content>
+</mat-card>

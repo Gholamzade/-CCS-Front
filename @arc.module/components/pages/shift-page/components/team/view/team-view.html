@@ -1,0 +1,53 @@
+
+<div fxLayout="row" class="new-team-container"  ngForm #addForm="ngForm">
+  <div fxFlex="0 1 80%">
+    <mat-form-field class="form-field" style="width: 100%;">
+      <mat-label>New Team</mat-label>
+      <input matInput type="text" [(ngModel)]="titleToAdd" name="titleAdd" (ngModelChange)="teamTitleChanged(null)" required>
+      <button mat-button *ngIf="titleToAdd" matSuffix mat-icon-button aria-label="Clear" (click)="titleToAdd='';takenTeamTitleToAdd=false;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div mat-label *ngIf="takenTeamTitleToAdd" style="color:red">
+      team title is taken</div>
+  </div>
+  <div fxFlex="0 1 20%">
+    <button mat-mini-fab color="primary" (click)="add()" [disabled]="!addForm.valid">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+
+<div class="team-list">
+  <div *ngFor="let item of teamArray" fxLayout="row wrap" ngForm #myForm="ngForm">
+    <div fxFlex="0 1 64%">
+      <span *ngIf="!item.isEditing" [style.color]="item.color"> {{item.title}}</span>
+
+      <mat-form-field *ngIf="item.isEditing" style="width: 100%;">
+        <mat-label>edit Name</mat-label>
+        <input matInput [(ngModel)]="editTitle" name="title" required (ngModelChange)="teamTitleChanged(item)">
+      </mat-form-field>
+      <div mat-label *ngIf="takenTeamTitleToEdit && item.isEditing" style="color:red">
+        team title is taken</div>
+    </div>
+
+    <div fxFlex="0 1 18%">
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="requestEdit(item)">
+        <mat-icon color="accent">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button *ngIf="item.isEditing" (click)="doneEdit(item)" [disabled]="!myForm.valid || takenTeamTitleToEdit">
+        <mat-icon color="primary">done</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="0 1 18%">
+      <button mat-icon-button *ngIf="!item.isEditing" (click)="delete(item)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="item.isEditing" (click)="cancelEdit(item)">
+        <mat-icon color="warn">clear</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

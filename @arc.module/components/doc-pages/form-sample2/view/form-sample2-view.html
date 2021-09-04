@@ -1,0 +1,160 @@
+<mat-card class="irisa-card">
+  <mat-card-content>
+    <div class="form-title">فرم نمونه</div>
+    <div class="form-divider">
+      <div class="ink"></div>
+    </div>
+    <div [formGroup]="form" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="1rem"
+      fxLayoutAlign="flex-start center">
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)"
+        class="static-position">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" formControlName="type">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)"
+        class="static-position">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" formControlName="type">
+
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)"
+        class="static-position">
+        <mat-label>عنوان تکست فیلد‌ها</mat-label>
+
+        <input matInput placeholder="placeholder" formControlName="count">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <mat-label>stop Reason</mat-label>
+        <mat-select formControlName="reason">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let item of reasons" [value]="item.reasonId">
+            {{ item.reasonName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <date-time-picker-overlay-presenter (onSelectedDate)="getSelectedStartDate($event)"
+          [selectedDate]="form?.controls?.startDate?.value" [label]="'Start Time*'" [placeholder]="'Start Time*'"
+          [showTime]="true" [locale]="'fa'" [buttonsLabel]="{submit:'submit',cancel:'cancel'}">
+        </date-time-picker-overlay-presenter>
+      </div>
+
+
+      <mat-form-field appearance="outline" fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)"
+        fxFlex.md="0 1 calc(50% - 1rem)" fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <mat-label>Coil Number</mat-label>
+        <mat-select formControlName="coil">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let item of coils" [value]="item.coilId">
+            {{ item.coilNumber }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 1rem)" fxFlex.md="0 1 calc(50% - 1rem)"
+        fxFlex.lg="0 1 calc(33% - 1rem)" fxFlex.xl="0 1 calc(25% - 1rem)">
+        <button mat-flat-button color="prime-outline" type="submit" class="button-lg" (click)="submit()">دکمه بزرگ
+        </button>
+
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>
+
+
+<mat-card>
+  <mat-card-content>
+    <div class="form-title">فرم نمونه</div>
+    <div class="form-divider">
+      <div class="ink"></div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="12px" fxLayoutAlign="baseline center"
+      class="irisa-table-section" [dir]="dir">
+      <div class="irisa-table-title">
+        <h1>
+          Table Title
+        </h1>
+      </div>
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(50% - 12px)" fxFlex.md="0 1 calc(50% - 12px)"
+        fxFlex.gt-md="0 1 calc(50% - 12px)">
+        <button mat-flat-button color="success" class="button-md">افزودن</button>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(30% - 12px)" fxFlex.md="0 1 calc(30% - 12px)"
+        fxFlex.gt-md="0 1 calc(30% - 12px)">
+        <mat-form-field appearance="outline" style="width: 100%;" class="remove-padding-bottom">
+          <mat-label>جستجو</mat-label>
+
+          <input matInput placeholder="جستجو" [formControl]="testCtrl">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex.xs="0 1 100%" fxFlex.sm="0 1 calc(20% - 12px)" fxFlex.md="0 1 calc(20% - 12px)"
+        fxFlex.gt-md="0 1 calc(20% - 12px)">
+        <button mat-flat-button color="prime-text" class="button-md">جستجو پیشرفته</button>
+      </div>
+
+      <!-- CAN USE  custom-table-container scss class and extend irisa-table-container <div class="custom-table-container"> -->
+      <div class="irisa-table-container">
+
+        <!--
+          CAN USE  custom-table scss class and extend irisa-table
+          <table mat-table [dataSource]="dataSource" class="irisa-table mat-elevation-z8">
+        -->
+
+
+        <table mat-table [dataSource]="dataSource" class="irisa-table mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

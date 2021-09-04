@@ -1,0 +1,30 @@
+<div [ngClass]="['irisa-msg-message']" [dir]="dir">
+  <div class="irisa-msg-message-content">
+
+    <span class="msg-icon" *ngIf="messageData.hasIcon">
+      <mat-icon *ngIf="messageData.type == messageType.WARNING">warning</mat-icon>
+      <mat-icon *ngIf="messageData.type == messageType.SUCCESS">check_circle</mat-icon>
+      <mat-icon *ngIf="messageData.type == messageType.INFO">info</mat-icon>
+      <mat-icon *ngIf="messageData.type == messageType.DANGER">dangerous</mat-icon>
+
+    </span>
+
+    <div class="irisa-msg-message-header" [ngStyle]="{'width':messageData.closable ? '100%' : null}">
+      <span *ngIf="messageData.title" class="irisa-msg-message-title" [innerHTML]="messageData.title"></span>
+      <!-- <button mat-flat-button  class="irisa-message-close irisa-link button-xs"
+        type="button" matRipple> -->
+      <mat-icon matRipple (click)="close()" *ngIf="messageData.closable" [color]="messageData.type"
+        class="button-margin icon-action">close</mat-icon>
+      <!-- </button> -->
+
+
+
+    </div>
+    <span *ngIf="messageData.message" [dir]="dir" class="irisa-msg-message-detail" [innerHTML]="messageData.message">
+    </span>
+    <!-- <mat-progress-bar style="padding-top: 2%;"  mode="determinate" [value]="value">
+    </mat-progress-bar> -->
+
+  </div>
+
+</div>
